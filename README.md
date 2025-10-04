@@ -1,7 +1,7 @@
 <div align="center">
  
 <img width="1694" height="863" alt="hifi-tui" src="https://github.com/user-attachments/assets/b9e0888b-cb1d-47ad-85d7-e29a91c3da5f" />
- 
+ HIFI Frontend - BiniTidal Web UI 
 </div>
 
 <h1 align="center"> HIFI </h1>
