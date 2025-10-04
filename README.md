@@ -149,7 +149,7 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 
 ## TUI
 
-(⭕ WIP)
+- (⭕ WIP)
 
 <br>
 
