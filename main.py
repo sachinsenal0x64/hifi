@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import asyncio
 import base64
 import json
@@ -16,10 +18,10 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="HiFi-RestAPI", version="v1.0", description="Tidal Music Proxy")
 app.add_middleware(
 CORSMiddleware,
-allow_origins=[""],
-allow_credentials=True,
-allow_methods=[""],
-allow_headers=["*"],
+allow_origins=["*"],
+allow_credentials=False,
+allow_methods=["*"],
+expose_headers=["*"],
 )
 
 load_dotenv()
