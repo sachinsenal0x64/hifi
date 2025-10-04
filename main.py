@@ -159,41 +159,7 @@ async def auth():
 
 @app.api_route("/", methods=["GET"], include_in_schema=False)
 async def index():
-    return {"HIFI-API": "v1.0", "REPO": "https://github.com/sachinsenal0x64/Hifi-Tui"}
-
-
-@app.api_route("/tdoc", methods=["GET"], include_in_schema=False)
-async def doc():
-    return HTMLResponse(
-        r"""
-
-<!doctype html>
-<html>
-<head>
-  <style>
-    a[href*="scalar.com"] {
-      display: none;
-    }
-  </style>
-    <title>hifi api reference</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-
-<script
-    id="api-reference"
-    type="application/json"
-    data-url="https://hifi.401658.xyz/openapi.json"
-    data-proxy-url="https://api.scalar.com/request-proxy"
-></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
-
-</body>
-</html>"""
-    )
+    return {"HIFI-API": "v1.0", "Repo": "https://github.com/sachinsenal0x64/hifi"}
 
 
 @app.api_route("/track/", methods=["GET"])
