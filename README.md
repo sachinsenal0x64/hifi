@@ -144,17 +144,17 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 
 <br>
 
-## 🏠 INSTALLATION (TUI)
+## 🏠 INSTALLATION (Web UI)
 
 > [!NOTE]
 > Tui player based on [api](https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-tidal-reverse-api--status) so its totally free (you can listen without any premium subscription) and easy to install via package manager 
 
+- [BiniTidal-Web](https://music.binimum.org) | [BiniTidal](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
 
-(⭕ WIP)
 
 <br>
 
-## ⌨ KEY BINDINGS (TUI)
+## ⌨ (TUI)
 
 (⭕ WIP)
 
@@ -193,11 +193,13 @@ docker compose up
 ### 🐳 Update
 
 ```sh
+# Clone the Repo
 git clone https://github.com/sachinsenal0x64/hifi
 
 cd hifi-tui
 git pull
 
+# Just run
 docker compose pull
 docker compose down
 docker compose up -d --build
