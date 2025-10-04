@@ -6,7 +6,7 @@ We take security and user data protection very seriously. If you discover a pote
 
 Please follow the steps below to report a vulnerability:
 
-1. Send an email to sachinsenal0x64@gmail.com, describing the details of the vulnerability you have discovered. Please provide as much specific information as possible to help us understand and reproduce the issue quickly.
+1. Send an email to senal666@icloud.com, describing the details of the vulnerability you have discovered. Please provide as much specific information as possible to help us understand and reproduce the issue quickly.
 
 2. We will respond as soon as we receive your email and work with you to verify the vulnerability.
 
