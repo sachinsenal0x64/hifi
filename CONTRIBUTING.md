@@ -12,6 +12,4 @@
 
 - Feel free to send PR's regarding spelling mistakes, incorrect grammar etc.
 
-- All of your commits should go to the dev or misc branch. Please don't push to the main branch.
-
-- If you have any prototype code ? then push to misc branch.
+- All of your commits should go to the dev branch. Please don't push to the main branch.
