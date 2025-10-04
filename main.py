@@ -19,9 +19,9 @@ app = FastAPI(title="HiFi-RestAPI", version="v1.0", description="Tidal Music Pro
 app.add_middleware(
 CORSMiddleware,
 allow_origins=["*"],
-allow_credentials=True,
+allow_credentials=False,
 allow_methods=["*"],
-allow_headers=["*"],
+expose_headers=["*"],
 )
 
 load_dotenv()
