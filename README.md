@@ -8,7 +8,7 @@
  
 <img width="1568" height="860" alt="image" src="https://github.com/user-attachments/assets/5cd7a68c-bb8f-4668-bde6-b03eda4d1c17" />
 
- HIFI Frontend - [BiniTidal](https://music.binimum.org)  Web UI 
+ Tidal HiFi Frontend - [BiniTidal](https://music.binimum.org)  Web UI 
 </div>
 
 
