@@ -1,150 +1,240 @@
-<img src="https://cdn.jsdelivr.net/gh/sachinsenal0x64/PICX-IMAGE-HOSTING@master/ledstrip.3024rqxzahq0.gif"
-width="1800"  height="3">
-
-[![hifi-tui](https://sachinsenal0x64.github.io/picx-images-hosting/wallpaperflare.com_wallpaper.3cauvcxohri8.webp)](https://en.wikipedia.org/wiki/Lilith)
-
 <div align="center">
-
- <p align="center">
  
-  <img src="https://cdn.jsdelivr.net/gh/sachinsenal0x64/picx-images-hosting@master/audio-Spectrum-.2jn5ghwym6w0.gif" alt="Audio Spectrum" align="center"> 
-  
-</p>
+ ![hifi-tui](https://github.com/sachinsenal0x64/picx-images-hosting/raw/master/gopher.1ap5wqeiwk.webp)
+ 
 </div>
 
-<img src="https://cdn.jsdelivr.net/gh/sachinsenal0x64/PICX-IMAGE-HOSTING@master/ledstrip.3024rqxzahq0.gif"
-width="1800"  height="3">
+<h1 align="center"> HIFI </h1>
 
-<h1 align="center"> HIFI TUI </h1>
+<h4 align="center">  🎵 Privacy-focused, cross-platform, self-hostable Tidal instance. <br><br>
 
-<h4 align="center"> 🎵 Tidal Reverse Proxy & TUI With Extra Batteries. </h4>
+</h4>
 
 <div align="center">
         
-[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT) [![FASTAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=FastAPI&logoColor=white)](https://fastapi.tiangolo.com) [![Python](https://img.shields.io/badge/-Python-FCC624?style=style=flat-square&logo=Python)](https://www.python.org) 
-[![Textual](https://img.shields.io/badge/Textual-black.svg?style=flat-square&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAIAAAC1eHXNAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAAB3RJTUUH5wsOCAgPBu8BmQAABstJREFUWMPtmGtsVMcVx8+ZuY+9e/furl+Qgg02scHYYAcL0YpGrapQ0kSKWnBIiRv6LlUSERUlLQTUUFGoSlTUVgkkATsY27iQREqkKFGUPpSW0EYtxOCagmseicA2GOzrfdzdvY+Z6YeVXePHZpdYKpU4n8/M/M7/nJkzM6jPLIFbwMj/GuA2x22O2xz/txzSdE0khEBERMzSn3M+1nkaOIQQACBR6jGWSCYzOxMkiACAiiKP0n8Cx6hTZh9KCBASHRwMGMaS2hrgHCaMEkIQQgghlpVwXVeA6L9ydez8UoYFEJEQwjnPFB+lSSvh2faq+lVPbnicMS+VsgkZV3YCkdiOE4/HaxcvWlBR3nzod99Z/7gRCo5OLk0FQSl1HdeyIoqugxCTQxBiJ5KLF1Vt37pZlqRNz/zs2LEPkBIBAGNGIEHhejPumPn0Uz/6ypfvAYCW9iOAN0iOE/utEEKSpFg0lp8X3v3LnfNK5yRTKYITdhaC4AIJLqurUxT57Xf/wBgLhYJiPDSCEALEktqamUVFAPDe0fdXPLBa07SxntJECEppdMisuavm17t2vvHm2xs3bRkZc8MChNAh0zzc3Lhl+462w6+Wlc4VnDPOx5UGpXQ4Etmz+9mZRUWWZem6/kLjAeY4RNc9z5uyPiilsXh89eqvHTnYeOLkKb9f+8nGJ8QUefE8r3jWZ975/R8j5nCXZQkAQshYWkLQTqVK55Qs/+wyxpiu651dp996512/YTDGMu1bRATbnlc693jHyR3P7i4rnTs8HIEJmwYRU6nUgoqKlG1futxrBA1AZIwlEon/OjFOKQHL/GbDj8PhkBDiHx92bHhqs207mt/HWMbzgzHmCwYPtB164P57O46feOu111FVbtBDAICglLJUtH7tI4UFBU4sphUV2Y4TChpfvHs55xwAheBBw5BlGREfW//93r7+bb/Y1dLWLoTw6fo4MSavD0VRBnv73v/rB48++sOfbt4ayM/3PG9UBkoJIqGUmgNi+eeXd5zqTGczFY09ueGxHc9s9TyPUoqIf/rz0QsffRQ0gs/va3zuhX2RwaFAXhgRJ0JMnhfOuRwMNrUean7x+fl31VqJBCUUQAAgY148brmexzlHRS2bO+fV199An892HCM/r+GhB0e34uW+vjUPrxvqv4KKLAB9oWCwIJ8xNu44n5IDADjnmqZd6Dn3l2N/e631wJWrA7IsAaDjOBXl87bt3NXa1q4FAiXFs/2adqa7R9f1eDRav+qrVZULRmN9qal5yDTz55SktWSMpXfHVAf0JByI6HmeHgr9fNevdj+3N90PqEQHBq417vmtX9NAiGQyWVNdFYlGI4OD4cJCAHh4TX06BlmWe/v6Gw+2qbruOM5obWVuEZn6iyRJyZG+JVEKqZSqqkOmCZSC4yytW9J97jwwlkwmFy6svH/livRqALB3f9OVS5dDhQXumBMis01+/0DEdBx0xAilIMtGIBCNxQAJyPLi6oV/P34CfD47kWhYU69pmuu6siRdHbjW0n5EMQJsilLIgWOijJxzlGVFkWPxOHBWNKOosCC/s+tfEpXyCwvWrqmHkeO2sbnl8scf+1Q1c4PMlmOccc41n0+RlWgsDo5bXVkZj1u9/f2e49y74p7yeWWe5ymyPHDt+ksvH1R0neciRi4cQqiqKsuSZVngedVVlWd7elgiQSTp6/WrAIAxBgD7m1suXbyo+Xw5iZELB+N+TRMAyWQKCKldVP3hqX+C4yypWXTfyhUAoKqqaQ43tbTJem6VkQMHAgjBfT41lbLjlqXmhYtnz+rsOg0Aax9crchyyrYB4OXWQxd7zmlazmJkrQci41zXdc9145FIRfmdlNCz3f+eUVaWTopPVYdMc8++Jtmfc2XkmhdmBHTX8yAZq6utGTRN17x638oVJcWzbdsGgAOt7TctRtZ5QQTGg4Zh2zYAX7a07kTHSQBct/YhAJAkKW5Z+5tbJb92c2LkoAdwlhcOR2MxALJw/vz3jh6rWvq5L33hbtd1KaVNB9u6z5zx+/03J0YuenAeCgaHhszAHcWBgN5xsvMH31pHCJEk6Td7X9y8bbseCk3a0LO0rN9RXITDoUu9ffPL7zx//oIkS99e1xCNxtY/sfHI4Vf8oRBk996ZMtRs/scopdHr15/esum7jzSYkUhA16OxGEHyje+t7znbHSwoYIx9GohsOQCAcx4OhYpnz0rfZRRVPd11OmXbAcNwXRc+qa1PD0c6Vs/zHMcBRATkgvs1jVL6aWpirGVVH+lrgCRJsiyPhZsuiGw5YET2cQ+Z6YKAW+cf5jbHrcnxH72YT2U8CdNBAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTExLTE0VDA2OjA4OjE1KzAyOjAwU1+P8wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0xMS0xNFQwNjowODoxNSswMjowMCICN08AAAAASUVORK5CYII=)](https://github.com/Textualize/textual)
+[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT) [![FASTAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=FastAPI&logoColor=white)](https://fastapi.tiangolo.com) [![Python](https://img.shields.io/badge/-Python-FCC624?style=style=flat-square&logo=Python)](https://www.python.org) [![PkgGoDev](https://pkg.go.dev/badge/github.com/rivo/tview)](https://pkg.go.dev/github.com/rivo/tview)
 
-   
-  
+
+    
 </div>
 
 <br><br>
 
 # 💕 Community
 
-> 🍻 Join the community: <a href="https://www.reddit.com/r/hifitui">Reddit</a> & <a href="https://discord.gg/EbfftZ5Dd4">Discord</a>
- [![](https://cdn.statically.io/gh/sachinsenal0x64/picx-images-hosting@master/reddit(1).4iicqsrtq6m8.webp)](https://www.reddit.com/r/hifitui) [![](https://cdn.statically.io/gh/sachinsenal0x64/picx-images-hosting@master/discord.72y8nlaw5mdc.webp)](https://discord.gg/EbfftZ5Dd4)
+> 🍻 Join the community:  <a href="https://discord.gg/EbfftZ5Dd4">Discord</a>
+> [![](https://cdn.statically.io/gh/sachinsenal0x64/picx-images-hosting@master/discord.72y8nlaw5mdc.webp)](https://discord.gg/EbfftZ5Dd4)
  
 <br>
 
 
-# <img src="https://sachinsenal0x64.github.io/picx-images-hosting/svgviewer-output(1).4gs81c9ecqkg.svg" alt="Status" height="40px" width="40px"> TIDAL REVERSE API
+# 📌 F.A.Q
 
-> [!NOTE]  
-> TUI based on this api and it free & opensource.
-
-> https://tidal.401658.xyz
-
-> https://status.401658.xyz
-
-<br>
-
-# 📌 NOTE
-
-> We DO NOT encourage piracy and made for purely educational purposes / personal use.
+> We DO NOT encourage piracy and made for purely educational purposes / personal use / just for listen not for downloading.
 
 > I'm currently paying for a Tidal HiFi Plus subscription.
 
+> We Dont have any GUI Application for android / ios / windows / mac / linux  contributors are welcome.
+
 > You can access our rest api for free if you want to self-host then need tidal subscription.
 
-> TUI is plug & play also you can add your own tidal account but by default its has our API so you can access tidal music for free.
+> TUI is plug & play also you can add your own tidal account but by default it has our API so you can listen tidal music for free.
+
+> TL;DR  HIFI API Can Get Any Quality & Codec Which Tidal Offer / Some Qualities & Codecs Need Special Driver / Song / Hardware to get maximum output i always recommend to use `HI_RES` or `LOSSLESS` both are in flac.
+
+> [MQA-CHECKER](https://github.com/purpl3F0x/MQA_identifier)
+
+> Low (96 kbps) - 3 MB | Low (320 kbps) - 8 MB | High (FLAC, 16-bit, 44.1 kHz) - 30 MB | Max (MQA) - 26 MB | Max (MQA) - 26  | Max (HiRes FLAC, up to 24-bit, 192 kHz) - 30 MB to 140 MB
+
+> Currently We don't have any GUI Application for android / ios / windows / mac / linux  contributors are welcome.
+
  
 <br>
 
 # ❓ WHY ?
 
-I love terminal/CLI tools as well as music, so why not to have a tidal music client for the terminal? Unfortunately, I haven't found any terminal client yet, and that's why it's all about :)
+I love cli tools as well as music, so why not to have a tidal music client for the terminal? Unfortunately, I haven't found any terminal client yet, and that's why it's all about :)
+
 
 <br>
 
+> Tidal Current Situation.
+
+![Doge](https://sachinsenal0x64.github.io/picx-images-hosting/658aud.5f9r4ktllf8.webp)
+
+<br>
+
+<table>
+<tr>
+<td>
+ 
 # 🚀 Features
 
-- 🍟 TIDAL PREMIUM (HIFI-PLUS) YOU CAN ACCESS FOR FREE USING OUR  [API](https://tidal.401658.xyz) & TUI PLAYER
+- 🍟 TIDAL PREMIUM (HIFI-PLUS) YOU CAN LISTEN FOR FREE USING OUR  [API](https://tidal.401658.xyz) & TUI PLAYER
   
-- 📀 AUDIO QUALITY: DOLBY ATMOS | MQA 96K | HI RES FLAC | FLAC | HIGH | LOW | Up to 24-bit, 192 kHz
+- 📀 AUDIO QUALITY / CODEC  : SONY_360RA | DOLBY ATMOS | MQA 96K  | HI RES FLAC | HI RES LOSSLESS | FLAC LOSSLESS | HIGH | LOW | Up to 24-bit, 192 kHz
 
-- 🎧 TIDAL-HIFI | PODCAST | YOUTUBE MUSIC PLAYER IN TUI  (⭕ in progress)
+- ⌨ VIM LIKE KEY BINDINGS
+
+- 🎧 PLAYER: TIDAL-HIFI | PODCAST TUI  (⭕ in progress)
   
 - 👤 TIDAL ACCOUNTS MANAGEMENT 
 
-- 📚 PLAYLISTS | RECENT PLAYBACK | LIBARAY MANAGEMENT (⭕ in progress)
+- 📚 PLAYLISTS | RECENT PLAYBACK | LIBARAY MANAGEMENT | LYRICS & COVER ART (⭕ in progress)
 
-- 🕹 QUALITY SWITCH   (⭕ in progress)
-
-- 📡 REST API (ACT AS REVERSE PROXY INSTANCE)
-
+- 📡 BEAUTIFUL REST API (ACT AS REVERSE PROXY INSTANCE)
+  
+- ⛓️‍💥 BYPASS GEO RESTRICTED CONTENT
+  
 - ⚖️ LAYER 7 LOAD BALANCER (ACT AS API GATEWAY | Purely Python & GO Implementations)
 
-- ⚡️ ASYNC SUPPORT
+- ⚡️ POWERFUL ASYNC | CONCURRENCY SUPPORT
 
-- 📑 DOCS SUPPORT ( SWAGGER UI ) 
+- 📑 DOCS SUPPORT ( SWAGGER UI ) | API PLAYGROUND (/tdoc and /pdoc)
+ 
+- 🕹️ REMOTE (Highly Controllable Remotely Over the Network + Independently, Such an as Play | Pause | Seek | Volume | Next | Previous | Loops (Repeat | Infinity))
+  
+</table>
+</tr>
+</td>
+
+
+<br>
+
+
+> [!NOTE]  
+> TUI based on this api and it free & opensource.
+
+> [API DOCS](https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation-no-account-required)
+
+> https://tidal.401658.xyz 
+
+
+<br>
+
+
+
+# 🔋 EXTRA 
+
+- [host-hifi-restapi-on-vercel](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel)
+- [host-hifi-restapi-on-heroku](https://github.com/sachinsenal0x64/host-hifi-restapi-on-heroku)
+- [tidal_auth](https://github.com/sachinsenal0x64/hifi-tui/tree/main/tidal_auth)
+- [apigateway](https://github.com/sachinsenal0x64/hifi-tui/tree/main/apigateway)
+
+
+<br>
+
+# 🌱 Community 
+
+- [tidal-dl](https://github.com/Nem-git/tidal) Download music from Tidal, no account required.
+- [tidler](https://git.medvidek77.tech/Medvidek77/tidler) Tidal music downloader based on the hifi-tui API
+- [BiniTidal-Web](https://music.binimum.org) | [BiniTidal](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
 
 <br>
 
 
 # 💨 Quick Start
 
-## 🏠 HOW TO SELF-HOST (API)
+<br>
 
-> [!NOTE]
-> This required tidal subscription / Redis & Fill the .env file.
+## 🏠 INSTALLATION (Web UI)
+
+- [BiniTidal-Web](https://music.binimum.org) | [BiniTidal](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
+
 
 <br>
 
-```env
+> [!NOTE]
+> Tui player based on [api](https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-tidal-reverse-api--status) so its totally free (you can listen without any premium subscription) and easy to install via package manager 
 
-CLIENT_ID= 
-CLIENT_SECRET=
-TIDAL_TOKEN= 
-TIDAL_REFRESH=
-REDIS_URL=
-REDIS_PORT=
-REDIS_PASSWORD=
-USER_ID= 
+## ⌨ (TUI)
+
+(⭕ WIP)
+
+<br>
+
+## 🏠 API SELF HOSTING (Optional)
+
+> [!TIP]
+> You can access [api](https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-tidal-reverse-api--status) for free without having to self-host it.
+
+> [!NOTE]
+> This Required [Tidal](https://tidal.com) subscription / [Redis](https://github.com/redis/redis) & Fill the [.env](https://github.com/sachinsenal0x64/Hifi-Tui/blob/main/api/env-example) file. / Grab Tokens and Ids Using
+[tidal_auth.py](https://github.com/sachinsenal0x64/hifi-tui/tree/main/tidal_auth)
+
+
+<br>
+
+### 🐳 Docker
+
+```sh
+# Clone the Repo
+git clone https://github.com/sachinsenal0x64/hifi
+
+# Rename .env-example
+cd hifi-tui
+mv .env.example .env
+
+# Just run
+docker compose up
+
+```
+<br>
+
+
+
+### 🐳 Update
+
+```sh
+# Clone the Repo
+git clone https://github.com/sachinsenal0x64/hifi
+
+cd hifi-tui
+git pull
+
+# Just run
+docker compose pull
+docker compose down
+docker compose up -d --build
+docker image prune -f
+
 
 ```
 
-```console
-git clone https://github.com/sachinsenal0x64/Hifi-Tui.git
-cd Hifi-Tui
-cd API
-rename .env-example to .env
+<br>
+
+### 🦄 From Source Code
+
+```sh
+git clone https://github.com/sachinsenal0x64/hifi
+
+# Rename .env-example
+cd hifi-tui
+mv .env.example .env
+
+pip install "fastapi[all]"
 pip install -r requirements.txt
-python main.py
+
+python3 -m uvicorn main:app --host 0.0.0.0 --port 8000
 
 ```
+
 ![fastapi](https://sachinsenal0x64.github.io/picx-images-hosting/300191675-4330ea31-3f15-45b0-962c-ca5a85041f02.5tz3jj54f2ps.webp)
 
 
 <br>
 
-## 📡 API DOCUMENTATION
+## 🎞️ DEMO
+
+[![hifi tui](https://img.youtube.com/vi/TfIWc5sQ2M0/0.jpg)](https://www.youtube.com/watch?v=TfIWc5sQ2M0)
+
+
+<br>
+
+## 📡 API DOCUMENTATION (No account required)
 
 > [!TIP]
-> You can access reverse [api](https://github.com/sachinsenal0x64/Hifi-Tui#-tidal-reverse-api) for free.
-
-### Demo
-
-<details>
-
-<summary><code>Here</code></summary>
-
-  <br>
-  
- > https://youtu.be/TfIWc5sQ2M0
-
-
-</details>
+> The same API endpoints are used for self-hosted instances — just change your domain.
 
 
 ------------------------------------------------------------------------------------------
@@ -161,7 +251,7 @@ python main.py
 > | Parameter  |   Type    | Description |
 > |------------|-----------|-------------|
 > | `id`       |  integer  | Track Id = `286266926` |
-> | `quality`  |  string   | Song Quality = `HI_RES` or `LOSSLESS` or `HIGH` or `LOW ` |
+> | `quality`  |  string   | Song Quality = `HI_RES_LOSSLESS` or `HI_RES` or `LOSSLESS` or `HIGH` or `LOW ` |
 
 
 <br>
@@ -219,9 +309,10 @@ HIFI returns the following status codes in its API:
 ------------------------------------------------------------------------------------------
 
 
+
 <details>
 
- <summary><code>GET</code>   <code><b>/song/</b></code> </summary>
+ <summary><code>GET</code>   <code><b>/search/</b></code> </summary>
 
 ## Request
 
@@ -229,15 +320,18 @@ HIFI returns the following status codes in its API:
 
 > | Parameter | Type | Description |
 > |------|--------|-------------|
-> | `q`  | string | Song Name = `Consequence`|
+> | `s`  | string |  Name = `Spaceship`|
+> | `a`  | string |  Artist Name = `Kanye West`|
+> | `al` | string |  Album Name = `Late Registration`|
+> | `v`  | string |  Video Name = `Spaceship`|
+> | `p`  | string |  Playlist Name = `Pop Hits`|
 
 <br>
-
 
 #### Example
 >HTTPie
 
-    https GET "https://tidal.401658.xyz/search/?q=Consequence"
+    https GET "https://tidal.401658.xyz/search/?s=Consequence"
 
 ![2023-11-19_03-05](https://github.com/sachinsenal0x64/Hifi-Tui/assets/127573781/35041774-394c-4b17-9cfd-927e5e113da3)
 
@@ -337,8 +431,11 @@ HIFI returns the following status codes in its API:
 > | Parameter  |   Type    | Description |
 > |------------|-----------|-------------|
 > | `id`       |  integer  | Track Id = `328060990` |
-> | `song`     |  string   | Song Name = `Maestro` |
-> | `sizes`    |  string   | Size =  `1280 / 640 / 80`|
+> | `q`     |  string      | Song Name = `Maestro` |
+
+<br>
+
+> #### Sizes = `1280px | 640px | 80px `
 
 <br>
 
@@ -372,34 +469,583 @@ HIFI returns the following status codes in its API:
 
 </details>
 
+------------------------------------------------------------------------------------------
+
+
+<details>
+
+
+ <summary><code>GET</code>   <code><b>/song/</b></code> </summary>
+
+## Request
+
+
+<br>
+
+> | Parameter  |   Type    | Description |
+> |------------|-----------|-------------|
+> | `q`        |  string   | Song Query   =  `Mine` |
+> | `quality`  |  string   | Song Quality = `HI_RES_LOSSLESS` or `HI_RES` or `LOSSLESS` or `HIGH` or `LOW ` |
+
+
+<br>
+
+#### Example
+
+>HTTPie
+
+    https GET "https://tidal.401658.xyz/song/?q=Mine&quality=HI_RES"
+    
+
+![image](https://sachinsenal0x64.github.io/picx-images-hosting/2024-02-07-20:19:04-screenshot.5zw9tsa19wcg.webp)
+
+<br>
+
+### Response
+
+  ```json
+{
+    "OriginalTrackUrl": "track url",
+    "Song Info": {
+        "adSupportedStreamReady": true,
+        "album": {
+            "cover": "22b8ce2a-1912-4fc6-956f-3be5eb4a7f4c",
+            "id": 79712262,
+            "title": "Mine",
+            "vibrantColor": "#a7d9fc",
+            "videoCover": null
+        },
+        "allowStreaming": true,
+        "artist": {
+            "id": 7384212,
+            "name": "Bazzi",
+            "picture": "2726f1e5-0435-4c49-a6f7-c2192544638f",
+            "type": "MAIN"
+        },
+        "artists": [
+            {
+                "id": 7384212,
+                "name": "Bazzi",
+                "picture": "2726f1e5-0435-4c49-a6f7-c2192544638f",
+                "type": "MAIN"
+            }
+        ],
+        "audioModes": [
+            "STEREO"
+        ],
+        "audioQuality": "HI_RES",
+        "copyright": "2017",
+        "djReady": true,
+        "duration": 134,
+        "editable": false,
+        "explicit": true,
+        "id": 79712263,
+        "isrc": "USAT21704227",
+        "mediaMetadata": {
+            "tags": [
+                "LOSSLESS",
+                "MQA"
+            ]
+        },
+        "mixes": {
+            "TRACK_MIX": "0014833cd62b1eecd3b24115e5f8d4"
+        },
+        "peak": 0.997437,
+        "popularity": 64,
+        "premiumStreamingOnly": false,
+        "replayGain": -10.39,
+        "stemReady": false,
+        "streamReady": true,
+        "streamStartDate": "2017-10-12T00:00:00.000+0000",
+        "title": "Mine",
+        "trackNumber": 1,
+        "url": "http://www.tidal.com/track/79712263",
+        "version": null,
+        "volumeNumber": 1
+    },
+    "Track Info": {
+        "albumPeakAmplitude": 0.997437,
+        "albumReplayGain": -10.39,
+        "assetPresentation": "FULL",
+        "audioMode": "STEREO",
+        "audioQuality": "HI_RES",
+        "manifest": "base64 manifest",
+        "manifestMimeType": "application/vnd.tidal.bts",
+        "trackId": 79712263,
+        "trackPeakAmplitude": 0.997437,
+        "trackReplayGain": -10.39
+    }
+}
+
+```
+
+### Status Codes
+
+HIFI returns the following status codes in its API:
+
+> | Status Code | Description |
+> | :---        | :--- |
+> | 200         | `OK` |
+> | 422         | `UNPROCESSABLE CONTENT` |
+> | 404         | `NOT FOUND` |
+> | 500         | `INTERNAL SERVER ERROR` |
+
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+
+ <summary><code>GET</code>   <code><b>/album/</b></code> </summary>
+
+## Request
+
+
+<br>
+
+> | Parameter  |   Type    | Description |
+> |------------|-----------|-------------|
+> | `id`       |  integer  | Album Id = `157117504` |
+
+
+<br>
+
+#### Example
+
+>HTTPie
+
+    https GET "https://tidal.401658.xyz/album/?id=157117504"
+    
+
+![image](https://github.com/sachinsenal0x64/picx-images-hosting/raw/master/2024-02-20-19:33:52-screenshot.99t2w3gelf.webp)
+
 <br>
 
 
-## 🏠 HOW TO INSTALL (TUI)
+### Response
+
+  ```json
+ {
+        "adSupportedStreamReady": true,
+        "allowStreaming": true,
+        "artist": {
+            "id": 7162333,
+            "name": "Dua Lipa",
+            "picture": "28047130-6ada-4955-b3b9-65bed4508618",
+            "type": "MAIN"
+        },
+        "artists": [
+            {
+                "id": 7162333,
+                "name": "Dua Lipa",
+                "picture": "28047130-6ada-4955-b3b9-65bed4508618",
+                "type": "MAIN"
+            }
+        ],
+        "audioModes": [
+            "SONY_360RA"
+        ],
+        "audioQuality": "LOW",
+        "copyright": "℗ 2017 Dua Lipa Limited under exclusive license to Warner Music UK Limited",
+        "cover": "deae7f19-5da7-4d73-97be-ce901911c939",
+        "djReady": true,
+        "duration": 2456,
+        "explicit": false,
+        "id": 157117504,
+        "mediaMetadata": {
+            "tags": [
+                "SONY_360RA"
+            ]
+        },
+        "numberOfTracks": 12,
+        "numberOfVideos": 0,
+        "numberOfVolumes": 1,
+        "popularity": 36,
+        "premiumStreamingOnly": false,
+        "releaseDate": "2020-10-05",
+        "stemReady": false,
+        "streamReady": true,
+        "streamStartDate": "2020-10-05T00:00:00.000+0000",
+        "title": "Dua Lipa (360 Reality Audio)",
+        "type": "ALBUM",
+        "upc": "190295160180",
+        "url": "http://www.tidal.com/album/157117504",
+        "version": null,
+        "vibrantColor": "#6d99c6",
+        "videoCover": null
+    }
+```
+<br>
 
 
-> [!NOTE]
-> Tui player based on reverse [api](https://github.com/sachinsenal0x64/Hifi-Tui#-tidal-reverse-api) so its totally free and easy to install via package manager 
+### Status Codes
+
+HIFI returns the following status codes in its API:
+
+> | Status Code | Description |
+> | :---        | :--- |
+> | 200         | `OK` |
+> | 422         | `UNPROCESSABLE CONTENT` |
+> | 404         | `NOT FOUND` |
+> | 500         | `INTERNAL SERVER ERROR` |
 
 
-(⭕ WIP)
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+
+ <summary><code>GET</code>   <code><b>/playlist/</b></code> </summary>
+
+## Request
+
 
 <br>
 
-## 🏗️ Contributing
+> | Parameter  |   Type    | Description |
+> |------------|-----------|-------------|
+> | `id`       |  string  | Playlist UUID = `910c525f-be8a-41a1-b557-2682af2bcef3` |
 
-> Workflow Diagram
+
 <br>
 
-![2023-11-06_18-12](https://cdn.statically.io/gh/sachinsenal0x64/picx-images-hosting@master/2023-11-08_23-58.220qxiet1zkw.png)
+#### Example
+
+>HTTPie
+
+    https GET "https://tidal.401658.xyz/playlist/?id=910c525f-be8a-41a1-b557-2682af2bcef3"
+    
+
+![image](https://sachinsenal0x64.github.io/picx-images-hosting/2024-02-20-23:15:31-screenshot.67x6v3b7q9.webp)
+
+<br>
 
 
-- Before send PR first open a issue then fork the repo.
-  
-- We need volunteers who have Tidal subscriptions because we might get banned by Tidal.
+### Response
 
-- Feel free to send PR's regarding spelling mistakes, incorrect grammar etc.
-  
+  ```json
+ {
+        "created": "2015-04-14T16:32:14.636+0000",
+        "creator": {
+            "id": 5034071,
+            "name": "VIC MENSA",
+            "picture": "cdd212a2-dadc-466d-9703-7216a9f66da1",
+            "type": null
+        },
+        "description": "",
+        "duration": 2696,
+        "image": "c41cfe9b-cda1-4364-b517-f6a706741d24",
+        "lastItemAddedAt": null,
+        "lastUpdated": "2020-03-24T12:27:23.941+0000",
+        "numberOfTracks": 11,
+        "numberOfVideos": 0,
+        "popularity": 0,
+        "promotedArtists": [
+            {
+                "id": 5034071,
+                "name": "VIC MENSA",
+                "picture": null,
+                "type": "MAIN"
+            },
+            {
+                "id": 25022,
+                "name": "Kanye West",
+                "picture": null,
+                "type": "MAIN"
+            },
+            {
+                "id": 3899583,
+                "name": "Theophilus London",
+                "picture": null,
+                "type": "MAIN"
+            },
+            {
+                "id": 5637986,
+                "name": "Allan Kingdom",
+                "picture": null,
+                "type": "MAIN"
+            }
+        ],
+        "publicPlaylist": false,
+        "squareImage": "03750282-401b-481c-bf60-55d6ee9fcc27",
+        "title": "My Playlist",
+        "type": "ARTIST",
+        "url": "http://www.tidal.com/playlist/910c525f-be8a-41a1-b557-2682af2bcef3",
+        "uuid": "910c525f-be8a-41a1-b557-2682af2bcef3"
+    },
+    {
+        "items": [
+            {
+                "cut": null,
+                "item": {
+                    "adSupportedStreamReady": true,
+                    "album": {
+                        "cover": "43929b37-df27-4e1a-81b2-70692c058674",
+                        "id": 44590541,
+                        "releaseDate": "2015-04-16",
+                        "title": "U Mad",
+                        "vibrantColor": "#FFFFFF",
+                        "videoCover": null
+                    },
+                    "allowStreaming": true,
+                    "artist": {
+                        "id": 5034071,
+                        "name": "VIC MENSA",
+                        "picture": "cdd212a2-dadc-466d-9703-7216a9f66da1",
+                        "type": "MAIN"
+                    },
+                    "artists": [
+                        {
+                            "id": 5034071,
+                            "name": "VIC MENSA",
+                            "picture": "cdd212a2-dadc-466d-9703-7216a9f66da1",
+                            "type": "MAIN"
+                        },
+                        {
+                            "id": 25022,
+                            "name": "Kanye West",
+                            "picture": "26076dbd-7361-40d3-9335-f944d2c49ea6",
+                            "type": "FEATURED"
+                        }
+                    ],
+                    "audioModes": [
+                        "STEREO"
+                    ],
+                    "audioQuality": "LOSSLESS",
+                    "copyright": "(C) 2015 Roc Nation Records, LLC",
+                    "dateAdded": "2015-04-15T15:03:19.696+0000",
+                    "description": null,
+                    "djReady": true,
+                    "duration": 300,
+                    "editable": false,
+                    "explicit": true,
+                    "id": 44590542,
+                    "index": 0,
+                    "isrc": "QMJMT1500671",
+                    "itemUuid": "90545040-acc7-44c1-9481-7e48f36cefe8",
+                    "mediaMetadata": {
+                        "tags": [
+                            "LOSSLESS"
+                        ]
+                    },
+                    "mixes": {
+                        "TRACK_MIX": "00169d5b613bbc32050146c8be21df"
+                    },
+                    "peak": 0.999359,
+                    "popularity": 47,
+                    "premiumStreamingOnly": false,
+                    "replayGain": -9.38,
+                    "stemReady": false,
+                    "streamReady": true,
+                    "streamStartDate": "2015-04-10T00:00:00.000+0000",
+                    "title": "U Mad",
+                    "trackNumber": 1,
+                    "url": "http://www.tidal.com/track/44590542",
+                    "version": null,
+                    "volumeNumber": 1
+                },
+                "type": "track"
+            },
+```
+<br>
+
+
+### Status Codes
+
+HIFI returns the following status codes in its API:
+
+> | Status Code | Description |
+> | :---        | :--- |
+> | 200         | `OK` |
+> | 422         | `UNPROCESSABLE CONTENT` |
+> | 404         | `NOT FOUND` |
+> | 500         | `INTERNAL SERVER ERROR` |
+
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+
+<details>
+
+ <summary><code>GET</code>   <code><b>/artist/</b></code> </summary>
+
+## Request
+
+
+<br>
+
+> | Parameter  |   Type    | Description |
+> |------------|-----------|-------------|
+> | `id`       |  integer  |  Artist ID = `5034071` |
+> | `f`        | integer   |  Artist ID = `5034071`, This will retrieve all the albums and tracks.| 
+
+
+<br>
+
+#### Example
+
+>HTTPie
+
+    https GET "https://tidal.401658.xyz/artist/?id=5034071"
+    
+
+![image](https://sachinsenal0x64.github.io/picx-images-hosting/2024-02-21-21:19:27-screenshot.1aoq2k57al.webp)
+
+<br>
+
+
+### Response
+
+  ```json
+ [
+    {
+        "artistRoles": [
+            {
+                "category": "Artist",
+                "categoryId": -1
+            },
+            {
+                "category": "Songwriter",
+                "categoryId": 2
+            },
+            {
+                "category": "Production team",
+                "categoryId": 10
+            },
+            {
+                "category": "Producer",
+                "categoryId": 1
+            },
+            {
+                "category": "Engineer",
+                "categoryId": 3
+            },
+            {
+                "category": "Performer",
+                "categoryId": 11
+            }
+        ],
+        "artistTypes": [
+            "ARTIST",
+            "CONTRIBUTOR"
+        ],
+        "id": 5034071,
+        "mixes": {
+            "ARTIST_MIX": "000720bd7d7867c71a4c63b1fe61cf"
+        },
+        "name": "VIC MENSA",
+        "picture": "cdd212a2-dadc-466d-9703-7216a9f66da1",
+        "popularity": 66,
+        "url": "http://www.tidal.com/artist/5034071"
+    },
+    [
+        {
+            "750": "https://resources.tidal.com/images/cdd212a2/dadc/466d/9703/7216a9f66da1/750x750.jpg",
+            "id": 5034071,
+            "name": "VIC MENSA"
+        }
+    ]
+]
+
+```
+<br>
+
+
+### Status Codes
+
+HIFI returns the following status codes in its API:
+
+> | Status Code | Description |
+> | :---        | :--- |
+> | 200         | `OK` |
+> | 422         | `UNPROCESSABLE CONTENT` |
+> | 404         | `NOT FOUND` |
+> | 500         | `INTERNAL SERVER ERROR` |
+
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+
+<details>
+
+ <summary><code>GET</code>   <code><b>/lyrics/</b></code> </summary>
+
+## Request
+
+
+<br>
+
+> | Parameter  |   Type    | Description |
+> |------------|-----------|-------------|
+> | `id`       |  integer  | Track ID = `286266926` |
+
+
+<br>
+
+#### Example
+
+>HTTPie
+
+    https GET "https://tidal.401658.xyz/lyrics/?id=286266926"
+    
+
+![image](https://github.com/sachinsenal0x64/picx-images-hosting/raw/master/2024-04-11-14:31:30-screenshot.3go6nb7skh.webp)
+
+<br>
+
+
+### Response
+
+  ```json
+[
+    {
+        "isRightToLeft": false,
+        "lyrics": "You know I question every motive, everything you say\nThought with you, maybe my heart wasn't meant to break\nCan't believe I let you in, I can't believe I stayed\nAs long as I stayed, yeah\n\nI hope one day someone will take your heart and hold it tight\nMake you feel like you're invincible deep inside\nAnd right when you think that it's perfect, they cross a line\nAnd steal your shine\nLike you did mine\n\nGo ahead and break my heart, that's fine\nSo unkind\nEternal sunshine of the spotless mind\nOh, love is blind\nWhy am I missin' you tonight?\nWas it all a lie?\nSomeone's gonna show you how a heart can be used\nLike you did mine\n\nAnd now, I second-guess my thoughts, every step I take\nI'm losin' hope in love, and I've lost all in faith\nYeah, for a dreamer, I just close my eyes and it's all blank\nI have you to thank, yeah\n\nI hope one day someone will take your heart and hold it tight\nMake you feel like you're invincible deep inside\nAnd right when you think that you'll try again, they cross a line\nAnd steal your shine\nLike you did mine\n\nGo ahead and break my heart, that's fine\nSo unkind\nEternal sunshine of the spotless mind\nOh, love is blind\nWhy am I missin' you tonight?\nWas it all a lie?\nSomeone's gonna show you how a heart can be used\n\nAnd you keep talkin', it'll come back, karma\nIs the truth, I don't make you look bad, you do, darlin'\nSabotage, your choice of art\nWho the hell do you think you are?\n\nGo ahead and break my heart, that's fine\nEternal sunshine of the spotless mind\nWhy am I missin' you tonight?\nSomeone's gonna show you how a heart can be used\nLike you did mine",
+        "lyricsProvider": "MUSIXMATCH",
+        "providerCommontrackId": "158550594",
+        "providerLyricsId": "31545572",
+        "subtitles": "[00:00.48] You know I question every motive, everything you say\n[00:04.51] Thought with you, maybe my heart wasn't meant to break\n[00:08.57] Can't believe I let you in, I can't believe I stayed\n[00:13.40] As long as I stayed, yeah\n[00:16.35] I hope one day someone will take your heart and hold it tight\n[00:20.64] Make you feel like you're invincible deep inside\n[00:24.45] And right when you think that it's perfect, they cross a line\n[00:28.97] And steal your shine\n[00:30.77] Like you did mine\n[00:33.04] Go ahead and break my heart, that's fine\n[00:38.97] So unkind\n[00:40.97] Eternal sunshine of the spotless mind\n[00:46.48] Oh, love is blind\n[00:49.13] Why am I missin' you tonight?\n[00:54.53] Was it all a lie?\n[00:57.18] Someone's gonna show you how a heart can be used\n[01:02.86] Like you did mine\n[01:06.11] \n[01:08.32] And now, I second-guess my thoughts, every step I take\n[01:12.67] I'm losin' hope in love, and I've lost all in faith\n[01:16.42] Yeah, for a dreamer, I just close my eyes and it's all blank\n[01:21.56] I have you to thank, yeah\n[01:24.30] I hope one day someone will take your heart and hold it tight\n[01:28.57] Make you feel like you're invincible deep inside\n[01:32.43] And right when you think that you'll try again, they cross a line\n[01:36.96] And steal your shine\n[01:39.06] Like you did mine\n[01:41.11] Go ahead and break my heart, that's fine\n[01:47.09] So unkind\n[01:49.03] Eternal sunshine of the spotless mind\n[01:54.52] Oh, love is blind\n[01:57.17] Why am I missin' you tonight?\n[02:02.52] Was it all a lie?\n[02:04.93] Someone's gonna show you how a heart can be used\n[02:11.65] And you keep talkin', it'll come back, karma\n[02:17.64] Is the truth, I don't make you look bad, you do, darlin'\n[02:23.79] Sabotage, your choice of art\n[02:29.90] Who the hell do you think you are?\n[02:37.59] Go ahead and break my heart, that's fine\n[02:44.06] Eternal sunshine of the spotless mind\n[02:49.03] \n[02:51.56] Why am I missin' you tonight?\n[02:56.72] \n[02:59.23] Someone's gonna show you how a heart can be used\n[03:05.24] Like you did mine\n[03:06.49] ",
+        "trackId": 286266926
+    }
+]
+
+
+```
+<br>
+
+
+### Status Codes
+
+HIFI returns the following status codes in its API:
+
+> | Status Code | Description |
+> | :---        | :--- |
+> | 200         | `OK` |
+> | 422         | `UNPROCESSABLE CONTENT` |
+> | 404         | `NOT FOUND` |
+> | 500         | `INTERNAL SERVER ERROR` |
+
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<br>
+
+## 🫂 Contributing
+Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+
+<br>
+
+## 🔐 Security Policy
+Please refer to [SECURITY.md](./SECURITY.md).
 
 <br>
 
