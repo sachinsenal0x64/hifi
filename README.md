@@ -137,7 +137,7 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 
 <br>
 
-## 🏠 INSTALLATION (Web UI)
+## (Web UI)
 
 - [BiniTidal-Web](https://music.binimum.org) | [BiniTidal](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
 
@@ -153,7 +153,7 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 
 <br>
 
-## 🏠 API SELF HOSTING (Optional)
+## 🏠 INSTALLATION (Optional)  
 
 > [!TIP]
 > You can access [api](https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-tidal-reverse-api--status) for free without having to self-host it.
