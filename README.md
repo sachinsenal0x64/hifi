@@ -181,10 +181,10 @@ git clone https://github.com/sachinsenal0x64/hifi-tui
 
 # Rename .env-example
 cd hifi-tui
-mv env-example .env
+mv .env.example .env
 
 # Just run
-docker-compose up
+docker compose up
 
 ```
 <br>
@@ -199,7 +199,7 @@ git clone https://github.com/sachinsenal0x64/hifi-tui
 
 # Rename .env-example
 cd hifi-tui
-mv env-example .env
+mv .env.example .env
 
 pip install "fastapi[all]"
 pip install -r requirements.txt
