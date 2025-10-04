@@ -1,6 +1,6 @@
 <div align="center">
  
- ![hifi-tui](https://github.com/sachinsenal0x64/picx-images-hosting/raw/master/gopher.1ap5wqeiwk.webp)
+<img width="1694" height="863" alt="hifi-tui" src="https://github.com/user-attachments/assets/b9e0888b-cb1d-47ad-85d7-e29a91c3da5f" />
  
 </div>
 
@@ -15,7 +15,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT) [![FASTAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=FastAPI&logoColor=white)](https://fastapi.tiangolo.com) [![Python](https://img.shields.io/badge/-Python-FCC624?style=style=flat-square&logo=Python)](https://www.python.org) [![PkgGoDev](https://pkg.go.dev/badge/github.com/rivo/tview)](https://pkg.go.dev/github.com/rivo/tview)
 
 
-    
+   
+
 </div>
 
 <br><br>
