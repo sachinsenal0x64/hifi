@@ -1,21 +1,24 @@
 <div align="center">
- 
- ![hifi-tui](https://github.com/sachinsenal0x64/picx-images-hosting/raw/master/gopher.1ap5wqeiwk.webp)
- 
-</div>
 
 <h1 align="center"> HIFI </h1>
 
 <h4 align="center">  🎵 Privacy-focused, cross-platform, self-hostable Tidal instance. <br><br>
 
 </h4>
+ 
+<img width="1568" height="860" alt="image" src="https://github.com/user-attachments/assets/5cd7a68c-bb8f-4668-bde6-b03eda4d1c17" />
+
+ Tidal HiFi Frontend - [BiniTidal](https://music.binimum.org)  Web UI 
+</div>
+
 
 <div align="center">
         
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT) [![FASTAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=FastAPI&logoColor=white)](https://fastapi.tiangolo.com) [![Python](https://img.shields.io/badge/-Python-FCC624?style=style=flat-square&logo=Python)](https://www.python.org) [![PkgGoDev](https://pkg.go.dev/badge/github.com/rivo/tview)](https://pkg.go.dev/github.com/rivo/tview)
 
 
-    
+   
+
 </div>
 
 <br><br>
