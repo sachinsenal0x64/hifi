@@ -116,9 +116,7 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 <br>
 
 
-# 📄 Documentation
 
-- https://tidal.401658.xyz/tdoc
 
 
 <br>
@@ -208,6 +206,7 @@ docker image prune -f
 
 ```
 
+<br>
 
 ### 🦄 From Source Code
 
