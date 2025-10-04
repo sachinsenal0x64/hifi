@@ -102,9 +102,6 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 <br>
 
 
-
-# <img src="https://sachinsenal0x64.github.io/picx-images-hosting/svgviewer-output(1).4gs81c9ecqkg.svg" alt="" height="40px" width="40px"> TIDAL REVERSE API / STATUS
-
 > [!NOTE]  
 > TUI based on this api and it free & opensource.
 
@@ -116,8 +113,6 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 <br>
 
 
-
-<br>
 
 # 🔋 EXTRA 
 
