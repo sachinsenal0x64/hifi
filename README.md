@@ -311,6 +311,88 @@ HIFI returns the following status codes in its API:
 
 ------------------------------------------------------------------------------------------
 
+<details>
+
+ <summary><code>GET</code>   <code><b>/dash/</b></code> </summary>
+
+## Request
+
+
+<br>
+
+> | Parameter  |   Type    | Description |
+> |------------|-----------|-------------|
+> | `id`       |  integer  | Track Id = `286266926` |
+> | `quality`  |  string   | Song Quality = `HI_RES_LOSSLESS` or `HI_RES` or `LOSSLESS` or `HIGH` or `LOW ` |
+
+
+<br>
+
+#### Example
+
+>HTTPie
+
+    https GET "https://tidal.401658.xyz/dash/?id=286266926&quality=HI_RES_LOSSLESS"
+
+<br>
+
+
+### Response
+
+XML-encoded MPEG-DASH manifest. Play on VLC/FFMpeg/Google Shaka Player (see note below).
+
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<MPD
+	xmlns="urn:mpeg:dash:schema:mpd:2011"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:cenc="urn:mpeg:cenc:2013" xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd" profiles="urn:mpeg:dash:profile:isoff-main:2011" type="static" minBufferTime="PT3.925S" mediaPresentationDuration="PT3M14.607S">
+	<Period id="0">
+		<AdaptationSet id="0" contentType="audio" mimeType="audio/mp4" segmentAlignment="true">
+			<Representation id="0" codecs="flac" bandwidth="1741283" audioSamplingRate="48000">
+				<SegmentTemplate timescale="48000" initialization="https://sp-ad-fa.audio.tidal.com/mediatracks/GigIAxIkY2VmNTNmMWRkMDVhMmMxYmU2YTQ1N2ExNmJmNDZmY2YubXA0IiAdAACAQCACKhAKFXRoxO9p3fvNd34d7sokMgUNAACgQQ/0.mp4?token=1759786386~L21lZGlhdHJhY2tzL0dpZ0lBeElrWTJWbU5UTm1NV1JrTURWaE1tTXhZbVUyWVRRMU4yRXhObUptTkRabVkyWXViWEEwSWlBZEFBQ0FRQ0FDS2hBS0ZYUm94TzlwM2Z2TmQzNGQ3c29rTWdVTkFBQ2dRUS8qfmM4NzFkODM0NGYxNThlYmM1Y2U4ODkzYTI3YjgyNTQ2ZTIyYzc4NGU=" media="https://sp-ad-fa.audio.tidal.com/mediatracks/GigIAxIkY2VmNTNmMWRkMDVhMmMxYmU2YTQ1N2ExNmJmNDZmY2YubXA0IiAdAACAQCACKhAKFXRoxO9p3fvNd34d7sokMgUNAACgQQ/$Number$.mp4?token=1759786386~L21lZGlhdHJhY2tzL0dpZ0lBeElrWTJWbU5UTm1NV1JrTURWaE1tTXhZbVUyWVRRMU4yRXhObUptTkRabVkyWXViWEEwSWlBZEFBQ0FRQ0FDS2hBS0ZYUm94TzlwM2Z2TmQzNGQ3c29rTWdVTkFBQ2dRUS8qfmM4NzFkODM0NGYxNThlYmM1Y2U4ODkzYTI3YjgyNTQ2ZTIyYzc4NGU=" startNumber="1">
+					<SegmentTimeline>
+						<S d="188416" r="48"/>
+						<S d="108786"/>
+					</SegmentTimeline>
+				</SegmentTemplate>
+			</Representation>
+		</AdaptationSet>
+	</Period>
+</MPD>
+```
+
+#### Google Shaka Player
+
+The API does not support HEAD requests so use this code to disable them:
+
+```js
+player.getNetworkingEngine().registerRequestFilter(function(type, request) {
+    // Convert any HEAD requests to GET
+    if (request.method === 'HEAD') {
+        request.method = 'GET';
+    }
+});
+```
+
+
+### Status Codes
+
+HIFI returns the following status codes in its API:
+
+> | Status Code | Description |
+> | :---        | :--- |
+> | 200         | `OK` |
+> | 422         | `UNPROCESSABLE CONTENT` |
+> | 404         | `NOT FOUND` |
+> | 500         | `INTERNAL SERVER ERROR` |
+
+
+</details>
+
+------------------------------------------------------------------------------------------
+
 
 
 <details>
