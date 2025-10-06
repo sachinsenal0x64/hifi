@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 
 app = FastAPI(title="HiFi-RestAPI", version="v1.0", description="Tidal Music Proxy")
 app.add_middleware(
@@ -161,14 +162,56 @@ async def auth():
 async def index():
     return {"HIFI-API": "v1.0", "Repo": "https://github.com/sachinsenal0x64/hifi"}
 
+"""
+Tidal Hi-Res streams are only avaliable over MPEG-DASH.
+
+This endpoint returns the DASH manifest for the requested track ID and quality.
+Configure Shaka Player to convert all HEAD requests to GET requests as this server doesn't support them:
+
+```js
+player.getNetworkingEngine().registerRequestFilter(function(type, request) {
+    // Convert any HEAD requests to GET
+    if (request.method === 'HEAD') {
+        request.method = 'GET';
+    }
+});
+```
+"""
+@app.api_route("/dash/", methods=["GET"])
+async def get_hi_res(
+    id: int,
+    quality: str = "HI_RES_LOSSLESS"
+):
+    try:
+        tokz = await refresh()
+        tidal_token = tokz
+        track_url = f"https://tidal.com/v1/tracks/{id}/playbackinfo?audioquality={quality}&playbackmode=STREAM&assetpresentation=FULL"
+        
+        payload = {
+            "authorization": f"Bearer {tidal_token}",
+        }
+        async with httpx.AsyncClient(http2=True) as client:
+            track_data = await client.get(url=track_url, headers=payload)
+            final_data = track_data.json()
+            decode_manifest = base64.b64decode(final_data["manifest"]) # returns dash
+            return Response(content=decode_manifest, media_type=final_data["manifestMimeType"])
+    except KeyError:
+        raise HTTPException(
+            status_code=404,
+            detail="Quality not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation"  
+        )
 
 @app.api_route("/track/", methods=["GET"])
 async def get_track(
     id: int,
-    quality: str,
-    country: Union[str, None] = Query(default=None, max_length=3),
+    quality: str = "LOSSLESS"
 ):
     try:
+        if quality == "HI_RES_LOSSLESS":
+            raise HTTPException(
+                status_code=404,
+                detail="HI_RES_LOSSLESS quality is not supported in this endpoint. Use /dash/ endpoint instead which returns MPEG-DASH.",
+            )
         tokz = await refresh()
         tidal_token = tokz
 
