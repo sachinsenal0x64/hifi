@@ -1,4 +1,6 @@
 
+<div align="center">
+
 <h1 align="center"> HIFI </h1>
 
 <h4 align="center">  🎵 Privacy-focused, cross-platform, self-hostable Tidal instance. <br><br>
@@ -12,7 +14,7 @@
 
 
 <div align="center">
-        
+	
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT) [![FASTAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=FastAPI&logoColor=white)](https://fastapi.tiangolo.com) [![Python](https://img.shields.io/badge/-Python-FCC624?style=style=flat-square&logo=Python)](https://www.python.org) [![PkgGoDev](https://pkg.go.dev/badge/github.com/rivo/tview)](https://pkg.go.dev/github.com/rivo/tview)
 
 
