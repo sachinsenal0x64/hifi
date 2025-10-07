@@ -1,4 +1,4 @@
-<div align="center">
+<img width="913" height="218" alt="image" src="https://github.com/user-attachments/assets/00a1a94b-fdd8-45a1-95ce-a56ec8875307" /><div align="center">
 
 <h1 align="center"> HIFI </h1>
 
@@ -362,6 +362,15 @@ XML-encoded MPEG-DASH manifest. Play on VLC/FFMpeg/Google Shaka Player (see note
 	</Period>
 </MPD>
 ```
+#### MPV Player
+
+```sh
+ mpv https://tidal.401658.xyz/dash/?id=286266926&quality=HI_RES_LOSSLESS
+
+```
+
+<img width="913" height="218" alt="image" src="https://github.com/user-attachments/assets/c6d0cad4-fc44-412b-8f0e-0ad870cc3ae2" />
+
 
 #### Google Shaka Player
 
