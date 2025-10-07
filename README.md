@@ -1,4 +1,3 @@
-<img width="913" height="218" alt="image" src="https://github.com/user-attachments/assets/00a1a94b-fdd8-45a1-95ce-a56ec8875307" /><div align="center">
 
 <h1 align="center"> HIFI </h1>
 
