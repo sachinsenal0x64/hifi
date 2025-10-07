@@ -701,7 +701,7 @@ HIFI returns the following status codes in its API:
 
 > | Parameter  |   Type    | Description |
 > |------------|-----------|-------------|
-> | `id`       |  integer  | Album Id = `157117504` |
+> | `id`       |  integer  | Album Id = `286266925` |
 
 
 <br>
@@ -710,7 +710,7 @@ HIFI returns the following status codes in its API:
 
 >HTTPie
 
-    https GET "https://tidal.401658.xyz/album/?id=157117504"
+    https GET "https://tidal.401658.xyz/album/?id=286266925"
     
 
 ![image](https://github.com/sachinsenal0x64/picx-images-hosting/raw/master/2024-02-20-19:33:52-screenshot.99t2w3gelf.webp)
