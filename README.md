@@ -84,7 +84,7 @@ I love cli tools as well as music, so why not to have a tidal music client for t
   
 - 👤 TIDAL ACCOUNTS MANAGEMENT 
 
-- 📚 PLAYLISTS | RECENT PLAYBACK | LIBARAY MANAGEMENT | LYRICS & COVER ART (⭕ in progress)
+- 📚 LIBARAY MANAGEMENT (⭕ in progress)
 
 - 📡 BEAUTIFUL REST API (ACT AS REVERSE PROXY INSTANCE)
   
