@@ -86,22 +86,14 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 
 - ⌨ VIM LIKE KEY BINDINGS
 
-- 🎧 PLAYER: TIDAL-HIFI | PODCAST TUI  (⭕ in progress)
-  
-- 👤 TIDAL ACCOUNTS MANAGEMENT 
+- 🎧 PLAYER: TIDAL-HIFI
 
-- 📚 LIBARAY MANAGEMENT (⭕ in progress)
-
-- 📡 BEAUTIFUL REST API (ACT AS REVERSE PROXY INSTANCE)
+- 📡 REST API
   
 - ⛓️‍💥 BYPASS GEO RESTRICTED CONTENT
   
-- ⚖️ LAYER 7 LOAD BALANCER (ACT AS API GATEWAY | Purely Python & GO Implementations)
+- ⚖️ LAYER 7 LOAD BALANCER (ACT AS API GATEWAY)
 
-- ⚡️ POWERFUL ASYNC | CONCURRENCY SUPPORT
-
-- 📑 DOCS SUPPORT ( SWAGGER UI ) | API PLAYGROUND (/tdoc and /pdoc)
- 
 - 🕹️ REMOTE (Highly Controllable Remotely Over the Network + Independently, Such an as Play | Pause | Seek | Volume | Next | Previous | Loops (Repeat | Infinity))
   
 </table>
