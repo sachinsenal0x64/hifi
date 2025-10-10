@@ -44,8 +44,6 @@
 
 > I'm currently paying for a Tidal HiFi Plus subscription.
 
-> We Dont have any GUI Application for android / ios / windows / mac / linux  contributors are welcome.
-
 > You can access our rest api for free if you want to self-host then need tidal subscription.
 
 > TUI is plug & play also you can add your own tidal account but by default it has our API so you can listen tidal music for free.
@@ -55,8 +53,6 @@
 > [MQA-CHECKER](https://github.com/purpl3F0x/MQA_identifier)
 
 > Low (96 kbps) - 3 MB | Low (320 kbps) - 8 MB | High (FLAC, 16-bit, 44.1 kHz) - 30 MB | Max (MQA) - 26 MB | Max (MQA) - 26  | Max (HiRes FLAC, up to 24-bit, 192 kHz) - 30 MB to 140 MB
-
-> Currently We don't have any GUI Application for android / ios / windows / mac / linux  contributors are welcome.
 
  
 <br>
