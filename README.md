@@ -13,7 +13,7 @@
 
 
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/image.wiy0x1yje.webp" />
+<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/image.3d56fumd2v.webp" />
 
  Another HiFi Frontend - [Monochrome](https://monochrome.prigoana.com) Web UI 
 
