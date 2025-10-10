@@ -139,8 +139,6 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 
 # 💨 Quick Start
 
-<br>
-
 ## Web UI
 
 - [BiniTidal-Web](https://music.binimum.org) | [BiniTidal](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
