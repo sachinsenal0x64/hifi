@@ -138,8 +138,8 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 
 - [tidal-dl](https://github.com/Nem-git/tidal) Download music from Tidal, no account required.
 - [tidler](https://git.medvidek77.tech/Medvidek77/tidler) Tidal music downloader based on the hifi-tui API
-- [BiniTidal-Web](https://music.binimum.org) | [SquidWtf](https://tidal.squid.wtf) | [BiniTidal (Source code)](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
-- [Monochrome (web)](https://monochrome.prigoana.com) | [Monochrome (Source code)](https://github.com/eduardprigoana/monochrome )  Hifi Frontend
+- [BiniTidal (Web)](https://music.binimum.org) | [SquidWtf (Web)](https://tidal.squid.wtf) | [BiniTidal (Source code)](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
+- [Monochrome (Web)](https://monochrome.prigoana.com) | [Monochrome (Source code)](https://github.com/eduardprigoana/monochrome)  Hifi Frontend
 
 <br>
 
