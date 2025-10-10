@@ -142,7 +142,7 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 ## Web UI
 
 - [BiniTidal-Web](https://music.binimum.org) | [BiniTidal](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
-
+- [Monochrome (web)](https://monochrome.prigoana.com) | [Monochrome](https://github.com/eduardprigoana/monochrome) another Hifi Frontend
 
 <br>
 
