@@ -1,7 +1,7 @@
 package main
 
 import (
-	"hifi-tui/tui/components"
+	"hifi/tui/components"
 
 	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
