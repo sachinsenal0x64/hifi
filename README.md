@@ -38,13 +38,18 @@
 <br>
 
 
-# 📌 F.A.Q
+> [!IMPORTANT]  
+> # F.A.Q / Terms
 
 > We DO NOT encourage piracy and made for purely educational purposes / personal use / just for listen not for downloading.
 
 > I'm currently paying for a Tidal HiFi Plus subscription.
 
-> You can access our rest api for free if you want to self-host then need tidal subscription.
+> Community projects may be inspired by or related to the HiFi Project but aren’t officially part of it. These projects are run independently, and the HiFi team isn’t responsible for their content or actions. Each project team should follow any relevant laws and handle its own checks and compliance.
+
+> The HiFi project does not claim ownership of any music or audio content. All rights remain with their respective copyright holders. Users are encouraged to support artists and rights owners by maintaining a valid Tidal subscription. HiFi serves solely as a playback and control interface (e.g., on a Raspberry Pi) for personal, non-commercial use.
+
+> You can access our rest api for free if you want to self-host then need tidal subscription. 
 
 > TUI is plug & play also you can add your own tidal account but by default it has our API so you can listen tidal music for free.
 
