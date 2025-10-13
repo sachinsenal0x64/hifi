@@ -106,7 +106,7 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 
 
 > [!NOTE]  
-> TUI based on this api and it free & opensource.
+> WebUI / TUI based on this API.
 
 > [API DOCS](https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation-no-account-required)
 
