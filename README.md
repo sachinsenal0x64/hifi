@@ -9,7 +9,7 @@
  
 <img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/hifi.5fkz01pkwn.webp" />
 
- Tidal HiFi Frontend - [BiniTidal](https://music.binimum.org)  Web UI 
+ HiFi Frontend - [BiniTidal](https://music.binimum.org)  Web UI 
 
 
 
