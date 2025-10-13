@@ -15,7 +15,7 @@
 
 <img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/image.3d56fumd2v.webp" />
 
- Another HiFi Frontend - [Monochrome](https://monochrome.prigoana.com) Web UI 
+ Another HiFi Frontend - [Monochrome](https://monochrome.prigoana.com) or [Monochrome](https://monochrome.tf) Web UI 
 
 </div>
 
@@ -135,7 +135,7 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 - [tidal-dl](https://github.com/Nem-git/tidal) Hifi CLI
 - [tidler](https://git.medvidek77.tech/Medvidek77/tidler) Hifi CLI
 - [BiniTidal (Web)](https://music.binimum.org) | [SquidWtf (Web)](https://tidal.squid.wtf) | [BiniTidal (Source code)](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
-- [Monochrome (Web)](https://monochrome.prigoana.com) | [Monochrome (Source code)](https://github.com/eduardprigoana/monochrome)  Hifi Frontend
+- [Monochrome (Web)](https://monochrome.prigoana.com) | [Monochrome (Web)](https://monochrome.tf) | [Monochrome (Source code)](https://github.com/eduardprigoana/monochrome)  Hifi Frontend
 
 <br>
 
