@@ -55,9 +55,9 @@
 
 > TL;DR  HIFI API Can Get Any Quality & Codec Which Tidal Offer / Some Qualities & Codecs Need Special Driver / Song / Hardware to get maximum output i always recommend to use `HI_RES` or `LOSSLESS` both are in flac.
 
-> [MQA-CHECKER](https://github.com/purpl3F0x/MQA_identifier)
+> How do I know if this is an MQA or not? - [MQA-CHECKER](https://github.com/purpl3F0x/MQA_identifier)
 
-> Low (96 kbps) - 3 MB | Low (320 kbps) - 8 MB | High (FLAC, 16-bit, 44.1 kHz) - 30 MB | Max (MQA) - 26 MB | Max (MQA) - 26  | Max (HiRes FLAC, up to 24-bit, 192 kHz) - 30 MB to 140 MB
+> File Size - Low (96 kbps) - 3 MB | Low (320 kbps) - 8 MB | High (FLAC, 16-bit, 44.1 kHz) - 30 MB | Max (MQA) - 26 MB | Max (MQA) - 26  | Max (HiRes FLAC, up to 24-bit, 192 kHz) - 30 MB to 140 MB
 
  
 <br>
