@@ -177,7 +177,7 @@ I love cli tools as well as music, so why not to have a tidal music client for t
 git clone https://github.com/sachinsenal0x64/hifi
 
 # Rename .env-example
-cd hifi-tui
+cd hifi
 mv .env.example .env
 
 # Just run
@@ -194,7 +194,7 @@ docker compose up
 # Clone the Repo
 git clone https://github.com/sachinsenal0x64/hifi
 
-cd hifi-tui
+cd hifi
 git pull
 
 # Just run
