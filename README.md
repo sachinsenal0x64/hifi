@@ -333,7 +333,7 @@ HIFI returns the following status codes in its API:
 
 >xh
 
-    xh GET "https://tidal.401658,xyz/home/?country=AU"
+    xh GET "https://tidal.401658.xyz/home/?country=AU"
     
 
 <br>
