@@ -22,8 +22,7 @@ CORSMiddleware,
 allow_origins=["*"],
 allow_credentials=False,
 allow_methods=["*"],
-expose_headers=["*"],
-redirect_slashes=False
+expose_headers=["*"]
 )
 
 load_dotenv()
