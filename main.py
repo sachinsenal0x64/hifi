@@ -38,6 +38,7 @@ user_id = os.getenv("USER_ID")
 
 client_id = "zU4XHVVkc2tDPo4t"
 client_secret = "VJKhDFqJPqvsPVNBV6ukXTJmwlvbttP7wlMlrc72se4="
+cached_tok = None
 
 
 if os.path.exists("token.json"):
@@ -62,43 +63,34 @@ async def get_redis_connection():
     return r
 
 
-cached_tok = None
 
-async def token_checker():
-    r = await get_redis_connection()
-    cached_tok = await r.get("access_token")
 
-    if not cached_tok:
-        await r.close()
-        return None
-
-    token_str = cached_tok.decode() if isinstance(cached_tok, bytes) else cached_tok
-
+async def token_checker(token: str) -> bool:
+    """Check if the token is valid with Tidal API."""
     refresh_url = f"https://api.tidal.com/v2/feed/activities/?userId={user_id}"
-    headers = {"authorization": f"Bearer {token_str}"}
+    headers = {"authorization": f"Bearer {token}"}
 
     async with httpx.AsyncClient() as client:
         res = await client.get(refresh_url, headers=headers)
-        rich.print(res.status_code, res.text)
+        rich.print(f"Tidal API status: {res.status_code}")
 
-    await r.close()
-    return res.status_code
-
+    return res.status_code == 200
 
 
 async def refresh():
+    """Get a valid Tidal token — cached if valid, refreshed if needed."""
     r = await get_redis_connection()
-    status = await token_checker()
 
-    # If token is valid
-    if status == 200:
-        cached_tok = await r.get("access_token")
-        print("Using cached token")
-        await r.close()
-        return cached_tok.decode() if cached_tok else None
-
-    # If token is invalid/expired
-    await r.delete("access_token")
+    cached_tok = await r.get("access_token")
+    if cached_tok:
+        print("🔍 Found cached token. Checking validity...")
+        if await token_checker(cached_tok):
+            print("✅ Using cached token")
+            await r.close()
+            return cached_tok
+        else:
+            print("⚠️ Cached token invalid or expired — refreshing...")
+            await r.delete("access_token")
 
     refresh_url = "https://auth.tidal.com/v1/oauth2/token"
     payload = {
@@ -111,21 +103,21 @@ async def refresh():
     async with httpx.AsyncClient(http2=True) as client:
         try:
             res = await client.post(refresh_url, data=payload, auth=(client_id, client_secret))
-            print("HTTP Version:", res.http_version)
 
             if res.status_code == 200:
                 token_data = res.json()
                 tidal_token = token_data.get("access_token")
                 if tidal_token:
                     await r.set("access_token", tidal_token)
+                    print("🔄 Token refreshed and cached.")
                     await r.close()
                     return tidal_token
                 else:
                     await r.close()
-                    return {"error": "No access_token in response"}
-            else:
-                await r.close()
-                return {"error": f"Failed to refresh token: {res.status_code} - {res.text}"}
+                    return {"error": "No access_token in response."}
+
+            await r.close()
+            return {"error": f"Failed to refresh token: {res.status_code} - {res.text}"}
 
         except httpx.HTTPError as e:
             await r.close()
