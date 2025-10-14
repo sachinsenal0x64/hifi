@@ -392,8 +392,8 @@ async def search(
     al: Union[str, None] = Query(default=None),
     v: Union[str, None] = Query(default=None),
     p: Union[str, None] = Query(default=None),
-    li: Union[int, None] = Query(default=25),
-    o: Union[int, None] = Query(default=0)
+    li: Union[int] = Query(default=25),
+    o: Union[int] = Query(default=0)
 ):
     try:
         tokz = await refresh()
