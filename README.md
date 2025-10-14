@@ -214,7 +214,7 @@ docker image prune -f
 git clone https://github.com/sachinsenal0x64/hifi
 
 # Rename .env-example
-cd hifi-tui
+cd hifi
 mv .env.example .env
 
 pip install "fastapi[all]"
