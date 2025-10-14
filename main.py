@@ -392,20 +392,22 @@ async def search(
     al: Union[str, None] = Query(default=None),
     v: Union[str, None] = Query(default=None),
     p: Union[str, None] = Query(default=None),
+    li: Union[int, None] = Query(default=25),
+    o: Union[int, None] = Query(default=0)
 ):
     try:
         tokz = await refresh()
         tidal_token = tokz
 
-        search_url = f"https://api.tidal.com/v1/search/tracks?query={s}&limit=25&offset=0&countryCode=US"
+        search_url = f"https://api.tidal.com/v1/search/tracks?query={s}&limit={li}&offset={o}&countryCode=US"
 
-        artist_url = f"https://api.tidal.com/v1/search/top-hits?query={a}&limit=25&offset=0&types=ARTISTS,TRACKS&countryCode=US"
+        artist_url = f"https://api.tidal.com/v1/search/top-hits?query={a}&limit={li}&offset={o}&types=ARTISTS,TRACKS&countryCode=US"
 
-        album_url = f"https://api.tidal.com/v1/search/top-hits?query={al}&limit=25&offset=0&types=ALBUMS&countryCode=US"
+        album_url = f"https://api.tidal.com/v1/search/top-hits?query={al}&limit={li}&offset={o}&types=ALBUMS&countryCode=US"
 
-        video_url = f"https://api.tidal.com/v1/search/top-hits?query={v}&limit=25&offset=0&types=VIDEOS&countryCode=US"
+        video_url = f"https://api.tidal.com/v1/search/top-hits?query={v}&limit={li}&offset={o}&types=VIDEOS&countryCode=US"
 
-        playlist_url = f"https://api.tidal.com/v1/search/top-hits?query={p}&limit=25&offset=0&types=PLAYLISTS&countryCode=US"
+        playlist_url = f"https://api.tidal.com/v1/search/top-hits?query={p}&limit={li}&offset={o}&types=PLAYLISTS&countryCode=US"
 
         header = {"authorization": f"Bearer {tidal_token}"}
 
