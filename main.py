@@ -852,13 +852,13 @@ async def get_cover(id: str, country: Optional[str] = "US"):
         else:
             raise HTTPException(
                 status_code=404,
-                detail="Home not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
+                detail="Mix not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
             )
 
     except KeyError:
         raise HTTPException(
             status_code=404,
-            detail="Home not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
+            detail="Mix not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
         )
 
     except httpx.ConnectTimeout:
