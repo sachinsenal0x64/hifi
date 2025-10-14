@@ -835,3 +835,60 @@ async def get_cover(country: Optional[str] = "US"):
         raise HTTPException(
             status_code=429,
         )
+    
+
+
+@app.api_route("/mix/", methods=["GET"])
+async def get_cover(id: str, country: Optional[str] = "US"):
+    try:
+        tokz = await refresh()
+        tidal_token = tokz
+        if country:
+            search_url = f"https://api.tidal.com/v1/mixes/{id}/items?countryCode={country}"
+            header = {"x-tidal-token": f"{client_id}",} 
+            async with httpx.AsyncClient(http2=True) as clinet:
+                home_data = await clinet.get(url=search_url, headers=header)
+                json_data = home_data.json()
+                return json_data
+
+        else:
+            raise HTTPException(
+                status_code=404,
+                detail="Home not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
+            )
+
+    except KeyError:
+        raise HTTPException(
+            status_code=404,
+            detail="Home not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
+        )
+
+    except httpx.ConnectTimeout:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except httpx.ConnectError:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except json.JSONDecodeError:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except httpx.ReadTimeout:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except httpx.WriteError:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except httpx.ReadError:
+        raise HTTPException(
+            status_code=429,
+        )
