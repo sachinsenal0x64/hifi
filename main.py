@@ -841,8 +841,6 @@ async def get_cover(country: Optional[str] = "US"):
 @app.api_route("/mix/", methods=["GET"])
 async def get_cover(id: str, country: Optional[str] = "US"):
     try:
-        tokz = await refresh()
-        tidal_token = tokz
         if country:
             search_url = f"https://api.tidal.com/v1/mixes/{id}/items?countryCode={country}"
             header = {"x-tidal-token": f"{client_id}",} 
