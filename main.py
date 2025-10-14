@@ -64,7 +64,6 @@ async def get_redis_connection():
 
 cached_tok = None
 
-
 async def token_checker():
     r = await get_redis_connection()
     cached_tok = await r.get("access_token")
@@ -94,6 +93,7 @@ async def refresh():
     # If token is valid
     if status == 200:
         cached_tok = await r.get("access_token")
+        print("Using cached token")
         await r.close()
         return cached_tok.decode() if cached_tok else None
 
