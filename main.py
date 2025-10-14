@@ -67,68 +67,72 @@ cached_tok = None
 
 async def token_checker():
     r = await get_redis_connection()
-    refresh_url = f"https://api.tidal.com/v2/feed/activities/?userId={user_id}"
-
     cached_tok = await r.get("access_token")
-    await r.close()
-    headers = {"authorization": f"Bearer {cached_tok}"}
+
+    if not cached_tok:
+        await r.close()
+        return None
+
+    token_str = cached_tok.decode() if isinstance(cached_tok, bytes) else cached_tok
+
+    refresh_url = f"https://api.tidal.com/v2/feed/activities/?userId={user_id}"
+    headers = {"authorization": f"Bearer {token_str}"}
 
     async with httpx.AsyncClient() as client:
-        res2 = await client.get(url=refresh_url, headers=headers)
-        rich.print(res2.json())
+        res = await client.get(refresh_url, headers=headers)
+        rich.print(res.status_code, res.text)
 
-        if res2.status_code == 200:
-            return res2.status_code
+    await r.close()
+    return res.status_code
+
 
 
 async def refresh():
-    status = await token_checker()
     r = await get_redis_connection()
+    status = await token_checker()
+
+    # If token is valid
     if status == 200:
         cached_tok = await r.get("access_token")
         await r.close()
-        tidal_token = cached_tok
-        return tidal_token
+        return cached_tok.decode() if cached_tok else None
 
-    elif status != 200:
-        cached_tok = None
-        await r.delete("access_token")
-        await r.close()
+    # If token is invalid/expired
+    await r.delete("access_token")
 
-    if not await r.get("access_token"):
-        await r.close()
-        refresh_url = "https://auth.tidal.com/v1/oauth2/token"
-        payload = {
-            "client_id": client_id,
-            "refresh_token": refresh_token,
-            "grant_type": "refresh_token",
-            "scope": "r_usr+w_usr+w_sub",
-        }
-        async with httpx.AsyncClient(http2=True) as client:
-            try:
-                res2 = await client.post(
-                    url=refresh_url,
-                    data=payload,
-                    auth=(client_id, client_secret),
-                )
+    refresh_url = "https://auth.tidal.com/v1/oauth2/token"
+    payload = {
+        "client_id": client_id,
+        "refresh_token": refresh_token,
+        "grant_type": "refresh_token",
+        "scope": "r_usr+w_usr+w_sub",
+    }
 
-                print(res2.http_version)
+    async with httpx.AsyncClient(http2=True) as client:
+        try:
+            res = await client.post(refresh_url, data=payload, auth=(client_id, client_secret))
+            print("HTTP Version:", res.http_version)
 
-                # Assuming a successful response code is 200
-                if res2.status_code == 200:
-                    print_token = res2.json()
-                    tida_token = print_token.get("access_token")
-                    await r.set("access_token", tida_token)
+            if res.status_code == 200:
+                token_data = res.json()
+                tidal_token = token_data.get("access_token")
+                if tidal_token:
+                    await r.set("access_token", tidal_token)
                     await r.close()
-                    tidal_token = tida_token
                     return tidal_token
                 else:
-                    return {"error": f"Failed to refresh token: {res2.status_code}"}
+                    await r.close()
+                    return {"error": "No access_token in response"}
+            else:
+                await r.close()
+                return {"error": f"Failed to refresh token: {res.status_code} - {res.text}"}
 
-            except httpx.HTTPError as e:
-                return {"error": f"HTTP error occurred: {str(e)}"}
-            except Exception as e:
-                return {"error": f"An error occurred: {str(e)}"}
+        except httpx.HTTPError as e:
+            await r.close()
+            return {"error": f"HTTP error occurred: {str(e)}"}
+        except Exception as e:
+            await r.close()
+            return {"error": f"Unexpected error: {str(e)}"}
 
 
 async def auth():
