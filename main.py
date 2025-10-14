@@ -4,7 +4,7 @@ import asyncio
 import base64
 import json
 import os
-from typing import Union
+from typing import Union, Optional
 
 import httpx
 import redis.asyncio as redis
@@ -753,6 +753,63 @@ async def get_cover(id: Union[int, None] = None, q: Union[str, None] = None):
         raise HTTPException(
             status_code=404,
             detail="Cover not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
+        )
+
+    except httpx.ConnectTimeout:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except httpx.ConnectError:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except json.JSONDecodeError:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except httpx.ReadTimeout:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except httpx.WriteError:
+        raise HTTPException(
+            status_code=429,
+        )
+
+    except httpx.ReadError:
+        raise HTTPException(
+            status_code=429,
+        )
+
+
+
+@app.api_route("/home/", methods=["GET"])
+async def get_cover(country: Optional[str] = "US"):
+    try:
+        tokz = await refresh()
+        tidal_token = tokz
+        if country:
+            search_url = f"https://api.tidal.com/v1/pages/home?countryCode={country.upper()}&deviceType=BROWSER"
+            header = {"authorization": f"Bearer {tidal_token}"} 
+            async with httpx.AsyncClient(http2=True) as clinet:
+                home_data = await clinet.get(url=search_url, headers=header)
+                json_data = home_data.json()
+                return json_data
+
+        else:
+            raise HTTPException(
+                status_code=404,
+                detail="Home not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
+            )
+
+    except KeyError:
+        raise HTTPException(
+            status_code=404,
+            detail="Home not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
         )
 
     except httpx.ConnectTimeout:
