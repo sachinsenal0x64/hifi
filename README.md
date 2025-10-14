@@ -203,6 +203,13 @@ docker compose down
 docker compose up -d --build
 docker image prune -f
 
+# or 
+
+cd hifi 
+
+chmod +x update.sh
+
+./update.sh
 
 ```
 
