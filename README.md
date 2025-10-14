@@ -324,7 +324,7 @@ HIFI returns the following status codes in its API:
 
 > | Parameter  |   Type    | Description | Optional    |
 > |------------|-----------|-------------|-------------|
-> | `country`  |  string   | Country = `AU`| true      |
+> | `country`  |  string   | Country = `AU`| `true`      |
 
 
 <br>
@@ -1097,6 +1097,8 @@ HIFI returns the following status codes in its API:
 > | `al` | string |  Album Name = `Late Registration`|
 > | `v`  | string |  Video Name = `Spaceship`|
 > | `p`  | string |  Playlist Name = `Pop Hits`|
+> |`li`  | integer | Limit = `125` |
+> | `o`  | integer | Offset = `0` |
 
 <br>
 
@@ -1820,8 +1822,8 @@ HIFI returns the following status codes in its API:
 
 > | Parameter  |   Type    | Description | Optional|
 > |------------|-----------|-------------|-------------|	
-> | `id`       |  string   | Mix ID = `286266926` | false|
-> | `country`  |  string   | Country = `AU`| true|
+> | `id`       |  string   | Mix ID = `286266926` | `false`|
+> | `country`  |  string   | Country = `AU`| `true`|
 
 
 <br>
