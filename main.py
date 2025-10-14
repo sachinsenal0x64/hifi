@@ -63,8 +63,6 @@ async def get_redis_connection():
     return r
 
 
-
-
 async def token_checker(token: str) -> bool:
     """Check if the token is valid with Tidal API."""
     refresh_url = f"https://api.tidal.com/v2/feed/activities/?userId={user_id}"
