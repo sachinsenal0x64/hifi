@@ -28,17 +28,19 @@ app.add_middleware(
 load_dotenv()
 
 client_id = os.getenv("CLIENT_ID")
+client_id_HIRES  = os.getenv("CLIENT_ID_HIRES") 
 client_secret = os.getenv("CLIENT_SECRET")
+client_secret_HIRES = os.getenv("CLIENT_SECRET_HIRES")
 access_token = os.getenv("TIDAL_TOKEN")
 refresh_token = os.getenv("TIDAL_REFRESH")
+refresh_token_HIRES = os.getenv("TIDAL_REFRESH_HIRES")
 redis_url = os.getenv("REDIS_URL")
 redis_port = os.getenv("REDIS_PORT")
 redis_password = os.getenv("REDIS_PASSWORD")
 user_id = os.getenv("USER_ID")
 
-client_id = client_id
-client_secret = client_secret
 cached_tok = None
+cached_tok2 = None
 
 
 if os.path.exists("token.json"):
@@ -64,6 +66,19 @@ async def get_redis_connection():
 
 
 async def token_checker(token: str) -> bool:
+    """Check if the token is valid with Tidal API."""
+    refresh_url = f"https://api.tidal.com/v2/feed/activities/?userId={user_id}"
+    headers = {"authorization": f"Bearer {token}"}
+
+    async with httpx.AsyncClient() as client:
+        res = await client.get(refresh_url, headers=headers)
+        print(res)
+        rich.print(f"Tidal API status: {res.status_code}")
+
+    return res.status_code == 200
+
+
+async def token_checker2(token: str) -> bool:
     """Check if the token is valid with Tidal API."""
     refresh_url = f"https://api.tidal.com/v2/feed/activities/?userId={user_id}"
     headers = {"authorization": f"Bearer {token}"}
@@ -154,6 +169,84 @@ async def auth():
 
     return out_res
 
+async def refresh2():
+    """Get a valid Tidal token — cached if valid, refreshed if needed."""
+    r = await get_redis_connection()
+
+    cached_tok2 = await r.get("access_token2")
+    if cached_tok2:
+        print("🔍 Found cached token. Checking validity...")
+        if await token_checker2(cached_tok2):
+            print("✅ Using cached token")
+            await r.close()
+            return cached_tok2
+        else:
+            print("⚠️ Cached token invalid or expired — refreshing...")
+            await r.delete("access_token2")
+
+    refresh_url = "https://auth.tidal.com/v1/oauth2/token"
+    payload = {
+        "client_id": client_id_HIRES,
+        "refresh_token": refresh_token_HIRES,
+        "grant_type": "refresh_token",
+        "scope": "r_usr+w_usr+w_sub",
+    }
+
+    async with httpx.AsyncClient(http2=True) as client:
+        try:
+            res = await client.post(
+                refresh_url, data=payload, auth=(client_id_HIRES, client_secret_HIRES)
+            )
+
+            if res.status_code == 200:
+                token_data = res.json()
+                tidal_token = token_data.get("access_token")
+                if tidal_token:
+                    await r.set("access_token2", tidal_token)
+                    print("🔄 Token refreshed and cached.")
+                    await r.close()
+                    return tidal_token
+                else:
+                    await r.close()
+                    return {"error": "No access_token in response."}
+
+            await r.close()
+            return {"error": f"Failed to refresh token: {res.status_code} - {res.text}"}
+
+        except httpx.HTTPError as e:
+            await r.close()
+            return {"error": f"HTTP error occurred: {str(e)}"}
+        except Exception as e:
+            await r.close()
+            return {"error": f"Unexpected error: {str(e)}"}
+
+
+async def auth2():
+    cids = client_id_HIRES
+    csec = client_secret_HIRES
+
+    url = "https://auth.tidal.com/v1/oauth2/token"
+
+    payload = {
+        "grant_type": "client_credentials",
+        "client_id": cids,
+        "client_secret": csec,
+    }
+
+    async with httpx.AsyncClient(http2=True) as client:
+        res = await client.post(url=url, data=payload)
+
+        access_token = res.json()["access_token"]
+        expires_in = res.json()["expires_in"]
+        token_type = res.json()["token_type"]
+        out_res = {
+            "access_token": access_token,
+            "expires_in": expires_in,
+            "token_type": token_type,
+        }
+
+    return out_res
+
 
 @app.api_route("/", methods=["GET"], include_in_schema=False)
 async def index():
@@ -180,7 +273,7 @@ player.getNetworkingEngine().registerRequestFilter(function(type, request) {
 @app.api_route("/dash/", methods=["GET"])
 async def get_hi_res(id: int, quality: str = "HI_RES_LOSSLESS"):
     try:
-        tokz = await refresh()
+        tokz = await refresh2()
         tidal_token = tokz
         track_url = f"https://tidal.com/v1/tracks/{id}/playbackinfo?audioquality={quality}&playbackmode=STREAM&assetpresentation=FULL"
 
