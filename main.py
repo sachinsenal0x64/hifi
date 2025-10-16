@@ -18,11 +18,11 @@ from fastapi.responses import Response
 
 app = FastAPI(title="HiFi-RestAPI", version="v1.0", description="Tidal Music Proxy")
 app.add_middleware(
-CORSMiddleware,
-allow_origins=["*"],
-allow_credentials=False,
-allow_methods=["*"],
-expose_headers=["*"]
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    expose_headers=["*"],
 )
 
 load_dotenv()
@@ -36,8 +36,8 @@ redis_port = os.getenv("REDIS_PORT")
 redis_password = os.getenv("REDIS_PASSWORD")
 user_id = os.getenv("USER_ID")
 
-client_id = "zU4XHVVkc2tDPo4t"
-client_secret = "VJKhDFqJPqvsPVNBV6ukXTJmwlvbttP7wlMlrc72se4="
+client_id = client_id
+client_secret = client_secret
 cached_tok = None
 
 
@@ -70,6 +70,7 @@ async def token_checker(token: str) -> bool:
 
     async with httpx.AsyncClient() as client:
         res = await client.get(refresh_url, headers=headers)
+        print(res)
         rich.print(f"Tidal API status: {res.status_code}")
 
     return res.status_code == 200
@@ -100,7 +101,9 @@ async def refresh():
 
     async with httpx.AsyncClient(http2=True) as client:
         try:
-            res = await client.post(refresh_url, data=payload, auth=(client_id, client_secret))
+            res = await client.post(
+                refresh_url, data=payload, auth=(client_id, client_secret)
+            )
 
             if res.status_code == 200:
                 token_data = res.json()
@@ -156,6 +159,7 @@ async def auth():
 async def index():
     return {"HIFI-API": "v1.0", "Repo": "https://github.com/sachinsenal0x64/hifi"}
 
+
 """
 Tidal Hi-Res streams are only avaliable over MPEG-DASH.
 
@@ -171,35 +175,34 @@ player.getNetworkingEngine().registerRequestFilter(function(type, request) {
 });
 ```
 """
+
+
 @app.api_route("/dash/", methods=["GET"])
-async def get_hi_res(
-    id: int,
-    quality: str = "HI_RES_LOSSLESS"
-):
+async def get_hi_res(id: int, quality: str = "HI_RES_LOSSLESS"):
     try:
         tokz = await refresh()
         tidal_token = tokz
         track_url = f"https://tidal.com/v1/tracks/{id}/playbackinfo?audioquality={quality}&playbackmode=STREAM&assetpresentation=FULL"
-        
+
         payload = {
             "authorization": f"Bearer {tidal_token}",
         }
         async with httpx.AsyncClient(http2=True) as client:
             track_data = await client.get(url=track_url, headers=payload)
             final_data = track_data.json()
-            decode_manifest = base64.b64decode(final_data["manifest"]) # returns dash
-            return Response(content=decode_manifest, media_type=final_data["manifestMimeType"])
+            decode_manifest = base64.b64decode(final_data["manifest"])  # returns dash
+            return Response(
+                content=decode_manifest, media_type=final_data["manifestMimeType"]
+            )
     except KeyError:
         raise HTTPException(
             status_code=404,
-            detail="Quality not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation"  
+            detail="Quality not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
         )
 
+
 @app.api_route("/track/", methods=["GET"])
-async def get_track(
-    id: int,
-    quality: str = "LOSSLESS"
-):
+async def get_track(id: int, quality: str = "LOSSLESS"):
     try:
         if quality == "HI_RES_LOSSLESS":
             raise HTTPException(
@@ -222,6 +225,7 @@ async def get_track(
             info_data = await client.get(url=info_url, headers=payload)
 
             final_data = track_data.json()["manifest"]
+            print(final_data)
             decode_manifest = base64.b64decode(final_data)
             con_json = json.loads(decode_manifest)
             audio_url = con_json.get("urls")[0]
@@ -393,7 +397,7 @@ async def search(
     v: Union[str, None] = Query(default=None),
     p: Union[str, None] = Query(default=None),
     li: Union[int] = Query(default=25),
-    o: Union[int] = Query(default=0)
+    o: Union[int] = Query(default=0),
 ):
     try:
         tokz = await refresh()
@@ -782,7 +786,6 @@ async def get_cover(id: Union[int, None] = None, q: Union[str, None] = None):
         )
 
 
-
 @app.api_route("/home/", methods=["GET"])
 async def get_cover(country: Optional[str] = "US"):
     try:
@@ -790,7 +793,7 @@ async def get_cover(country: Optional[str] = "US"):
         tidal_token = tokz
         if country:
             search_url = f"https://api.tidal.com/v1/pages/home?countryCode={country.upper()}&deviceType=BROWSER"
-            header = {"authorization": f"Bearer {tidal_token}"} 
+            header = {"authorization": f"Bearer {tidal_token}"}
             async with httpx.AsyncClient(http2=True) as clinet:
                 home_data = await clinet.get(url=search_url, headers=header)
                 json_data = home_data.json()
@@ -837,15 +840,18 @@ async def get_cover(country: Optional[str] = "US"):
         raise HTTPException(
             status_code=429,
         )
-    
 
 
 @app.api_route("/mix/", methods=["GET"])
 async def get_cover(id: str, country: Optional[str] = "US"):
     try:
         if country:
-            search_url = f"https://api.tidal.com/v1/mixes/{id}/items?countryCode={country}"
-            header = {"x-tidal-token": f"{client_id}",} 
+            search_url = (
+                f"https://api.tidal.com/v1/mixes/{id}/items?countryCode={country}"
+            )
+            header = {
+                "x-tidal-token": f"{client_id}",
+            }
             async with httpx.AsyncClient(http2=True) as clinet:
                 home_data = await clinet.get(url=search_url, headers=header)
                 json_data = home_data.json()

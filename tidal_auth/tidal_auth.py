@@ -1,9 +1,25 @@
 import asyncio
 import json
 import webbrowser
-
+from dotenv import load_dotenv
 import httpx
+import os
 import rich
+
+
+load_dotenv()
+
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
+access_token = os.getenv("TIDAL_TOKEN")
+refresh_token = os.getenv("TIDAL_REFRESH")
+redis_url = os.getenv("REDIS_URL")
+redis_port = os.getenv("REDIS_PORT")
+redis_password = os.getenv("REDIS_PASSWORD")
+user_id = os.getenv("USER_ID")
+
+client_id = client_id
+client_secret = client_secret
 
 
 class Hifi:
@@ -50,10 +66,10 @@ async def poll_for_authorization(url, data, auth):
 
 async def main():
     authrize = Auth(
-        client_id="zU4XHVVkc2tDPo4t",
+        client_id=client_id,
         scope="r_usr+w_usr+w_sub",
         url="https://auth.tidal.com/v1/oauth2/device_authorization",
-        client_secret="VJKhDFqJPqvsPVNBV6ukXTJmwlvbttP7wlMlrc72se4=",
+        client_secret=client_secret,
     )
 
     await authrize.get_auth_response()
@@ -91,8 +107,8 @@ async def main():
         "access_token": access_token,
         "refresh_token": refresh_token,
         "userID": user_id,
-        "client_ID": "zU4XHVVkc2tDPo4t",
-        "client_secret": "VJKhDFqJPqvsPVNBV6ukXTJmwlvbttP7wlMlrc72se4=",
+        "client_ID": client_id,
+        "client_secret": client_secret,
     }
     with open("token.json", "w") as file:
         json.dump(accs, file, indent=4)
