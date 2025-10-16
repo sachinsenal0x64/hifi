@@ -270,7 +270,7 @@ python3 -m uvicorn main:app --host 0.0.0.0 --port 8000
 
 #### Example
 
->HTTPie
+>xh
 
     https GET "https://tidal.401658.xyz/track/?id=286266926&quality=LOSSLESS"
     
@@ -1015,7 +1015,7 @@ HIFI returns the following status codes in its API:
 
 #### Example
 
->HTTPie
+>xh
 
     https GET "https://tidal.401658.xyz/dash/?id=286266926&quality=HI_RES_LOSSLESS"
 
@@ -1110,7 +1110,7 @@ HIFI returns the following status codes in its API:
 <br>
 
 #### Example
->HTTPie
+>xh
 
     https GET "https://tidal.401658.xyz/search/?s=Consequence"
 
@@ -1222,7 +1222,7 @@ HIFI returns the following status codes in its API:
 
 #### Example
 
->HTTPie
+>xh
 
     https GET "https://tidal.401658.xyz/cover/?q=Maestro"
     https GET "https://tidal.401658.xyz/cover/?id=328060990"
@@ -1273,7 +1273,7 @@ HIFI returns the following status codes in its API:
 
 #### Example
 
->HTTPie
+>xh
 
     https GET "https://tidal.401658.xyz/song/?q=Mine&quality=HI_RES"
     
@@ -1394,7 +1394,7 @@ HIFI returns the following status codes in its API:
 
 #### Example
 
->HTTPie
+>xh
 
     https GET "https://tidal.401658.xyz/album/?id=286266925"
     
@@ -1494,7 +1494,7 @@ HIFI returns the following status codes in its API:
 
 #### Example
 
->HTTPie
+>xh
 
     https GET "https://tidal.401658.xyz/playlist/?id=910c525f-be8a-41a1-b557-2682af2bcef3"
     
@@ -1669,7 +1669,7 @@ HIFI returns the following status codes in its API:
 
 #### Example
 
->HTTPie
+>xh
 
     https GET "https://tidal.401658.xyz/artist/?id=5034071"
     
@@ -1771,7 +1771,7 @@ HIFI returns the following status codes in its API:
 
 #### Example
 
->HTTPie
+>xh
 
     https GET "https://tidal.401658.xyz/lyrics/?id=286266926"
     
@@ -1829,7 +1829,7 @@ HIFI returns the following status codes in its API:
 
 > | Parameter  |   Type    | Description | Optional|
 > |------------|-----------|-------------|-------------|	
-> | `id`       |  string   | Mix ID = `286266926` | `false`|
+> | `id`       |  string   | Mix ID = `286266926000bc267583f06c15474662e5a83ae` | `false`|
 > | `country`  |  string   | Country = `AU`| `true`|
 
 
@@ -1837,9 +1837,9 @@ HIFI returns the following status codes in its API:
 
 #### Example
 
->HTTPie
+>xh
 
-    https GET "https://tidal.401658.xyz/mix/?id=286266926&country=us"
+    https GET "https://tidal.401658.xyz/mix/?id=000bc267583f06c15474662e5a83ae&country=us"
     
 <br>
 
