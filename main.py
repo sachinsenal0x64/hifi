@@ -335,31 +335,37 @@ async def get_track(id: int, quality: str = "LOSSLESS"):
     except httpx.ConnectTimeout:
         raise HTTPException(
             status_code=429,
+            detail="Tidal API is not responding. Please try again later.",
         )
 
     except httpx.ConnectError:
         raise HTTPException(
             status_code=429,
+            detail="Connection error. Please try again later.",
         )
 
     except json.JSONDecodeError:
         raise HTTPException(
             status_code=429,
+            detail="Error decoding JSON response from Tidal API.",
         )
 
     except httpx.ReadTimeout:
         raise HTTPException(
             status_code=429,
+            detail="2 Tidal API is not responding. Please try again later.",
         )
 
     except httpx.WriteError:
         raise HTTPException(
             status_code=429,
+            detail="Error writing request to Tidal API.",
         )
 
     except httpx.ReadError:
         raise HTTPException(
             status_code=429,
+            detail="2 Error reading response from Tidal API.",
         )
 
 
