@@ -347,7 +347,6 @@ async def get_track(id: int, quality: str = "LOSSLESS"):
     except json.JSONDecodeError:
         raise HTTPException(
             status_code=429,
-            detail="Error decoding JSON response from Tidal API.",
         )
 
     except httpx.ReadTimeout:
