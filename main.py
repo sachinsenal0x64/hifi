@@ -847,7 +847,7 @@ async def get_cover(id: str, country: Optional[str] = "US"):
     try:
         if country:
             search_url = (
-                f"https://api.tidal.com/v1/mixes/{id}/items?countryCode={country}"
+                f"https://api.tidal.com/v1/mixes/{id}/items?countryCode={country.upper()}"
             )
             header = {
                 "x-tidal-token": f"{client_id}",
