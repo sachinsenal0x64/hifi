@@ -677,7 +677,7 @@ async def get_artist(
     f: Union[int, None] = Query(default=None),
 ):
     try:
-        tokz = await refresh2()
+        tokz = await refresh()
         tidal_token = tokz
         search_url = f"https://api.tidal.com/v1/artists/{id}?countryCode=US"
         header = {"authorization": f"Bearer {tidal_token}"}
