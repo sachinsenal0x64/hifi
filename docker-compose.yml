@@ -13,5 +13,6 @@ services:
     restart: unless-stopped
 
 networks:
+  container_name: hifi-network
   default:
     driver: bridge
