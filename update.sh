@@ -10,7 +10,7 @@ echo "Stopping running containers..."
 docker compose down
 
 echo "Rebuilding and starting containers..."
-docker compose -p hifi up -d --build
+docker compose up -d --build
 
 echo "Cleaning up unused Docker images..."
 docker image prune -f
