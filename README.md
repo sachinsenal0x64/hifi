@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+We’re going to rewrite this API to be compatible with Subsonic. Once that’s done, you’ll be able to use any frontend client that supports the Subsonic API.
+The old hifi API will remain the same at host/, and Subsonic support will be available at host/subsonic.
+I can’t give an ETA right now, but all current issues will be resolved in the next update, which will also add Subsonic support.
 
 <div align="center">
 
