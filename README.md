@@ -44,19 +44,18 @@ The previous API will be deprecated, yet all its endpoints will continue to work
 > [!IMPORTANT]  
 > # Terms
 
-> We do not encourage piracy. This project is made purely for educational and personal use, intended only for listening, not for downloading.
-  If you somehow download copyrighted content, you are solely responsible for complying with the relevant laws in your country.
+- We do not encourage piracy. This project is made purely for educational and personal use, intended only for listening, not for downloading.
+If you somehow download copyrighted content, you are solely responsible for complying with the relevant laws in your country.
 
-> The HiFi Project assumes no responsibility for any misuse or legal violations arising from the use of this project.
+- The HiFi Project assumes no responsibility for any misuse or legal violations arising from the use of this project.
 
-> HiFi project requires a valid Tidal subscription. We encourage users to maintain an active subscription.
+- HiFi project requires a valid Tidal subscription. We encourage users to maintain an active subscription.
 
-> The subsonic client use the maximum quality available from the HiFi API.
+- The subsonic client use the maximum quality available from the HiFi API.
 
-> Community projects may be inspired by or related to the HiFi Project but aren’t officially part of it. These projects are run independently, and the HiFi team isn’t responsible for their content or actions. Each project team should follow any relevant laws and handle its own checks and compliance.
+- Community projects may be inspired by or related to the HiFi Project but aren’t officially part of it. These projects are run independently, and the HiFi team isn’t responsible for their content or actions. Each project team should follow any relevant laws and handle its own checks and compliance.
 
-> The HiFi project does not claim ownership of any music or audio content. All rights remain with their respective copyright holders. Users are encouraged to support artists and rights owners by maintaining a valid Tidal subscription. HiFi serves solely as a playback and control interface (e.g., on a Raspberry Pi) for personal, non-commercial use.
-
+- The HiFi project does not claim ownership of any music or audio content. All rights remain with their respective copyright holders. Users are encouraged to support artists and rights owners by maintaining a valid Tidal subscription. HiFi serves solely as a playback and control interface (e.g., on a Raspberry Pi) for personal, non-commercial use.
 
 
 <br>
