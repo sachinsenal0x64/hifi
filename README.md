@@ -25,8 +25,6 @@ The previous API will be deprecated, yet all its endpoints will continue to work
 </div>
 
 <div align="center">
-	
-[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT)
   
 
 </div>
