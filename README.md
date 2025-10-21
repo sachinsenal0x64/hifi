@@ -88,7 +88,6 @@ If you somehow download copyrighted content, you are solely responsible for comp
 - [tidler](https://git.medvidek77.tech/Medvidek77/tidler) Hifi CLI
 - [BiniTidal (Web)](https://music.binimum.org) | [SquidWtf (Web)](https://tidal.squid.wtf) | [BiniTidal (Source code)](https://github.com/uimaxbai/tidal-ui) Hifi Frontend
 - [Monochrome (Web)](https://monochrome.prigoana.com) | [Monochrome (Web)](https://monochrome.tf) | [Monochrome (Source code)](https://github.com/eduardprigoana/monochrome)  Hifi Frontend
-- [Multi-Region Instances](https://github.com/EduardPrigoana/hifi-instances) - Status
 
 <br>
 
