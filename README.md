@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-This project will be ported to be compatible with Subsonic. Once that’s done, you’ll be able to use any frontend client that supports the Subsonic API.
+This project will be ported to be compatible with Subsonic. Once that’s done, you’ll be able to use any client that supports the Subsonic API.
 I can’t provide an ETA right now, but all current issues will be resolved in the next update.
 The previous API will be deprecated, yet all its endpoints will continue to work with Subsonic.
 [API Docs](https://opensubsonic.netlify.app/docs).
@@ -51,21 +51,13 @@ The previous API will be deprecated, yet all its endpoints will continue to work
 
 > I'm currently paying for a Tidal HiFi Plus subscription.
 
+> The subsonic client use the maximum quality available from the HiFi API.
+
 > Community projects may be inspired by or related to the HiFi Project but aren’t officially part of it. These projects are run independently, and the HiFi team isn’t responsible for their content or actions. Each project team should follow any relevant laws and handle its own checks and compliance.
 
 > The HiFi project does not claim ownership of any music or audio content. All rights remain with their respective copyright holders. Users are encouraged to support artists and rights owners by maintaining a valid Tidal subscription. HiFi serves solely as a playback and control interface (e.g., on a Raspberry Pi) for personal, non-commercial use.
 
-> You can access our rest api for free if you want to self-host then need tidal subscription. 
-
-> TUI is plug & play also you can add your own tidal account but by default it has our API so you can listen tidal music for free.
-
-> TL;DR  HIFI API Can Get Any Quality & Codec Which Tidal Offer / Some Qualities & Codecs Need Special Driver / Song / Hardware to get maximum output i always recommend to use `HI_RES` or `LOSSLESS` both are in flac.
-
-> How do I know if this is an MQA or not? - [MQA-CHECKER](https://github.com/purpl3F0x/MQA_identifier)
-
 > File Size - Low (96 kbps) - 3 MB | Low (320 kbps) - 8 MB | High (FLAC, 16-bit, 44.1 kHz) - 30 MB | Max (MQA) - 26 MB | Max (MQA) - 26  | Max (HiRes FLAC, up to 24-bit, 192 kHz) - 30 MB to 140 MB
-
-> AUDIO QUALITY / CODEC  : SONY_360RA | DOLBY ATMOS | MQA 96K  | HI RES FLAC | HI RES LOSSLESS | FLAC LOSSLESS | HIGH | LOW | Up to 24-bit, 192 kHz
 
 
 
