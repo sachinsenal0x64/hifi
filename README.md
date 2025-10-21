@@ -42,22 +42,20 @@ The previous API will be deprecated, yet all its endpoints will continue to work
 
 
 > [!IMPORTANT]  
-> # F.A.Q / Terms
+> # Terms
 
 > We do not encourage piracy. This project is made purely for educational and personal use, intended only for listening, not for downloading.
   If you somehow download copyrighted content, you are solely responsible for complying with the relevant laws in your country.
 
 > The HiFi Project assumes no responsibility for any misuse or legal violations arising from the use of this project.
 
-> I'm currently paying for a Tidal HiFi Plus subscription.
+> HiFi project requires a valid Tidal subscription. We encourage users to maintain an active subscription.
 
 > The subsonic client use the maximum quality available from the HiFi API.
 
 > Community projects may be inspired by or related to the HiFi Project but aren’t officially part of it. These projects are run independently, and the HiFi team isn’t responsible for their content or actions. Each project team should follow any relevant laws and handle its own checks and compliance.
 
 > The HiFi project does not claim ownership of any music or audio content. All rights remain with their respective copyright holders. Users are encouraged to support artists and rights owners by maintaining a valid Tidal subscription. HiFi serves solely as a playback and control interface (e.g., on a Raspberry Pi) for personal, non-commercial use.
-
-> File Size - Low (96 kbps) - 3 MB | Low (320 kbps) - 8 MB | High (FLAC, 16-bit, 44.1 kHz) - 30 MB | Max (MQA) - 26 MB | Max (MQA) - 26  | Max (HiRes FLAC, up to 24-bit, 192 kHz) - 30 MB to 140 MB
 
 
 
