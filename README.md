@@ -63,48 +63,15 @@ I can’t give an ETA right now, but all current issues will be resolved in the 
 
 > File Size - Low (96 kbps) - 3 MB | Low (320 kbps) - 8 MB | High (FLAC, 16-bit, 44.1 kHz) - 30 MB | Max (MQA) - 26 MB | Max (MQA) - 26  | Max (HiRes FLAC, up to 24-bit, 192 kHz) - 30 MB to 140 MB
 
- 
-<br>
+> 📀 AUDIO QUALITY / CODEC  : SONY_360RA | DOLBY ATMOS | MQA 96K  | HI RES FLAC | HI RES LOSSLESS | FLAC LOSSLESS | HIGH | LOW | Up to 24-bit, 192 kHz
 
-# ❓ WHY ?
-
-I love cli tools as well as music, so why not to have a tidal music client for the terminal? Unfortunately, I haven't found any terminal client yet, and that's why it's all about :)
-
-
-<br>
-
-<table>
-<tr>
-<td>
- 
-# 🚀 Features
-
-- 🍟 TIDAL PREMIUM (HIFI-PLUS) YOU CAN LISTEN FOR FREE USING OUR  [API](https://hifi.401658.xyz) & WEB PLAYER
-  
-- 📀 AUDIO QUALITY / CODEC  : SONY_360RA | DOLBY ATMOS | MQA 96K  | HI RES FLAC | HI RES LOSSLESS | FLAC LOSSLESS | HIGH | LOW | Up to 24-bit, 192 kHz
-
-- ⌨ VIM LIKE KEY BINDINGS
-
-- 🎧 PLAYER: TIDAL-HIFI Web / TUI
-
-- 📡 REST API
-  
-- ⛓️‍💥 BYPASS GEO RESTRICTED CONTENT
-  
-- ⚖️ LAYER 7 LOAD BALANCER (ACT AS API GATEWAY)
-
-- 🕹️ REMOTE (Highly Controllable Remotely Over the Network + Independently, Such an as Play | Pause | Seek | Volume | Next | Previous | Loops (Repeat | Infinity))
-  
-</table>
-</tr>
-</td>
 
 
 <br>
 
 
 > [!NOTE]  
-> WebUI / TUI based on this API.
+> API
 
 > [API DOCS](https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation-no-account-required)
 
