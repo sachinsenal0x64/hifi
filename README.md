@@ -87,14 +87,6 @@ If you somehow download copyrighted content, you are solely responsible for comp
 <br>
 
 
-# 💨 Quick Start
-
-## Web UI
-
-- [BiniTidal (Web)](https://music.binimum.org) | [SquidWtf (Web)](https://tidal.squid.wtf) Hifi Frontend
-- [Monochrome (Web)](https://monochrome.prigoana.com)  Another Hifi Frontend
-
-<br>
 
 ## 🏠 INSTALLATION (Optional)  
 
