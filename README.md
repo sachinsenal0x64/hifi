@@ -1,8 +1,5 @@
 > [!IMPORTANT]
-This project will be ported to be compatible with Subsonic. Once that’s done, you’ll be able to use any client that supports the Subsonic API.
-I can’t provide an ETA right now, but all current issues will be resolved in the next update.
-The previous API will be deprecated, yet all its endpoints will continue to work with Subsonic.
-[API Docs](https://opensubsonic.netlify.app/docs).
+This project will be ported to be compatible with Subsonic. Once that’s done, you’ll be able to use any client that supports the Subsonic API. I can’t provide an ETA at the moment, but all current issues will be resolved in the next update. The previous API will be deprecated; however, all its endpoints will remain compatible with the Subsonic API. [API Docs](https://opensubsonic.netlify.app/docs).
 
 <div align="center">
 
