@@ -1,4 +1,4 @@
-module hifi-tui
+module hifi
 
 go 1.21.6
 
