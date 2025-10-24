@@ -15,6 +15,14 @@ const (
 	// Content types
 	ContentTypeJSON = "application/json"
 
+	// Common headers
+	HeaderContentType  = "Content-Type"
+	HeaderCacheControl = "Cache-Control"
+	HeaderConnection   = "Connection"
+	HeaderAllowOrigin  = "Access-Control-Allow-Origin"
+	HeaderAllowMethods = "Access-Control-Allow-Methods"
+	HeaderAllowHeaders = "Access-Control-Allow-Headers"
+
 	// HTTP State codes
 	StatusOK                  = 200
 	StatusCreated             = 201
@@ -25,12 +33,4 @@ const (
 	StatusInternalServerError = 500
 	StatusMethodNotAllowed    = 405
 	StatusMultipleChoices     = 300
-
-	// Common headers
-	HeaderContentType  = "Content-Type"
-	HeaderCacheControl = "Cache-Control"
-	HeaderConnection   = "Connection"
-	HeaderAllowOrigin  = "Access-Control-Allow-Origin"
-	HeaderAllowMethods = "Access-Control-Allow-Methods"
-	HeaderAllowHeaders = "Access-Control-Allow-Headers"
 )

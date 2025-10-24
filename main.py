@@ -275,7 +275,7 @@ async def get_hi_res(id: int, quality: str = "HI_RES_LOSSLESS"):
     try:
         tokz = await refresh2()
         tidal_token = tokz
-        track_url = f"https://tidal.com/v1/tracks/{id}/playbackinfo?audioquality={quality}&playbackmode=STREAM&assetpresentation=FULL"
+        track_url = f"https://api.tidal.com/v1/tracks/{id}/playbackinfo?audioquality={quality}&playbackmode=STREAM&assetpresentation=FULL"
 
         payload = {
             "authorization": f"Bearer {tidal_token}",
