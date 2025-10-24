@@ -21,10 +21,10 @@ tmp_dir = "tmp"
   poll = false
   poll_interval = 0
   post_cmd = [
-  "lsof -i :8976 -sTCP:LISTEN | sed 1d | awk '{print $2}' | xargs -r kill -9"
+  "lsof -i :1125 -sTCP:LISTEN | sed 1d | awk '{print $2}' | xargs -r kill -9"
   ]
   pre_cmd = [
-  "lsof -i :8976 -sTCP:LISTEN | sed 1d | awk '{print $2}' | xargs -r kill -9"
+  "lsof -i :1125 -sTCP:LISTEN | sed 1d | awk '{print $2}' | xargs -r kill -9"
   ] 
   rerun = false
   rerun_delay = 500
