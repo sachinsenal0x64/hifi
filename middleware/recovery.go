@@ -10,8 +10,7 @@ import (
 // -------------------- RECOVERY --------------------
 
 type ErrorResponse struct {
-	State   []string `json:"state"`
-	Message string   `json:"message"`
+	Message string `json:"message"`
 }
 
 func RecoveryMiddleware(next http.Handler) http.Handler {
@@ -24,7 +23,6 @@ func RecoveryMiddleware(next http.Handler) http.Handler {
 				}
 				w.WriteHeader(config.StatusInternalServerError)
 				_ = json.NewEncoder(w).Encode(ErrorResponse{
-					State:   []string{"error"},
 					Message: "internal server error",
 				})
 			}
