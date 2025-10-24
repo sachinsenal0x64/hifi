@@ -1,7 +1,0 @@
-Screen {
-    align: center middle;
-}
-
-RadioSet {
-    width: 50%;
-}
