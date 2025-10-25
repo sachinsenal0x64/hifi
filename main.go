@@ -12,6 +12,10 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	mux.HandleFunc("/v1", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("ok"))
+	})
+
 	handler := middleware.RecoveryMiddleware(mux)
 
 	fmt.Printf("Hifi API server running at http://%s:%s\n", config.Host, config.Port)

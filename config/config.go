@@ -2,7 +2,7 @@ package config
 
 const (
 	Host = "127.0.0.1"
-	Port = "1125"
+	Port = "5000"
 
 	// HTTP methods
 	MethodGet     = "GET"
@@ -33,4 +33,10 @@ const (
 	StatusInternalServerError = 500
 	StatusMethodNotAllowed    = 405
 	StatusMultipleChoices     = 300
+)
+
+var (
+	AllowedOrigins = []string{
+		"*",
+	}
 )
