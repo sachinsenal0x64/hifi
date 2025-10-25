@@ -1,8 +1,8 @@
 package middleware
 
 import (
+	"api/config"
 	"encoding/json"
-	"hifi/config"
 	"log"
 	"net/http"
 )

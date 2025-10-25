@@ -2,7 +2,7 @@ package config
 
 const (
 	Host = "127.0.0.1"
-	Port = "5000"
+	Port = "5001"
 
 	// HTTP methods
 	MethodGet     = "GET"
@@ -34,14 +34,3 @@ const (
 	StatusMethodNotAllowed    = 405
 	StatusMultipleChoices     = 300
 )
-
-var (
-	AllowedOrigins = []string{
-		"*",
-	}
-)
-
-type Person struct {
-	UserName string
-	PassWord string
-}
