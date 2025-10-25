@@ -18,5 +18,4 @@ func main() {
 	if err := http.ListenAndServe(fmt.Sprintf("%s:%s", config.Host, config.Port), handler); err != nil {
 		log.Fatal(err)
 	}
-
 }
