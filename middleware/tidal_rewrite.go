@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"fmt"
+	"hifi/routes/rest"
 	"net/http"
 )
 
@@ -17,7 +18,7 @@ func RewriteRequest(r *http.Request) {
 
 	print(q.Get("id"))
 	switch r.URL.Path {
-	case "/rest/search3.view":
+	case rest.Search3View():
 		fmt.Println("recived")
 	}
 }

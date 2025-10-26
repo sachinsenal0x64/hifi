@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"hifi/config"
+	"hifi/routes/rest"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -30,7 +31,7 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			}
 
 			switch r.URL.Path {
-			case "/rest/search3.view":
+			case rest.Search3View():
 				RewriteRequest(r)
 			}
 
