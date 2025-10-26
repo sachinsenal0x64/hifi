@@ -13,7 +13,9 @@ type Person struct {
 var (
 
 	// Blacklist
-	ExcludedPaths = []string{}
+	ExcludedPaths = []string{
+		"/admin/home",
+	}
 
 	// ENV
 	AccessToken = os.Getenv("ACCESS_TOKEN")
