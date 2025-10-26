@@ -61,7 +61,7 @@ Soon...
 
 ## API
 
-[API Docs](https://opensubsonic.netlify.app/docs)
+[API Docs](https://opensubsonic.netlify.app/docs) |
 [Hosted API](https://hifi.401658.xyz)
 
 <br>
