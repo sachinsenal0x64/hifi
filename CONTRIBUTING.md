@@ -1,10 +1,6 @@
-## 🫂 Contributing
+## 🤝 Contributing
 
-> Workflow Diagram
 <br>
-
-![Workflow Diagram](https://sachinsenal0x64.github.io/picx-images-hosting/Untitled-2024-02-02-1444.5m2c9asdofb4.webp)
-
 
 - Before send PR first open a issue then fork the repo.
 
