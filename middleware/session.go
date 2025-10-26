@@ -29,14 +29,26 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 				return
 			}
 
-			// Add authentication parameters to the URL query (https://)
+			switch r.URL.Path {
+			case "/rest/search3.view":
+				RewriteRequest(r)
+			}
+
+			// Add authentication parameters to the URL query like -> (https://)
 			q := r.URL.Query()
-			setQueryParams(q, map[string]string{
+
+			q.Del("s")
+			q.Del("t")
+
+			// Legacy Subsonic auth
+			params := map[string]string{
 				"u": userName,
 				"p": passWord,
 				"c": "",
 				"f": "json",
-			})
+			}
+
+			setQueryParams(q, params)
 
 			r.URL.RawQuery = q.Encode()
 			log.Println("PATH:", r.URL.Path, "RAW:", r.URL.RawQuery)

@@ -14,6 +14,8 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	// Define user credentials and excluded paths from config
+
 	person := config.Person{
 		UserName: config.UserAdmin,
 		PassWord: config.UserPassword,

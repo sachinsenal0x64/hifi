@@ -15,9 +15,7 @@ var (
 
 	// Blacklist
 
-	ExcludedPaths = []string{
-		"/admin/home",
-	}
+	ExcludedPaths = []string{}
 
 	// ENV
 	AccessToken = os.Getenv("ACCESS_TOKEN")
