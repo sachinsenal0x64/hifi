@@ -107,11 +107,11 @@ Soon...
 
 <br>
 
-### Contributing
+## Contributing
 
 Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-### Security Policy
+## Security Policy
 
 Please refer to [SECURITY.md](./SECURITY.md).
 
