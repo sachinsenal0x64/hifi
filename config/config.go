@@ -4,15 +4,16 @@ import (
 	"os"
 )
 
+// Subsonic User
+
 type Person struct {
 	UserName string
 	PassWord string
 }
 
 var (
-	AllowedOrigins = []string{
-		"*",
-	}
+
+	// Blacklist
 
 	ExcludedPaths = []string{
 		"/admin/home",
@@ -56,7 +57,7 @@ const (
 	StatusMethodNotAllowed    = 405
 	StatusMultipleChoices     = 300
 
-	// User
+	// Subsonic User
 	UserAdmin    = "admin"
 	UserPassword = "admin"
 
