@@ -13,13 +13,13 @@ func main() {
 	mux := http.NewServeMux()
 
 	person := config.Person{
-		UserName: "admin",
-		PassWord: "admin",
+		UserName: config.UserAdmin,
+		PassWord: config.UserPassword,
 	}
 
-	excluded := []string{"/admin/home"}
+	excluded := config.ExcludedPaths
 
-	targetHost := "http://localhost:4747"
+	targetHost := config.TargetHost
 	sessionWrapped := middleware.Session(person.UserName, person.PassWord, targetHost, excluded)(mux)
 
 	handler := middleware.Recovery(sessionWrapped)

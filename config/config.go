@@ -1,5 +1,20 @@
 package config
 
+type Person struct {
+	UserName string
+	PassWord string
+}
+
+var (
+	AllowedOrigins = []string{
+		"*",
+	}
+
+	ExcludedPaths = []string{
+		"/admin/home",
+	}
+)
+
 const (
 	Host = "127.0.0.1"
 	Port = "5000"
@@ -33,15 +48,11 @@ const (
 	StatusInternalServerError = 500
 	StatusMethodNotAllowed    = 405
 	StatusMultipleChoices     = 300
-)
 
-var (
-	AllowedOrigins = []string{
-		"*",
-	}
-)
+	// User
+	UserAdmin    = "admin"
+	UserPassword = "admin"
 
-type Person struct {
-	UserName string
-	PassWord string
-}
+	// Target Host
+	TargetHost = "http://localhost:4747"
+)
