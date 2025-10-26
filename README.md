@@ -124,6 +124,10 @@ Soon...
 
 Soon...
 
+### Garmin watch
+
+Soon...
+
 <br>
 
 ## Contributing
