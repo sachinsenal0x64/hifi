@@ -22,6 +22,10 @@ var (
 )
 
 const (
+	Scheme      = "https"
+	TidalHost   = "api.tidal.com"
+	BrowserHost = "tidal.com"
+
 	Host = "127.0.0.1"
 	Port = "5000"
 
