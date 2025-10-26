@@ -76,6 +76,8 @@ Soon...
 
 > [!NOTE]  
 > I will only add open-source clients here. There are many other apps compatible with subsonic, so please do your own research.
+
+> [!TIP]  
 > HiFi supports various subsonic clients.
 
 ### Web
