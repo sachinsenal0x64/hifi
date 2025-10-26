@@ -10,6 +10,8 @@ import (
 
 func main() {
 
+	fmt.Println("Access Token:", config.AccessToken)
+
 	mux := http.NewServeMux()
 
 	person := config.Person{

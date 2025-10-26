@@ -1,5 +1,9 @@
 package config
 
+import (
+	"os"
+)
+
 type Person struct {
 	UserName string
 	PassWord string
@@ -13,6 +17,9 @@ var (
 	ExcludedPaths = []string{
 		"/admin/home",
 	}
+
+	// ENV
+	AccessToken = os.Getenv("ACCESS_TOKEN")
 )
 
 const (
