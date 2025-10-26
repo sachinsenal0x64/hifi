@@ -5,7 +5,6 @@ import (
 )
 
 // Subsonic User
-
 type Person struct {
 	UserName string
 	PassWord string
@@ -14,7 +13,6 @@ type Person struct {
 var (
 
 	// Blacklist
-
 	ExcludedPaths = []string{}
 
 	// ENV
