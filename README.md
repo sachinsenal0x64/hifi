@@ -26,7 +26,7 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 > [!TIP]
 >
-> #### The old v1 hosted [API](https://hifi.401658.xyz) will remain available until the new update is merged. The [Docs](https://github.com/sachinsenal0x64/hifi/tree/20f6adbc7b58cbda6183e600d6a554f86416e251?tab=readme-ov-file#-api-documentation-no-account-required) are available in the previous [commit](https://github.com/sachinsenal0x64/hifi/tree/20f6adbc7b58cbda6183e600d6a554f86416e251)
+> #### The old v1 hosted [API](https://hifi.401658.xyz) will remain available until the subsonic update is merged. The [Docs](https://github.com/sachinsenal0x64/hifi/tree/20f6adbc7b58cbda6183e600d6a554f86416e251?tab=readme-ov-file#-api-documentation-no-account-required) are available in the previous [commit](https://github.com/sachinsenal0x64/hifi/tree/20f6adbc7b58cbda6183e600d6a554f86416e251)
 
 # 💕 Community
 
