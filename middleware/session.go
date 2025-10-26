@@ -32,11 +32,10 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			// Add authentication parameters to the URL query (https://)
 			q := r.URL.Query()
 			setQueryParams(q, map[string]string{
-				"message": "hi",
-				"u":       userName,
-				"p":       passWord,
-				"c":       "",
-				"f":       "json",
+				"u": userName,
+				"p": passWord,
+				"c": "",
+				"f": "json",
 			})
 
 			r.URL.RawQuery = q.Encode()
