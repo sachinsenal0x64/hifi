@@ -3,7 +3,7 @@ package middleware
 import (
 	"hifi/config"
 	"hifi/routes/rest"
-	"log"
+	"log/slog"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -69,7 +69,10 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			setQueryParams(q, params)
 
 			r.URL.RawQuery = q.Encode()
-			log.Println("PATH:", r.URL.Path, "RAW:", r.URL.RawQuery)
+			slog.Info("incoming request",
+				"path", r.URL.Path,
+				"raw", r.URL.RawQuery,
+			)
 
 			r.URL.Scheme = target.Scheme
 			r.URL.Host = target.Host
