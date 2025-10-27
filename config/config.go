@@ -60,8 +60,8 @@ const (
 	StatusMultipleChoices     = 300
 
 	// Subsonic User
-	UserAdmin    = "admin"
-	UserPassword = "admin"
+	UserAdmin    = ""
+	UserPassword = ""
 
 	// Target Host
 	TargetHost = "http://localhost:4747"

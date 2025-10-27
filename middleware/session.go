@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"hifi/config"
 	"hifi/routes/rest"
 	"log"
@@ -38,6 +39,8 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			// Add authentication parameters to the URL query like -> (https://)
 			q := r.URL.Query()
 
+			fmt.Println(q)
+
 			// q.Del("s")
 			// q.Del("t")
 
@@ -53,11 +56,12 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 
 			if s != "" && t != "" {
 
-				salt := Encode(16)
+				salt := Encode(10)
+				token := Token(passWord, salt)
 
 				// Token auth exists
 				params["s"] = salt
-				params["t"] = "fd0ca358286130b31587f1cd2f0ddf7c"
+				params["t"] = token
 			} else {
 				// Fallback to legacy password
 				params["p"] = passWord
