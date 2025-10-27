@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"hifi/config"
 	"hifi/routes/rest"
 	"log"
@@ -42,13 +41,11 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			s := q.Get("s")
 			t := q.Get("t")
 
+			salt := Encode(10)
+			token := Token(t, salt)
+
 			userName := q.Get("u")
 			passWord := q.Get("p")
-
-			salt := Encode(10)
-			token := Token(passWord, salt)
-
-			fmt.Println(userName, passWord)
 
 			params := map[string]string{
 				"u": userName,
