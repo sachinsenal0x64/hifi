@@ -38,7 +38,9 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 				return
 			}
 
-			// Add authentication parameters to the URL query like -> (https://)
+			/* Add authentication parameters
+			to the URL query like -> (https://) */
+
 			q := r.URL.Query()
 
 			s := q.Get("s")
@@ -59,11 +61,12 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 
 			// Check if s and t exist in query
 			if s != "" && t != "" {
-				// Token auth exists
+				// Use token authentication
 				params["s"] = s
 				params["t"] = t
 			} else {
-				// Fallback to legacy password
+				/* Fallback to legacy password
+				authentication */
 				params["p"] = passWord
 			}
 
@@ -79,7 +82,8 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			r.URL.Host = target.Host
 			r.Host = target.Host
 
-			// Forward the request to the subsonic server -> (gonic)
+			/* Forward the request to the
+			subsonic server -> (gonic) */
 			proxy.ServeHTTP(w, r)
 		})
 	}

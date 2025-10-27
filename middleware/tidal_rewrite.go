@@ -17,7 +17,7 @@ func RewriteRequest(r *http.Request) {
 	r.URL.Host = config.TidalHost
 	r.Host = config.TidalHost
 
-	// Add Tidal auth header
+	// Get the Tidal auth token
 	tidalToken := TidalAuth()
 
 	switch r.URL.Path {
@@ -40,7 +40,7 @@ func RewriteRequest(r *http.Request) {
 			r.URL = tidalURL
 			r.Host = tidalURL.Host
 
-			fmt.Println(tidalURL)
+			fmt.Println(tidalURL.Host)
 
 			req, err := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
 			req.Header.Set("Authorization", "Bearer "+tidalToken)
