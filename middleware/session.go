@@ -25,10 +25,14 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
+			// Blacklist URL paths
+
 			if slices.Contains(exclude, r.URL.Path) {
 				w.WriteHeader(config.StatusNotFound)
 				return
 			}
+
+			// Rewrite tidal requests
 
 			switch r.URL.Path {
 			case rest.Search3View():
@@ -40,14 +44,13 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 
 			s := q.Get("s")
 			t := q.Get("t")
+			userName := q.Get("u")
+			passWord := q.Get("p")
 
 			// -------------------- SESSION --------------------
 
 			// salt := Salt("Key")
 			// token := Token("Password", salt)
-
-			userName := q.Get("u")
-			passWord := q.Get("p")
 
 			params := map[string]string{
 				"u": userName,

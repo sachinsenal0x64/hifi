@@ -25,10 +25,13 @@ var (
 )
 
 const (
+
+	// TIDAL API
 	Scheme      = "https"
 	TidalHost   = "api.tidal.com"
 	BrowserHost = "tidal.com"
 
+	// Hifi Server
 	Host = "127.0.0.1"
 	Port = "5000"
 
@@ -61,8 +64,4 @@ const (
 	StatusInternalServerError = 500
 	StatusMethodNotAllowed    = 405
 	StatusMultipleChoices     = 300
-
-	// Subsonic User
-	UserAdmin    = ""
-	UserPassword = ""
 )

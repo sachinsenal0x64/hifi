@@ -11,18 +11,20 @@ import (
 
 func main() {
 
-	mux := http.NewServeMux()
-
-	// Define user credentials and excluded paths from config
-
+	// Define subsonic user credentials
 	person := config.Person{
-		UserName: config.UserAdmin,
-		PassWord: config.UserPassword,
+		UserName: "",
+		PassWord: "",
 	}
 
+	// Hifi proxy
 	excluded := config.ExcludedPaths
-
 	targetHost := config.TargetHost
+
+	// HTTP server setup
+	mux := http.NewServeMux()
+
+	// Middleware setup
 	sessionWrapped := middleware.Session(person.UserName, person.PassWord, targetHost, excluded)(mux)
 
 	handler := middleware.Recovery(sessionWrapped)
