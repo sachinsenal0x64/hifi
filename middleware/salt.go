@@ -2,9 +2,9 @@ package middleware
 
 import "encoding/base64"
 
-// -------------------- ENCODE --------------------
+// -------------------- SALT --------------------
 
-func Encode(length int) string {
+func Salt(length int) string {
 	data := make([]byte, length)
 	return base64.StdEncoding.EncodeToString(data)
 }
