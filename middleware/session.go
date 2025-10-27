@@ -42,7 +42,6 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			t := q.Get("t")
 
 			// salt := Salt("Key")
-
 			// token := Token("Password", salt)
 
 			userName := q.Get("u")
