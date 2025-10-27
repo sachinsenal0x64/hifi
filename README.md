@@ -53,6 +53,20 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 <br>
 
+> [!NOTE]
+>
+> ## This project is for
+
+- People who use Tidal but don’t like its official app and want more client options.
+
+- Anyone who needs lossless or Hi-Res audio.
+
+- People who don’t want to store terabytes of music.
+
+- Users who want to access over 110 million songs through their Subsonic-based client.
+
+- Anyone who doesn’t need to download and manually add tracks.
+
 ## Quickstart
 
 Soon...
