@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"hifi/config"
 	"hifi/middleware"
-	"log"
 	"log/slog"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -35,7 +35,8 @@ func main() {
 		"url", "http://"+config.Host+":"+config.Port,
 	)
 	if err := http.ListenAndServe(fmt.Sprintf("%s:%s", config.Host, config.Port), handler); err != nil {
-		log.Fatal(err)
+		slog.Error("Failed to start server", "error", err)
+		os.Exit(1)
 	}
 
 }
