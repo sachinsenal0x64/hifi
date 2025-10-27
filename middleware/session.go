@@ -52,8 +52,11 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			t := q.Get("t")
 
 			if s != "" && t != "" {
+
+				salt := Encode(16)
+
 				// Token auth exists
-				params["s"] = "fZEzDipWepjGSQ=="
+				params["s"] = salt
 				params["t"] = "fd0ca358286130b31587f1cd2f0ddf7c"
 			} else {
 				// Fallback to legacy password
