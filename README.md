@@ -67,6 +67,8 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 - Anyone who doesn’t need to download and manually add tracks.
 
+- Developers who want to create their own Subsonic-based client using HiFi as a proxy.
+
 <br>
 
 ## Quickstart
