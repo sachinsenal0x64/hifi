@@ -11,8 +11,6 @@ import (
 
 func main() {
 
-	fmt.Println("Access Token:", config.AccessToken)
-
 	mux := http.NewServeMux()
 
 	// Define user credentials and excluded paths from config
