@@ -19,6 +19,9 @@ var (
 
 	// ENV
 	AccessToken = os.Getenv("ACCESS_TOKEN")
+
+	// Target Host
+	TargetHost = os.Getenv("TARGET_HOST")
 )
 
 const (
@@ -62,7 +65,4 @@ const (
 	// Subsonic User
 	UserAdmin    = ""
 	UserPassword = ""
-
-	// Target Host
-	TargetHost = "http://localhost:4747"
 )
