@@ -39,10 +39,16 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			// Add authentication parameters to the URL query like -> (https://)
 			q := r.URL.Query()
 
-			fmt.Println(q)
+			s := q.Get("s")
+			t := q.Get("t")
 
-			// q.Del("s")
-			// q.Del("t")
+			userName := q.Get("u")
+			passWord := q.Get("p")
+
+			salt := Encode(10)
+			token := Token(passWord, salt)
+
+			fmt.Println(userName, passWord)
 
 			params := map[string]string{
 				"u": userName,
@@ -51,14 +57,8 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			}
 
 			// Check if s and t exist in query
-			s := q.Get("s")
-			t := q.Get("t")
 
 			if s != "" && t != "" {
-
-				salt := Encode(10)
-				token := Token(passWord, salt)
-
 				// Token auth exists
 				params["s"] = salt
 				params["t"] = token
