@@ -1,10 +1,11 @@
 package middleware
 
-import "encoding/base64"
+import (
+	"encoding/base64"
+)
 
 // -------------------- SALT --------------------
 
-func Salt(length int) string {
-	data := make([]byte, length)
-	return base64.StdEncoding.EncodeToString(data)
+func Salt(key string) string {
+	return base64.StdEncoding.EncodeToString([]byte(key))
 }
