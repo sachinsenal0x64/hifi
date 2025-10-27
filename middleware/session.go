@@ -26,14 +26,12 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 			// Blacklist URL paths
-
 			if slices.Contains(exclude, r.URL.Path) {
 				w.WriteHeader(config.StatusNotFound)
 				return
 			}
 
 			// Rewrite tidal requests
-
 			switch r.URL.Path {
 			case rest.Search3View():
 				RewriteRequest(r)
@@ -51,7 +49,7 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 
 			// salt := Salt("Key")
 			// token := Token("Password", salt)
-
+			
 			params := map[string]string{
 				"u": userName,
 				"c": "",
@@ -59,7 +57,6 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			}
 
 			// Check if s and t exist in query
-
 			if s != "" && t != "" {
 				// Token auth exists
 				params["s"] = s
@@ -81,7 +78,7 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			r.URL.Host = target.Host
 			r.Host = target.Host
 
-			// Forward the request to the subsonic server (gonic)
+			// Forward the request to the subsonic server -> (gonic)
 			proxy.ServeHTTP(w, r)
 		})
 	}
