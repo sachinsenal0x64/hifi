@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"fmt"
+	"hifi/config"
 	"hifi/routes/rest"
 	"net/http"
 )
@@ -10,9 +11,9 @@ import (
 
 func RewriteRequest(r *http.Request) {
 
-	r.URL.Scheme = "https"
-	r.URL.Host = "api.tidal.com"
-	r.Host = "tidal.com"
+	r.URL.Scheme = config.Scheme
+	r.URL.Host = config.TidalHost
+	r.Host = config.BrowserHost
 
 	q := r.URL.Query()
 

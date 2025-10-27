@@ -38,15 +38,26 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			// Add authentication parameters to the URL query like -> (https://)
 			q := r.URL.Query()
 
-			q.Del("s")
-			q.Del("t")
+			// q.Del("s")
+			// q.Del("t")
 
-			// Legacy Subsonic auth
 			params := map[string]string{
 				"u": userName,
-				"p": passWord,
 				"c": "",
 				"f": "json",
+			}
+
+			// Check if s and t exist in query
+			s := q.Get("s")
+			t := q.Get("t")
+
+			if s != "" && t != "" {
+				// Token auth exists
+				params["s"] = "fZEzDipWepjGSQ=="
+				params["t"] = "fd0ca358286130b31587f1cd2f0ddf7c"
+			} else {
+				// Fallback to legacy password
+				params["p"] = passWord
 			}
 
 			setQueryParams(q, params)
