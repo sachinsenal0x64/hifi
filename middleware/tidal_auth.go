@@ -4,7 +4,7 @@ import (
 	"hifi/config"
 )
 
-func TidalAuth(clientID string, clientSecret string, refreshToken string) string {
+func TidalAuth() string {
 
 	return config.AccessToken
 }

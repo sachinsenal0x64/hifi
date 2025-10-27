@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"hifi/config"
 	"hifi/routes/rest"
 	"net/http"
@@ -15,6 +16,10 @@ func RewriteRequest(r *http.Request) {
 	r.Host = config.BrowserHost
 
 	q := r.URL.Query()
+
+	tidalToken := TidalAuth()
+
+	fmt.Println(tidalToken)
 
 	switch r.URL.Path {
 	case rest.Search3View():
