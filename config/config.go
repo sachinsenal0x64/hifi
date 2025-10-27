@@ -27,9 +27,8 @@ var (
 const (
 
 	// TIDAL API
-	Scheme      = "https"
-	TidalHost   = "api.tidal.com"
-	BrowserHost = "tidal.com"
+	Scheme    = "https"
+	TidalHost = "api.tidal.com"
 
 	// Hifi Server
 	Host = "127.0.0.1"
@@ -53,6 +52,7 @@ const (
 	HeaderAllowOrigin  = "Access-Control-Allow-Origin"
 	HeaderAllowMethods = "Access-Control-Allow-Methods"
 	HeaderAllowHeaders = "Access-Control-Allow-Headers"
+	Authorization      = "Authorization"
 
 	// HTTP State codes
 	StatusOK                  = 200

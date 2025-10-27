@@ -25,9 +25,11 @@ func main() {
 	mux := http.NewServeMux()
 
 	// Middleware setup
-	sessionWrapped := middleware.Session(person.UserName, person.PassWord, targetHost, excluded)(mux)
+	session := middleware.Session(person.UserName, person.PassWord, targetHost, excluded)(mux)
 
-	handler := middleware.Recovery(sessionWrapped)
+	cors := middleware.CORS(session)
+
+	handler := middleware.Recovery(cors)
 
 	slog.Info("Hifi API server running",
 		"host", config.Host,

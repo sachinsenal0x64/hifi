@@ -35,6 +35,7 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			switch r.URL.Path {
 			case rest.Search3View():
 				RewriteRequest(r)
+				return
 			}
 
 			// Add authentication parameters to the URL query like -> (https://)
