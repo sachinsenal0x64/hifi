@@ -55,7 +55,7 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 > [!NOTE]
 >
-> ## This project is for
+> ## Hifi project is for
 
 - Tidal subscribers who don’t like the official app and want more client options.
 
