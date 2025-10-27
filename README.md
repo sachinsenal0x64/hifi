@@ -59,7 +59,7 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 - People who use Tidal but don’t like its official app and want more client options.
 
-- Anyone who needs lossless or Hi-Res audio.
+- Anyone who wants to listen to lossless or Hi-Res audio.
 
 - People who don’t want to store terabytes of music.
 
@@ -68,6 +68,8 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 - Anyone who doesn’t need to download and manually add tracks.
 
 - Developers who want to create their own Subsonic-based client using HiFi as a proxy.
+
+- People who want to try Tidal before making a commitment.
 
 <br>
 
