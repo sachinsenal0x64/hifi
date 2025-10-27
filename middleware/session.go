@@ -41,8 +41,8 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			s := q.Get("s")
 			t := q.Get("t")
 
-			salt := Salt(100)
-			token := Token(q.Get("t"), salt)
+			// salt := Salt(100)
+			// token := Token("password", salt)
 
 			userName := q.Get("u")
 			passWord := q.Get("p")
@@ -57,8 +57,8 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 
 			if s != "" && t != "" {
 				// Token auth exists
-				params["s"] = salt
-				params["t"] = token
+				params["s"] = s
+				params["t"] = t
 			} else {
 				// Fallback to legacy password
 				params["p"] = passWord
