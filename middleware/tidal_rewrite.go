@@ -13,6 +13,8 @@ import (
 
 // -------------------- REWRITE --------------------
 
+var coverMap = make(map[string]string)
+
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case rest.Search3View():
@@ -67,6 +69,14 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		albumMap := make(map[int]bool)
 
 		for _, item := range tidal.Items {
+
+			albumID := fmt.Sprint(item.Album.ID)
+			songID := fmt.Sprint(item.ID)
+			coverUUID := item.Album.Cover
+
+			coverMap[albumID] = coverUUID // album
+			coverMap[songID] = coverUUID  // song
+
 			// Artist
 			if !artistMap[item.Artist.ID] {
 				sub.Subsonic.SearchResult3.Artist = append(sub.Subsonic.SearchResult3.Artist, types.SubsonicArtist{
@@ -118,9 +128,23 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(sub)
 
-	// -------------------- COVER ART --------------------
+		// -------------------- COVER ART --------------------
+
 	case rest.GetCoverArtView():
-		redirectURL := fmt.Sprintf("https://%s/images/0d2d5108/3644/4888/a5d9/df19d4777aeb/640x640.jpg", config.TidalStaticHost)
+		id := r.URL.Query().Get("id")
+		if id == "" {
+			http.Error(w, "missing id", http.StatusBadRequest)
+			return
+		}
+
+		uuid := id
+		if v, ok := coverMap[id]; ok {
+			uuid = v
+		}
+
+		path := FormatCoverID(uuid)
+		redirectURL := fmt.Sprintf("https://%s/images/%s/80x80.jpg", config.TidalStaticHost, path)
+
 		http.Redirect(w, r, redirectURL, config.StatusRedirectPermanent)
 
 	// -------------------- MOCKS --------------------
