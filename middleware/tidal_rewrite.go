@@ -154,7 +154,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			}
 
 			// Song
-			// Song
 			song := types.SubsonicSong{
 				ID:          fmt.Sprint(item.ID),
 				Title:       item.Title,
@@ -170,10 +169,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				AlbumID:     fmt.Sprint(item.Album.ID),
 			}
 
-			// add to search result as before
 			sub.Subsonic.SearchResult3.Song = append(sub.Subsonic.SearchResult3.Song, song)
-
-			// also store it in map for /getSong
 			songMap[song.ID] = song
 
 		}
