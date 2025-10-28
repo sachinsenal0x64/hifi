@@ -14,7 +14,7 @@ var (
 
 	// Blacklist
 	ExcludedPaths = []string{
-		"/admin/home",
+		"/admin/*",
 		"/rest/download.view",
 	}
 
