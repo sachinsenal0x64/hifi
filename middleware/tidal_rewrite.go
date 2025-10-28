@@ -16,8 +16,8 @@ import (
 // -------------------- REWRITE --------------------
 
 var (
-	coverMap = make(map[string]string)
 	songMap  = make(map[string]types.SubsonicSong)
+	coverMap = make(map[string]string)
 )
 
 func GetPlaybackInfo(trackID string) (string, error) {
@@ -118,6 +118,9 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		sub := types.MetaBanner()
 		sub.Subsonic.SearchResult3 = &types.SubsonicSearchResult{}
 
+		artistMap := make(map[int]bool)
+		albumMap := make(map[int]bool)
+
 		for _, item := range tidal.Items {
 
 			albumID := fmt.Sprint(item.Album.ID)
@@ -128,21 +131,27 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			coverMap[songID] = coverUUID  // song
 
 			// Artist
-			sub.Subsonic.SearchResult3.Artist = append(sub.Subsonic.SearchResult3.Artist, types.SubsonicArtist{
-				ID:         fmt.Sprint(item.Artist.ID),
-				Name:       item.Artist.Name,
-				CoverArt:   item.Artist.Picture,
-				AlbumCount: 11,
-			})
+			if !artistMap[item.Artist.ID] {
+				sub.Subsonic.SearchResult3.Artist = append(sub.Subsonic.SearchResult3.Artist, types.SubsonicArtist{
+					ID:         fmt.Sprint(item.Artist.ID),
+					Name:       item.Artist.Name,
+					CoverArt:   item.Artist.Picture,
+					AlbumCount: 11,
+				})
+				artistMap[item.Artist.ID] = true
+			}
 
 			// Album
-			sub.Subsonic.SearchResult3.Album = append(sub.Subsonic.SearchResult3.Album, types.SubsonicAlbum{
-				ID:        fmt.Sprint(item.Album.ID),
-				Name:      item.Album.Title,
-				Artist:    item.Artist.Name,
-				CoverArt:  item.Album.Cover,
-				SongCount: 11,
-			})
+			if !albumMap[item.Album.ID] {
+				sub.Subsonic.SearchResult3.Album = append(sub.Subsonic.SearchResult3.Album, types.SubsonicAlbum{
+					ID:        fmt.Sprint(item.Album.ID),
+					Name:      item.Album.Title,
+					Artist:    item.Artist.Name,
+					CoverArt:  item.Album.Cover,
+					SongCount: 11,
+				})
+				albumMap[item.Album.ID] = true
+			}
 
 			// Song
 			// Song
@@ -161,7 +170,10 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				AlbumID:     fmt.Sprint(item.Album.ID),
 			}
 
+			// add to search result as before
 			sub.Subsonic.SearchResult3.Song = append(sub.Subsonic.SearchResult3.Song, song)
+
+			// also store it in map for /getSong
 			songMap[song.ID] = song
 
 		}
