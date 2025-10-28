@@ -94,5 +94,6 @@ type SubsonicWrapper struct {
 		OpenSubsonic  bool                  `json:"openSubsonic"`
 		SearchResult3 *SubsonicSearchResult `json:"searchResult3,omitempty"`
 		Artists       *SubsonicArtists      `json:"artists,omitempty"`
+		Song          *SubsonicSong         `json:"song,omitempty"`
 	} `json:"subsonic-response"`
 }

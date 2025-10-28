@@ -8,7 +8,6 @@ import (
 	"hifi/routes/rest"
 	"hifi/types"
 	"io"
-	"log/slog"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -17,6 +16,8 @@ import (
 // -------------------- REWRITE --------------------
 
 var coverMap = make(map[string]string)
+
+var songMap = make(map[string]types.SubsonicSong)
 
 func GetPlaybackInfo(trackID string) (string, error) {
 
@@ -114,13 +115,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		sub := types.MetaBanner()
-
-		if sub.Subsonic.SearchResult3 == nil {
-			sub.Subsonic.SearchResult3 = &types.SubsonicSearchResult{}
-		}
-
-		artistMap := make(map[int]bool)
-		albumMap := make(map[int]bool)
+		sub.Subsonic.SearchResult3 = &types.SubsonicSearchResult{}
 
 		for _, item := range tidal.Items {
 
@@ -132,30 +127,25 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			coverMap[songID] = coverUUID  // song
 
 			// Artist
-			if !artistMap[item.Artist.ID] {
-				sub.Subsonic.SearchResult3.Artist = append(sub.Subsonic.SearchResult3.Artist, types.SubsonicArtist{
-					ID:         fmt.Sprint(item.Artist.ID),
-					Name:       item.Artist.Name,
-					CoverArt:   item.Artist.Picture,
-					AlbumCount: 11,
-				})
-				artistMap[item.Artist.ID] = true
-			}
+			sub.Subsonic.SearchResult3.Artist = append(sub.Subsonic.SearchResult3.Artist, types.SubsonicArtist{
+				ID:         fmt.Sprint(item.Artist.ID),
+				Name:       item.Artist.Name,
+				CoverArt:   item.Artist.Picture,
+				AlbumCount: 11,
+			})
 
 			// Album
-			if !albumMap[item.Album.ID] {
-				sub.Subsonic.SearchResult3.Album = append(sub.Subsonic.SearchResult3.Album, types.SubsonicAlbum{
-					ID:        fmt.Sprint(item.Album.ID),
-					Name:      item.Album.Title,
-					Artist:    item.Artist.Name,
-					CoverArt:  item.Album.Cover,
-					SongCount: 11,
-				})
-				albumMap[item.Album.ID] = true
-			}
+			sub.Subsonic.SearchResult3.Album = append(sub.Subsonic.SearchResult3.Album, types.SubsonicAlbum{
+				ID:        fmt.Sprint(item.Album.ID),
+				Name:      item.Album.Title,
+				Artist:    item.Artist.Name,
+				CoverArt:  item.Album.Cover,
+				SongCount: 11,
+			})
 
 			// Song
-			sub.Subsonic.SearchResult3.Song = append(sub.Subsonic.SearchResult3.Song, types.SubsonicSong{
+			// Song
+			song := types.SubsonicSong{
 				ID:          fmt.Sprint(item.ID),
 				Title:       item.Title,
 				Album:       item.Album.Title,
@@ -168,7 +158,10 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				Suffix:      "flac",
 				ArtistID:    fmt.Sprint(item.Artist.ID),
 				AlbumID:     fmt.Sprint(item.Album.ID),
-			})
+			}
+
+			sub.Subsonic.SearchResult3.Song = append(sub.Subsonic.SearchResult3.Song, song)
+			songMap[song.ID] = song
 
 		}
 
@@ -184,42 +177,41 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		id := r.URL.Query().Get("id")
 		size := r.URL.Query().Get("size")
 
-		fmt.Println("Raw query:", r.URL.RawQuery)
-		fmt.Println("Parsed query:", r.URL.Query())
-
-		slog.Debug("Cover art request", "id", id, "size", size)
-
 		uuid := id
-		if v, ok := coverMap[id]; ok {
-			uuid = v
-		}
 
 		sizeMapping := map[int]int{
 			80:  80,
-			300: 320,
-			450: 640,
+			300: 80,
+			450: 320,
 		}
 
-		// default size if none provided or not mapped
-		mappedSize := 80
+		s, _ := strconv.Atoi(size)
+		mappedSize := sizeMapping[s]
 
-		if size != "" {
-			if s, err := strconv.Atoi(size); err == nil {
-				if mapped, ok := sizeMapping[s]; ok {
-					mappedSize = mapped
-				}
-			}
-		}
-
-		path := FormatCoverID(uuid)
-		redirectURL := fmt.Sprintf("https://%s/images/%s/%dx%d.jpg", config.TidalStaticHost, path, mappedSize, mappedSize)
+		redirectURL := fmt.Sprintf(
+			"https://%s/images/%s/%dx%d.jpg",
+			config.TidalStaticHost,
+			FormatCoverID(uuid),
+			mappedSize,
+			mappedSize,
+		)
 
 		http.Redirect(w, r, redirectURL, config.StatusRedirectPermanent)
 
 	// -------------------- getSong --------------------
 
 	case rest.GetSong():
-		return
+		id := r.URL.Query().Get("id")
+
+		song := songMap[id]
+
+		sub := types.MetaBanner()
+		sub.Subsonic.Song = &song
+
+		w.Header().Set("Cache-Control", "public, max-age=3600, immutable")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(sub)
 
 	// -------------------- Scrobble --------------------
 
@@ -237,38 +229,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		http.Redirect(w, r, playbackURL, config.StatusRedirectPermanent)
-
-	// -------------------- MOCKS --------------------
-
-	case rest.GetArtistsView():
-		sub := types.MetaBanner()
-
-		if sub.Subsonic.Artists == nil {
-			sub.Subsonic.Artists = &types.SubsonicArtists{}
-		}
-
-		sub.Subsonic.Artists.IgnoredArticles = "The An A Die Das Ein Eine Les Le La"
-
-		sub.Subsonic.Artists.Index = []types.SubsonicArtistIndexItem{
-			{
-				Name: "C",
-				Artist: []types.SubsonicArtist{
-					{ID: "100000016", Name: "CARNÚN", CoverArt: "ar-100000016", AlbumCount: 1},
-					{ID: "100000027", Name: "Chi.Otic", CoverArt: "ar-100000027", AlbumCount: 0},
-				},
-			},
-			{
-				Name: "I",
-				Artist: []types.SubsonicArtist{
-					{ID: "100000013", Name: "IOK-1", CoverArt: "ar-100000013", AlbumCount: 1},
-				},
-			},
-		}
-
-		w.Header().Set("Cache-Control", "public, max-age=3600, immutable")
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(sub)
 
 	}
 }
