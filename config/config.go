@@ -27,8 +27,9 @@ var (
 const (
 
 	// TIDAL API
-	Scheme    = "https"
-	TidalHost = "api.tidal.com"
+	Scheme          = "https"
+	TidalHost       = "api.tidal.com"
+	TidalStaticHost = "resources.tidal.com"
 
 	// Hifi Server
 	Host = "127.0.0.1"
@@ -54,6 +55,9 @@ const (
 	HeaderAllowHeaders = "Access-Control-Allow-Headers"
 	Authorization      = "Authorization"
 
+	// CORS
+	CORSAllowOrigin = "*"
+
 	// HTTP State codes
 	StatusOK                  = 200
 	StatusCreated             = 201
@@ -64,4 +68,5 @@ const (
 	StatusInternalServerError = 500
 	StatusMethodNotAllowed    = 405
 	StatusMultipleChoices     = 300
+	StatusRedirectPermanent   = 308
 )

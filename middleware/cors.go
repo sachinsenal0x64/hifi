@@ -6,11 +6,13 @@ import (
 	"net/http"
 )
 
+// -------------------- CORS --------------------
+
 func CORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case rest.Search3View():
-			w.Header().Set(config.HeaderAllowOrigin, "*")
+		case rest.Search3View(), rest.GetArtistsView():
+			w.Header().Set(config.HeaderAllowOrigin, config.CORSAllowOrigin)
 		}
 		next.ServeHTTP(w, r)
 	})
