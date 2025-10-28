@@ -15,9 +15,10 @@ import (
 
 // -------------------- REWRITE --------------------
 
-var coverMap = make(map[string]string)
-
-var songMap = make(map[string]types.SubsonicSong)
+var (
+	coverMap = make(map[string]string)
+	songMap  = make(map[string]types.SubsonicSong)
+)
 
 func GetPlaybackInfo(trackID string) (string, error) {
 
