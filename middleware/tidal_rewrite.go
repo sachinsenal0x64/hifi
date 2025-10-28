@@ -19,10 +19,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case rest.Search3View():
 		query := r.URL.Query().Get("query")
-		if query == "" {
-			http.Error(w, "missing query parameter", http.StatusBadRequest)
-			return
-		}
 
 		// Tidal search URL
 		tidalURL := &url.URL{
@@ -32,7 +28,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 		q := tidalURL.Query()
 		q.Set("query", query)
-		q.Set("limit", "500")
+		q.Set("limit", "1500")
 		q.Set("offset", "0")
 		q.Set("countryCode", "US")
 		tidalURL.RawQuery = q.Encode()
@@ -132,10 +128,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 	case rest.GetCoverArtView():
 		id := r.URL.Query().Get("id")
-		if id == "" {
-			http.Error(w, "missing id", http.StatusBadRequest)
-			return
-		}
 
 		uuid := id
 		if v, ok := coverMap[id]; ok {
