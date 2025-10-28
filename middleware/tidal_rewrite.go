@@ -8,8 +8,10 @@ import (
 	"hifi/routes/rest"
 	"hifi/types"
 	"io"
+	"log/slog"
 	"net/http"
 	"net/url"
+	"strconv"
 )
 
 // -------------------- REWRITE --------------------
@@ -138,7 +140,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 					AlbumCount: 11,
 				})
 				artistMap[item.Artist.ID] = true
-				fmt.Println("Added artist:", item.Artist.Picture)
 			}
 
 			// Album
@@ -151,7 +152,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 					SongCount: 11,
 				})
 				albumMap[item.Album.ID] = true
-				fmt.Println("Added album:", item.Album.Cover)
 			}
 
 			// Song
@@ -178,18 +178,41 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(sub)
 
-		// -------------------- COVER ART --------------------
+	// -------------------- COVER ART --------------------
 
 	case rest.GetCoverArtView():
 		id := r.URL.Query().Get("id")
+		size := r.URL.Query().Get("size")
+
+		fmt.Println("Raw query:", r.URL.RawQuery)
+		fmt.Println("Parsed query:", r.URL.Query())
+
+		slog.Debug("Cover art request", "id", id, "size", size)
 
 		uuid := id
 		if v, ok := coverMap[id]; ok {
 			uuid = v
 		}
 
+		sizeMapping := map[int]int{
+			80:  80,
+			300: 320,
+			450: 640,
+		}
+
+		// default size if none provided or not mapped
+		mappedSize := 80
+
+		if size != "" {
+			if s, err := strconv.Atoi(size); err == nil {
+				if mapped, ok := sizeMapping[s]; ok {
+					mappedSize = mapped
+				}
+			}
+		}
+
 		path := FormatCoverID(uuid)
-		redirectURL := fmt.Sprintf("https://%s/images/%s/80x80.jpg", config.TidalStaticHost, path)
+		redirectURL := fmt.Sprintf("https://%s/images/%s/%dx%d.jpg", config.TidalStaticHost, path, mappedSize, mappedSize)
 
 		http.Redirect(w, r, redirectURL, config.StatusRedirectPermanent)
 
