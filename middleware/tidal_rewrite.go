@@ -29,13 +29,15 @@ func GetPlaybackInfo(trackID string) (string, error) {
 		Path:   fmt.Sprintf("/v1/%s/playbackinfopostpaywall/v4", trackID),
 	}
 
+	fmt.Println(playbackURL.String())
+
 	q := playbackURL.Query()
 	q.Set("audioquality", "LOSSLESS")
 	q.Set("playbackmode", "STREAM")
 	q.Set("assetpresentation", "FULL")
-	playbackURL.RawQuery = q.Encode()
 
 	req, _ := http.NewRequest(http.MethodGet, playbackURL.String(), nil)
+
 	req.Header.Set("Authorization", "Bearer "+TidalAuth())
 
 	resp, err := http.DefaultClient.Do(req)
@@ -190,6 +192,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		sizeMapping := map[int]int{
 			100: 80,
+			200: 320,
 			300: 80,
 			450: 640,
 		}
@@ -231,13 +234,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 	case rest.Stream():
 		id := r.URL.Query().Get("id")
-		playbackURL, err := GetPlaybackInfo(id)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("playback error: %v", err), http.StatusBadGateway)
-			return
-		}
 
-		http.Redirect(w, r, playbackURL, config.StatusRedirectPermanent)
-
+		fmt.Println("Stream request for song ID:", id)
 	}
 }
