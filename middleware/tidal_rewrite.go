@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"hifi/config"
@@ -14,6 +15,61 @@ import (
 // -------------------- REWRITE --------------------
 
 var coverMap = make(map[string]string)
+
+func GetPlaybackInfo(trackID string) (string, error) {
+
+	// Tidal playback URL
+	playbackURL := &url.URL{
+		Scheme: config.Scheme,
+		Host:   config.TidalHost,
+		Path:   fmt.Sprintf("/v1/%s/playbackinfopostpaywall/v4", trackID),
+	}
+
+	q := playbackURL.Query()
+	q.Set("audioquality", "LOSSLESS")
+	q.Set("playbackmode", "STREAM")
+	q.Set("assetpresentation", "FULL")
+	playbackURL.RawQuery = q.Encode()
+
+	req, _ := http.NewRequest(http.MethodGet, playbackURL.String(), nil)
+	req.Header.Set("Authorization", "Bearer "+TidalAuth())
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	var playback struct {
+		Manifest string `json:"manifest"`
+	}
+	if err := json.Unmarshal(body, &playback); err != nil {
+		return "", err
+	}
+
+	decoded, err := base64.StdEncoding.DecodeString(playback.Manifest)
+	if err != nil {
+		return "", err
+	}
+
+	var manifest struct {
+		Urls []string `json:"urls"`
+	}
+	if err := json.Unmarshal(decoded, &manifest); err != nil {
+		return "", err
+	}
+
+	if len(manifest.Urls) == 0 {
+		return "", fmt.Errorf("no urls in manifest")
+	}
+
+	return manifest.Urls[0], nil
+}
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
@@ -114,8 +170,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				AlbumID:     fmt.Sprint(item.Album.ID),
 			})
 
-			fmt.Println("Added album:", item.ID)
-
 		}
 
 		// Write response
@@ -138,6 +192,28 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		redirectURL := fmt.Sprintf("https://%s/images/%s/80x80.jpg", config.TidalStaticHost, path)
 
 		http.Redirect(w, r, redirectURL, config.StatusRedirectPermanent)
+
+	// -------------------- getSong --------------------
+
+	case rest.GetSong():
+		return
+
+	// -------------------- Scrobble --------------------
+
+	case rest.Scrobble():
+		return
+
+	// -------------------- Stream --------------------
+
+	case rest.Stream():
+		id := r.URL.Query().Get("id")
+		playbackURL, err := GetPlaybackInfo(id)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("playback error: %v", err), http.StatusBadGateway)
+			return
+		}
+
+		http.Redirect(w, r, playbackURL, config.StatusRedirectPermanent)
 
 	// -------------------- MOCKS --------------------
 

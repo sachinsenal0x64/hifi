@@ -33,7 +33,9 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 
 			// Rewrite tidal requests
 			switch r.URL.Path {
-			case rest.Search3View(), rest.GetArtistsView(), rest.GetCoverArtView():
+			case rest.Search3View(), rest.GetArtistsView(),
+				rest.GetCoverArtView(), rest.Stream(),
+				rest.GetSong(), rest.Scrobble():
 				RewriteRequest(w, r)
 				return
 
