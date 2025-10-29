@@ -147,7 +147,8 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		mappedSize := sizeMapping[s]
 
 		redirectURL := fmt.Sprintf(
-			"https://%s/images/%s/%dx%d.jpg",
+			"%s://%s/images/%s/%dx%d.jpg",
+			config.Scheme,
 			config.TidalStaticHost,
 			FormatCoverID(uuid),
 			mappedSize,
