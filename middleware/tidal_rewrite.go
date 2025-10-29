@@ -142,6 +142,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		uuid := id
 
 		sizeMapping := map[int]int{
+			100: 640,
 			200: 640,
 			300: 80,
 			450: 640,
@@ -217,7 +218,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		decoded, err := base64.StdEncoding.DecodeString(playback.Manifest)
 
-		fmt.Println(decoded)
 		if err != nil {
 			http.Error(w, "failed to decode manifest", config.StatusInternalServerError)
 			return
@@ -235,8 +235,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		streamURL := manifest.Urls[0]
-		fmt.Println("Redirecting to:", streamURL)
-
 		http.Redirect(w, r, streamURL, config.StatusRedirectPermanent)
 
 	}
