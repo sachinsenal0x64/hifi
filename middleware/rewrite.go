@@ -140,7 +140,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		sizeMapping := map[int]int{
 			100: 160,
 			200: 320,
-			300: 320,
+			300: 80,
 			450: 640, // 1080x1080
 			500: 750, // 1280x1280
 		}
