@@ -20,61 +20,12 @@ var (
 	coverMap = make(map[string]string)
 )
 
-func GetPlaybackInfo(trackID string) (string, error) {
+type PlaybackInfo struct {
+	Manifest string `json:"manifest"`
+}
 
-	// Tidal playback URL
-	playbackURL := &url.URL{
-		Scheme: config.Scheme,
-		Host:   config.TidalHost,
-		Path:   fmt.Sprintf("/v1/%s/playbackinfopostpaywall/v4", trackID),
-	}
-
-	fmt.Println(playbackURL.String())
-
-	q := playbackURL.Query()
-	q.Set("audioquality", "LOSSLESS")
-	q.Set("playbackmode", "STREAM")
-	q.Set("assetpresentation", "FULL")
-
-	req, _ := http.NewRequest(http.MethodGet, playbackURL.String(), nil)
-
-	req.Header.Set("Authorization", "Bearer "+TidalAuth())
-
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-
-	var playback struct {
-		Manifest string `json:"manifest"`
-	}
-	if err := json.Unmarshal(body, &playback); err != nil {
-		return "", err
-	}
-
-	decoded, err := base64.StdEncoding.DecodeString(playback.Manifest)
-	if err != nil {
-		return "", err
-	}
-
-	var manifest struct {
-		Urls []string `json:"urls"`
-	}
-	if err := json.Unmarshal(decoded, &manifest); err != nil {
-		return "", err
-	}
-
-	if len(manifest.Urls) == 0 {
-		return "", fmt.Errorf("no urls in manifest")
-	}
-
-	return manifest.Urls[0], nil
+type ManifestData struct {
+	Urls []string `json:"urls"`
 }
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
@@ -95,7 +46,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		q.Set("countryCode", "US")
 		tidalURL.RawQuery = q.Encode()
 
-		req, _ := http.NewRequest(http.MethodGet, tidalURL.String(), nil)
+		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
 		req.Header.Set("Authorization", "Bearer "+TidalAuth())
 
 		resp, err := http.DefaultClient.Do(req)
@@ -191,9 +142,8 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		uuid := id
 
 		sizeMapping := map[int]int{
-			100: 80,
-			200: 320,
-			300: 80,
+			200: 640,
+			300: 320,
 			450: 640,
 		}
 
@@ -235,6 +185,59 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	case rest.Stream():
 		id := r.URL.Query().Get("id")
 
+		if id == "" {
+			http.Error(w, "missing track ID", config.StatusBadRequest)
+			return
+		}
+
 		fmt.Println("Stream request for song ID:", id)
+
+		url := fmt.Sprintf(
+			"https://api.tidal.com/v1/tracks/%s/playbackinfopostpaywall/v4?audioquality=LOSSLESS&playbackmode=STREAM&assetpresentation=FULL",
+			id,
+		)
+
+		req, _ := http.NewRequest("GET", url, nil)
+		req.Header.Add("Authorization", "Bearer "+TidalAuth())
+
+		res, err := http.DefaultClient.Do(req)
+		if err != nil {
+			http.Error(w, "failed to request Tidal API", config.StatusInternalServerError)
+			return
+		}
+		defer res.Body.Close()
+
+		body, _ := io.ReadAll(res.Body)
+
+		var playback PlaybackInfo
+		if err := json.Unmarshal(body, &playback); err != nil {
+			http.Error(w, "failed to parse playback info", config.StatusInternalServerError)
+			return
+		}
+
+		decoded, err := base64.StdEncoding.DecodeString(playback.Manifest)
+
+		fmt.Println(decoded)
+		if err != nil {
+			http.Error(w, "failed to decode manifest", config.StatusInternalServerError)
+			return
+		}
+
+		var manifest ManifestData
+		if err := json.Unmarshal(decoded, &manifest); err != nil {
+			http.Error(w, "failed to parse manifest JSON", config.StatusInternalServerError)
+			return
+		}
+
+		if len(manifest.Urls) == 0 {
+			http.Error(w, "no stream URLs found", config.StatusNotFound)
+			return
+		}
+
+		streamURL := manifest.Urls[0]
+		fmt.Println("Redirecting to:", streamURL)
+
+		http.Redirect(w, r, streamURL, config.StatusRedirectPermanent)
+
 	}
 }
