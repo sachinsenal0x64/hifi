@@ -206,7 +206,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		sub := types.MetaBanner()
 		sub.Subsonic.Artists = &types.SubsonicArtists{}
 
-		// Define ignored articles
 		ignoredArticles := []string{"The", "An", "A", "Die", "Das", "Ein", "Eine", "Les", "Le", "La"}
 		sub.Subsonic.Artists.IgnoredArticles = strings.Join(ignoredArticles, " ")
 
