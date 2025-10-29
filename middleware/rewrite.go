@@ -123,9 +123,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Write response
-		w.Header().Set("Cache-Control", "public, max-age=3600, immutable")
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
+
 		json.NewEncoder(w).Encode(sub)
 
 	// -------------------- COVER ART --------------------
@@ -169,9 +167,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		sub := types.MetaBanner()
 		sub.Subsonic.Song = &song
 
-		w.Header().Set("Cache-Control", "public, max-age=3600, immutable")
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(sub)
 
 	// -------------------- getArtists --------------------
@@ -261,9 +256,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			})
 		}
 
-		w.Header().Set("Cache-Control", "public, max-age=3600, immutable")
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(sub)
 
 	// -------------------- Stream --------------------
