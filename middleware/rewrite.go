@@ -145,8 +145,8 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			500: 750, // 1280x1280
 		}
 
-		s, _ := strconv.Atoi(size)
-		mappedSize := sizeMapping[s]
+		s, _ := strconv.ParseInt(size, 10, 64)
+		mappedSize := sizeMapping[int(s)]
 
 		redirectURL := fmt.Sprintf(
 			"%s://%s/images/%s/%dx%d.jpg",
@@ -177,6 +177,21 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	// -------------------- getArtists --------------------
 
 	case rest.GetArtistsView():
+
+		query := r.URL.Query().Get("query")
+
+		// Tidal search URL
+		tidalURL := &url.URL{
+			Scheme: config.Scheme,
+			Host:   config.TidalHost,
+			Path:   "/v1/search/tracks",
+		}
+		q := tidalURL.Query()
+		q.Set("query", query)
+		q.Set("limit", "1500")
+		q.Set("offset", "0")
+		q.Set("countryCode", "US")
+		tidalURL.RawQuery = q.Encode()
 
 		songMap := []types.TidalArtistResponse{
 			{ArtistID: 1, Name: "Nirvana", ProfilePicture: "cover1.jpg"},
