@@ -55,7 +55,6 @@ type SubsonicSong struct {
 	Suffix      string `json:"suffix"`
 	ArtistID    string `json:"artistId"`
 	AlbumID     string `json:"albumId"`
-	Track       int    `json:"track"`
 }
 
 type SubsonicArtist struct {
@@ -68,11 +67,10 @@ type SubsonicArtist struct {
 }
 
 type SubsonicAlbum struct {
-	ID        string `json:"id"`
-	Name      string `json:"name"`
-	Artist    string `json:"artist"`
-	CoverArt  string `json:"coverArt"`
-	SongCount int    `json:"songCount"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Artist   string `json:"artist"`
+	CoverArt string `json:"coverArt"`
 }
 
 type SubsonicSearchResult struct {
