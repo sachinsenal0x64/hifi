@@ -20,6 +20,7 @@ var (
 	coverMap = make(map[string]string)
 	playback types.PlaybackInfo
 	manifest types.ManifestData
+	tidal    types.TidalResponse
 )
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +57,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		var tidal types.TidalResponse
 		if err := json.Unmarshal(body, &tidal); err != nil {
 			http.Error(w, fmt.Sprintf("parse error: %v", err), http.StatusInternalServerError)
 			return
