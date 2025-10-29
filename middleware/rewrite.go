@@ -304,6 +304,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		streamURL := manifest.Urls[0]
+
 		http.Redirect(w, r, streamURL, config.StatusRedirectPermanent)
 
 	// -------------------- Scrobble --------------------
