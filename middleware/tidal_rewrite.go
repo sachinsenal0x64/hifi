@@ -143,7 +143,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		sizeMapping := map[int]int{
 			200: 640,
-			300: 320,
+			300: 80,
 			450: 640,
 		}
 
@@ -185,20 +185,20 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	case rest.Stream():
 		id := r.URL.Query().Get("id")
 
-		if id == "" {
-			http.Error(w, "missing track ID", config.StatusBadRequest)
-			return
+		tidalURL := &url.URL{
+			Scheme: config.Scheme,
+			Host:   config.TidalHost,
+			Path:   fmt.Sprintf("/v1/tracks/%s/playbackinfopostpaywall/v4", id),
 		}
 
-		fmt.Println("Stream request for song ID:", id)
+		q := tidalURL.Query()
+		q.Set("audioquality", "LOSSLESS")
+		q.Set("playbackmode", "STREAM")
+		q.Set("assetpresentation", "FULL")
+		tidalURL.RawQuery = q.Encode()
 
-		url := fmt.Sprintf(
-			"https://api.tidal.com/v1/tracks/%s/playbackinfopostpaywall/v4?audioquality=LOSSLESS&playbackmode=STREAM&assetpresentation=FULL",
-			id,
-		)
-
-		req, _ := http.NewRequest("GET", url, nil)
-		req.Header.Add("Authorization", "Bearer "+TidalAuth())
+		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
+		req.Header.Set("Authorization", "Bearer "+TidalAuth())
 
 		res, err := http.DefaultClient.Do(req)
 		if err != nil {
