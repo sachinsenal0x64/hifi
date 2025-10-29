@@ -83,10 +83,9 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			// Artist
 			if !artistMap[item.Artist.ID] {
 				sub.Subsonic.SearchResult3.Artist = append(sub.Subsonic.SearchResult3.Artist, types.SubsonicArtist{
-					ID:         fmt.Sprint(item.Artist.ID),
-					Name:       item.Artist.Name,
-					CoverArt:   item.Artist.Picture,
-					AlbumCount: 11,
+					ID:       fmt.Sprint(item.Artist.ID),
+					Name:     item.Artist.Name,
+					CoverArt: item.Artist.Picture,
 				})
 				artistMap[item.Artist.ID] = true
 			}
@@ -94,11 +93,10 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			// Album
 			if !albumMap[item.Album.ID] {
 				sub.Subsonic.SearchResult3.Album = append(sub.Subsonic.SearchResult3.Album, types.SubsonicAlbum{
-					ID:        fmt.Sprint(item.Album.ID),
-					Name:      item.Album.Title,
-					Artist:    item.Artist.Name,
-					CoverArt:  item.Album.Cover,
-					SongCount: 11,
+					ID:       fmt.Sprint(item.Album.ID),
+					Name:     item.Album.Title,
+					Artist:   item.Artist.Name,
+					CoverArt: item.Album.Cover,
 				})
 				albumMap[item.Album.ID] = true
 			}
@@ -133,16 +131,18 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	// -------------------- COVER ART --------------------
 
 	case rest.GetCoverArtView():
+
 		id := r.URL.Query().Get("id")
 		size := r.URL.Query().Get("size")
+
 		uuid := id
 
 		sizeMapping := map[int]int{
 			100: 160,
 			200: 320,
-			300: 80,
-			450: 640,  // 750x750
-			500: 1080, // 1280x1280
+			300: 320,
+			450: 640, // 1080x1080
+			500: 750, // 1280x1280
 		}
 
 		s, _ := strconv.Atoi(size)

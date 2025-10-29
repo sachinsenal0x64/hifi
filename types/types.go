@@ -22,14 +22,14 @@ type TidalSearchResponse struct {
 		Duration int    `json:"duration"`
 		Explicit bool   `json:"explicit"`
 		Artist   struct {
-			ID      int    `json:"id"`
-			Name    string `json:"name"`
+			ID      int    `json:"id,omitempty"`
+			Name    string `json:"name,omitempty"`
 			Picture string `json:"picture,omitempty"`
 		} `json:"artist"`
 		Album struct {
-			ID    int    `json:"id"`
-			Title string `json:"title"`
-			Cover string `json:"cover"`
+			ID    int    `json:"id,omitempty"`
+			Title string `json:"title,omitempty"`
+			Cover string `json:"cover,omitempty"`
 		} `json:"album"`
 	} `json:"items"`
 }
@@ -105,9 +105,9 @@ type SubsonicWrapper struct {
 }
 
 type PlaybackInfo struct {
-	Manifest string `json:"manifest"`
+	Manifest string `json:"manifest,omitempty"`
 }
 
 type ManifestData struct {
-	Urls []string `json:"urls"`
+	Urls []string `json:"urls,omitempty"`
 }
