@@ -20,14 +20,6 @@ var (
 	coverMap = make(map[string]string)
 )
 
-type PlaybackInfo struct {
-	Manifest string `json:"manifest"`
-}
-
-type ManifestData struct {
-	Urls []string `json:"urls"`
-}
-
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case rest.Search3View():
@@ -211,7 +203,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		body, _ := io.ReadAll(res.Body)
 
-		var playback PlaybackInfo
+		var playback types.PlaybackInfo
 		if err := json.Unmarshal(body, &playback); err != nil {
 			http.Error(w, "failed to parse playback info", config.StatusInternalServerError)
 			return
@@ -224,7 +216,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		var manifest ManifestData
+		var manifest types.ManifestData
 		if err := json.Unmarshal(decoded, &manifest); err != nil {
 			http.Error(w, "failed to parse manifest JSON", config.StatusInternalServerError)
 			return

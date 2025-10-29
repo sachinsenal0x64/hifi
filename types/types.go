@@ -97,3 +97,11 @@ type SubsonicWrapper struct {
 		Song          *SubsonicSong         `json:"song,omitempty"`
 	} `json:"subsonic-response"`
 }
+
+type PlaybackInfo struct {
+	Manifest string `json:"manifest"`
+}
+
+type ManifestData struct {
+	Urls []string `json:"urls"`
+}
