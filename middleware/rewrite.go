@@ -264,7 +264,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		q := tidalURL.Query()
-		q.Set("audioquality", "LOSSLESS")
+		q.Set("audioquality", "HI_RES_LOSSLESS")
 		q.Set("playbackmode", "STREAM")
 		q.Set("assetpresentation", "FULL")
 		tidalURL.RawQuery = q.Encode()

@@ -61,7 +61,7 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 - Anyone who want to try Tidal before making a commitment.
 
-- Anyone who wants to listen to lossless audio.
+- Anyone who wants to listen to hifi-res lossless audio.
 
 - Anyone who doesn’t want to store terabytes of music.
 
