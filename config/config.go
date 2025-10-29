@@ -21,7 +21,7 @@ var (
 	// ENV
 	AccessToken = os.Getenv("ACCESS_TOKEN")
 
-	// Target Host
+	// Subsonic Server
 	TargetHost = os.Getenv("TARGET_HOST")
 )
 
