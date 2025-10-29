@@ -18,6 +18,8 @@ import (
 var (
 	songMap  = make(map[string]types.SubsonicSong)
 	coverMap = make(map[string]string)
+	playback types.PlaybackInfo
+	manifest types.ManifestData
 )
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
@@ -203,7 +205,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		body, _ := io.ReadAll(res.Body)
 
-		var playback types.PlaybackInfo
 		if err := json.Unmarshal(body, &playback); err != nil {
 			http.Error(w, "failed to parse playback info", config.StatusInternalServerError)
 			return
@@ -216,7 +217,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		var manifest types.ManifestData
 		if err := json.Unmarshal(decoded, &manifest); err != nil {
 			http.Error(w, "failed to parse manifest JSON", config.StatusInternalServerError)
 			return
