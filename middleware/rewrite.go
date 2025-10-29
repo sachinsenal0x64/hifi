@@ -172,11 +172,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(sub)
 
-	// -------------------- Scrobble --------------------
-
-	case rest.Scrobble():
-		return
-
 	// -------------------- Stream --------------------
 
 	case rest.Stream():
@@ -230,6 +225,11 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		streamURL := manifest.Urls[0]
 		http.Redirect(w, r, streamURL, config.StatusRedirectPermanent)
+
+	// -------------------- Scrobble --------------------
+
+	case rest.Scrobble():
+		return
 
 	}
 }
