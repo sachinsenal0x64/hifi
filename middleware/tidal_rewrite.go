@@ -142,10 +142,11 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		uuid := id
 
 		sizeMapping := map[int]int{
-			100: 640,
-			200: 640,
+			100: 160,
+			200: 320,
 			300: 80,
 			450: 640,
+			500: 1080,
 		}
 
 		s, _ := strconv.Atoi(size)
