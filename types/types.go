@@ -12,7 +12,7 @@ func MetaBanner() SubsonicWrapper {
 
 // -------------------- TRANSFORM --------------------
 
-type TidalResponse struct {
+type TidalSearchResponse struct {
 	Limit              int `json:"limit"`
 	Offset             int `json:"offset"`
 	TotalNumberOfItems int `json:"totalNumberOfItems"`
@@ -32,6 +32,12 @@ type TidalResponse struct {
 			Cover string `json:"cover"`
 		} `json:"album"`
 	} `json:"items"`
+}
+
+type TidalArtistResponse struct {
+	ArtistID       int    `json:"artistId"`
+	Name           string `json:"artist"`
+	ProfilePicture string `json:"profilePicture"`
 }
 
 // Subsonic Response Format
