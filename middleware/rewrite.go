@@ -36,7 +36,9 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case rest.Search3View():
 
-		query[user] = search
+		if search != "" {
+			query[user] = search
+		}
 
 		// Tidal search URL
 		tidalURL := &url.URL{
@@ -180,7 +182,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 	case rest.GetArtistsView():
 
-		fmt.Println(query[user])
+		fmt.Println(query)
 
 		// Tidal search URL
 		tidalURL := &url.URL{
