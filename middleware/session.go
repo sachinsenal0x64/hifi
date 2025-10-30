@@ -48,6 +48,9 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 
 			s := q.Get("s")
 			t := q.Get("t")
+			f := q.Get("f")
+			c := q.Get("c")
+
 			userName := q.Get("u")
 			passWord := q.Get("p")
 
@@ -58,11 +61,12 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 
 			params := map[string]string{
 				"u": userName,
-				"c": "",
-				"f": "json",
+				"c": c,
+				"f": f,
 			}
 
 			// Check if s and t exist in query
+
 			if s != "" && t != "" {
 				// Use token authentication
 				params["s"] = s
