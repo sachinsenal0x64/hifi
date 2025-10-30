@@ -29,9 +29,14 @@ var (
 )
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
+
+	user := r.URL.Query().Get("u")
+	search := r.URL.Query().Get("query")
+
 	switch r.URL.Path {
 	case rest.Search3View():
-		query["query"] = r.URL.Query().Get("query")
+
+		query[user] = search
 
 		// Tidal search URL
 		tidalURL := &url.URL{
@@ -40,7 +45,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			Path:   "/v1/search/tracks",
 		}
 		q := tidalURL.Query()
-		q.Set("query", query["query"])
+		q.Set("query", query[user])
 		q.Set("limit", "1500")
 		q.Set("offset", "0")
 		q.Set("countryCode", "US")
@@ -182,7 +187,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			Path:   "/v1/search/artists",
 		}
 		q := tidalURL.Query()
-		q.Set("query", query["query"])
+		q.Set("query", query[user])
 		q.Set("limit", "1500")
 		q.Set("offset", "0")
 		q.Set("countryCode", "US")
@@ -199,8 +204,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		defer resp.Body.Close()
 
 		body, err := io.ReadAll(resp.Body)
-
-		fmt.Println("Tidal response:", string(body))
 
 		if err != nil {
 			http.Error(w, "failed to read Tidal response", http.StatusInternalServerError)
