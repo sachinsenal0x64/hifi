@@ -53,7 +53,7 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 
 			// -------------------- SESSION --------------------
 
-			// salt := Salt("Key")
+			// salt := Salt("Key") //random string
 			// token := Token("Password", salt)
 
 			params := map[string]string{
