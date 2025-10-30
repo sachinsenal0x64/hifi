@@ -59,7 +59,7 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 - Tidal subscribers who don’t like the official app and want more client options.
 
-- Anyone who want to try Tidal before making a commitment.
+- Anyone who want to try Tidal music before making a commitment.
 
 - Anyone who wants to listen to hifi-res lossless audio.
 
@@ -83,6 +83,10 @@ Soon...
 
 [API Docs](https://opensubsonic.netlify.app/docs) |
 [Hosted API](https://hifi.401658.xyz)
+
+## How can I create my own app based on HiFi?
+
+First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/routes) are supported by Hifi. Hifi uses OpenSubsonic [API](https://opensubsonic.netlify.app), but that doesn’t mean it supports every endpoint that OpenSubsonic provides. Hifi only supports the necessary endpoints required to play music. For example, You can connect the Hifi server to [Feishin](https://github.com/jeffvli/feishin) to observe how it works in practice.
 
 <br>
 
