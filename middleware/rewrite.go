@@ -270,9 +270,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			})
 		}
 
-		w.Header().Set("Cache-Control", "public, max-age=86400")
-		w.Header().Set("Content-Type", "application/json")
-
 		json.NewEncoder(w).Encode(sub)
 
 	// -------------------- Stream --------------------
