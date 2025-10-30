@@ -35,9 +35,14 @@ type TidalSearchResponse struct {
 }
 
 type TidalArtistResponse struct {
-	ArtistID       int    `json:"artistId"`
-	Name           string `json:"artist"`
-	ProfilePicture string `json:"profilePicture"`
+	Limit              int `json:"limit"`
+	Offset             int `json:"offset"`
+	TotalNumberOfItems int `json:"totalNumberOfItems"`
+	Items              []struct {
+		ID      int    `json:"id"`
+		Name    string `json:"name"`
+		Picture string `json:"picture"`
+	} `json:"items"`
 }
 
 // Subsonic Response Format

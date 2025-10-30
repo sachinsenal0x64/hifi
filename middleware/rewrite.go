@@ -24,12 +24,14 @@ var (
 	playback    types.PlaybackInfo
 	manifest    types.ManifestData
 	tidalSearch types.TidalSearchResponse
+	tidalArtist types.TidalArtistResponse
+	query       = make(map[string]string)
 )
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case rest.Search3View():
-		query := r.URL.Query().Get("query")
+		query["query"] = r.URL.Query().Get("query")
 
 		// Tidal search URL
 		tidalURL := &url.URL{
@@ -38,7 +40,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			Path:   "/v1/search/tracks",
 		}
 		q := tidalURL.Query()
-		q.Set("query", query)
+		q.Set("query", query["query"])
 		q.Set("limit", "1500")
 		q.Set("offset", "0")
 		q.Set("countryCode", "US")
@@ -173,29 +175,41 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 	case rest.GetArtistsView():
 
-		query := r.URL.Query().Get("query")
-
 		// Tidal search URL
 		tidalURL := &url.URL{
 			Scheme: config.Scheme,
 			Host:   config.TidalHost,
-			Path:   "/v1/search/tracks",
+			Path:   "/v1/search/artists",
 		}
 		q := tidalURL.Query()
-		q.Set("query", query)
+		q.Set("query", query["query"])
 		q.Set("limit", "1500")
 		q.Set("offset", "0")
 		q.Set("countryCode", "US")
 		tidalURL.RawQuery = q.Encode()
 
-		songMap := []types.TidalArtistResponse{
-			{ArtistID: 1, Name: "Nirvana", ProfilePicture: "cover1.jpg"},
-			{ArtistID: 2, Name: "A Radiohead", ProfilePicture: "cover2.jpg"},
-			{ArtistID: 2, Name: "jack", ProfilePicture: "cover1.jpg"}, // duplicate test
-			{ArtistID: 4, Name: "Swift", ProfilePicture: "0af461b8/96b3/4711/a27b/1cb765263111"},
-			{ArtistID: 5, Name: "Coldplay", ProfilePicture: "cover3.jpg"},
-			{ArtistID: 6, Name: "The Beatles", ProfilePicture: "cover4.jpg"},
-			{ArtistID: 7, Name: "An Endless Sporadic", ProfilePicture: "cover5.jpg"},
+		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
+		req.Header.Set("Authorization", "Bearer "+TidalAuth())
+
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("tidal error: %v", err), http.StatusBadGateway)
+			return
+		}
+		defer resp.Body.Close()
+
+		body, err := io.ReadAll(resp.Body)
+
+		fmt.Println("Tidal response:", string(body))
+
+		if err != nil {
+			http.Error(w, "failed to read Tidal response", http.StatusInternalServerError)
+			return
+		}
+
+		if err := json.Unmarshal(body, &tidalArtist); err != nil {
+			http.Error(w, fmt.Sprintf("parse error: %v", err), http.StatusInternalServerError)
+			return
 		}
 
 		sub := types.MetaBanner()
@@ -215,13 +229,13 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		artistMap := make(map[string]types.SubsonicArtist)
-		for _, song := range songMap {
-			idStr := fmt.Sprintf("%d", song.ArtistID)
+		for _, song := range tidalArtist.Items {
+			idStr := fmt.Sprintf("%d", song.ID)
 			if _, exists := artistMap[idStr]; !exists {
 				artistMap[idStr] = types.SubsonicArtist{
 					ID:       idStr,
 					Name:     song.Name,
-					CoverArt: song.ProfilePicture,
+					CoverArt: song.Picture,
 				}
 			}
 		}
