@@ -20,14 +20,18 @@ import (
 // -------------------- REWRITE --------------------
 
 var (
-	songMap     = make(map[string]types.SubsonicSong)
-	coverMap    = make(map[string]string)
+	query    = make(map[string]string)
+	songMap  = make(map[string]types.SubsonicSong)
+	coverMap = make(map[string]string)
+
 	playback    types.PlaybackInfo
 	manifest    types.ManifestData
 	tidalSearch types.TidalSearchResponse
 	tidalArtist types.TidalArtistResponse
-	query       = make(map[string]string)
-	queryMu     sync.RWMutex
+
+	queryMu sync.RWMutex
+	songMu  sync.RWMutex
+	coverMu sync.RWMutex
 )
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
@@ -99,10 +103,13 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 			albumID := fmt.Sprint(item.Album.ID)
 			songID := fmt.Sprint(item.ID)
+
 			coverUUID := item.Album.Cover
 
-			coverMap[albumID] = coverUUID // album
-			coverMap[songID] = coverUUID  // song
+			coverMu.Lock()
+			coverMap[albumID] = coverUUID
+			coverMap[songID] = coverUUID
+			coverMu.Unlock()
 
 			// Artist
 			if !artistMap[item.Artist.ID] {
@@ -142,7 +149,10 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			}
 
 			sub.Subsonic.SearchResult3.Song = append(sub.Subsonic.SearchResult3.Song, song)
-			songMap[song.ID] = song
+
+			songMu.Lock()
+			songMap[songID] = song
+			songMu.Unlock()
 
 		}
 
@@ -156,8 +166,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		id := r.URL.Query().Get("id")
 		size := r.URL.Query().Get("size")
-
-		uuid := id
 
 		sizeMapping := map[int]int{
 			100: 160,
@@ -174,7 +182,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			"%s://%s/images/%s/%dx%d.jpg",
 			config.Scheme,
 			config.TidalStaticHost,
-			FormatCoverID(uuid),
+			FormatCoverID(id),
 			mappedSize,
 			mappedSize,
 		)
@@ -186,7 +194,9 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	case rest.GetSong():
 		id := r.URL.Query().Get("id")
 
+		songMu.RLock()
 		song := songMap[id]
+		songMu.RUnlock()
 
 		sub := types.MetaBanner()
 		sub.Subsonic.Song = &song
