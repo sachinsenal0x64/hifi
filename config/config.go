@@ -33,7 +33,7 @@ const (
 	TidalStaticHost = "resources.tidal.com"
 
 	// Hifi Server
-	Host = "0.0.0.0"
+	Host = "127.0.0.1"
 	Port = "5000"
 
 	// HTTP methods
