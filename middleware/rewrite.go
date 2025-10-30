@@ -57,11 +57,18 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		req.Header.Set("Authorization", "Bearer "+TidalAuth())
 
 		resp, err := http.DefaultClient.Do(req)
+
 		if err != nil {
 			http.Error(w, fmt.Sprintf("tidal error: %v", err), http.StatusBadGateway)
 			return
 		}
+
 		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusOK {
+			http.Error(w, fmt.Sprintf("Tidal returned %s", resp.Status), resp.StatusCode)
+			return
+		}
 
 		body, err := io.ReadAll(resp.Body)
 		if err != nil {
