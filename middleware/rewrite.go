@@ -13,6 +13,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"unicode"
 )
 
@@ -26,6 +27,7 @@ var (
 	tidalSearch types.TidalSearchResponse
 	tidalArtist types.TidalArtistResponse
 	query       = make(map[string]string)
+	queryMu     sync.RWMutex
 )
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
@@ -37,8 +39,14 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 	case rest.Search3View():
 
 		if search != "" {
+			queryMu.Lock()
 			query[user] = search
+			queryMu.Unlock()
 		}
+
+		queryMu.RLock()
+		qu := query[user]
+		queryMu.RUnlock()
 
 		// Tidal search URL
 		tidalURL := &url.URL{
@@ -47,7 +55,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			Path:   "/v1/search/tracks",
 		}
 		q := tidalURL.Query()
-		q.Set("query", query[user])
+		q.Set("query", qu)
 		q.Set("limit", "1500")
 		q.Set("offset", "0")
 		q.Set("countryCode", "US")
@@ -189,7 +197,11 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 	case rest.GetArtistsView():
 
-		fmt.Println(query)
+		queryMu.RLock()
+		qu := query[user]
+		queryMu.RUnlock()
+
+		fmt.Println(qu)
 
 		// Tidal search URL
 		tidalURL := &url.URL{
@@ -198,7 +210,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			Path:   "/v1/search/artists",
 		}
 		q := tidalURL.Query()
-		q.Set("query", query[user])
+		q.Set("query", qu)
 		q.Set("limit", "1500")
 		q.Set("offset", "0")
 		q.Set("countryCode", "US")
