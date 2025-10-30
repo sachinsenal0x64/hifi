@@ -96,6 +96,7 @@ Soon...
 
 > [!NOTE]  
 > I will only add open-source clients here. There are many other apps compatible with subsonic, so please do your own research.
+> The clients listed below work with HiFi. I have tested them myself. Any other clients that do not work will not be implemented in HiFi.
 
 > [!TIP]  
 > HiFi supports various subsonic clients.

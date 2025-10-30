@@ -180,6 +180,8 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 	case rest.GetArtistsView():
 
+		fmt.Println(query[user])
+
 		// Tidal search URL
 		tidalURL := &url.URL{
 			Scheme: config.Scheme,
