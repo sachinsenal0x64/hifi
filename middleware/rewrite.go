@@ -279,6 +279,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			sub.Subsonic.Album.Album = item.Item.Album.Title
 			sub.Subsonic.Album.Artist = item.Item.Artist.Name
 			sub.Subsonic.Album.CoverArt = item.Item.Album.Cover
+			sub.Subsonic.Album.Year = item.Item.StreamStartDate[0:4]
 
 			sub.Subsonic.Album.Song = append(sub.Subsonic.Album.Song, song)
 
