@@ -35,7 +35,8 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			switch r.URL.Path {
 			case rest.Search3View(), rest.GetArtistsView(),
 				rest.GetCoverArtView(), rest.Stream(),
-				rest.GetSong(), rest.Scrobble():
+				rest.GetSong(), rest.Scrobble(),
+				rest.GetAlbumView():
 				RewriteRequest(w, r)
 				return
 
