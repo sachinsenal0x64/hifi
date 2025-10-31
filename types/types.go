@@ -43,7 +43,10 @@ type TidalAlbumResponse struct {
 	ID       int    `json:"id,omitempty"`
 	Title    string `json:"title,omitempty"`
 	Duration int    `json:"duration,omitempty"`
-	Items    []struct {
+	Artist   struct {
+		ID int `json:"id"`
+	} `json:"artist"`
+	Items []struct {
 		Item struct {
 			ID       int    `json:"id"`
 			Title    string `json:"title"`

@@ -22,7 +22,6 @@ import (
 var (
 	query    = make(map[string]string)
 	songMap  = make(map[string]types.SubsonicSong)
-	albumMap = make(map[string]types.SubsonicAlbum)
 	coverMap = make(map[string]string)
 
 	playback    types.PlaybackInfo
@@ -34,7 +33,6 @@ var (
 	queryMu sync.RWMutex
 	songMu  sync.RWMutex
 	coverMu sync.RWMutex
-	albumMu sync.RWMutex
 )
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
@@ -249,7 +247,11 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		sub := types.MetaBanner()
-		sub.Subsonic.Album = &types.SubsonicAlbum{}
+
+		sub.Subsonic.Album = &types.SubsonicAlbum{
+
+			Duration: tidalAlbum.Duration,
+		}
 
 		for _, item := range tidalAlbum.Items {
 
