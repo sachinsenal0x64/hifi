@@ -264,7 +264,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				Type:     "music",
 				IsVideo:  false,
 				Suffix:   "flac",
-				Year:     item.Item.StreamStartDate,
+				Year:     item.Item.StreamStartDate[0:4],
 				Track:    item.Item.TrackNumber,
 				ArtistID: fmt.Sprint(item.Item.Artist.ID),
 				AlbumID:  fmt.Sprint(item.Item.Album.ID),
