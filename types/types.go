@@ -22,11 +22,12 @@ type ManifestData struct {
 
 type TidalSearchResponse struct {
 	Items []struct {
-		ID       int    `json:"id"`
-		Title    string `json:"title"`
-		Duration int    `json:"duration"`
-		Explicit bool   `json:"explicit"`
-		Artist   struct {
+		ID              int    `json:"id"`
+		Title           string `json:"title"`
+		Duration        int    `json:"duration"`
+		Explicit        bool   `json:"explicit"`
+		StreamStartDate string `json:"streamStartDate,omitempty"`
+		Artist          struct {
 			ID      int    `json:"id,omitempty"`
 			Name    string `json:"name,omitempty"`
 			Picture string `json:"picture,omitempty"`

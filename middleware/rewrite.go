@@ -129,6 +129,8 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 					Name:     item.Album.Title,
 					Artist:   item.Artist.Name,
 					CoverArt: item.Album.Cover,
+					Year:     item.StreamStartDate[0:4],
+					Duration: item.Duration,
 				})
 				albumMap[item.Album.ID] = true
 			}
