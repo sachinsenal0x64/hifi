@@ -110,6 +110,7 @@ type SubsonicArtist struct {
 
 type SubsonicAlbum struct {
 	ID        string         `json:"id"`
+	Album     string         `json:"album,omitempty"`
 	Parent    int            `json:"parent"`
 	Title     string         `json:"title"`
 	Name      string         `json:"name"`
