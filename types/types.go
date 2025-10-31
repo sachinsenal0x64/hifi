@@ -11,6 +11,15 @@ func MetaBanner() SubsonicWrapper {
 }
 
 // -------------------- TRANSFORM --------------------
+
+type PlaybackInfo struct {
+	Manifest string `json:"manifest,omitempty"`
+}
+
+type ManifestData struct {
+	Urls []string `json:"urls,omitempty"`
+}
+
 type TidalSearchResponse struct {
 	Items []struct {
 		ID       int    `json:"id"`
@@ -126,12 +135,4 @@ type SubsonicWrapper struct {
 		Song          *SubsonicSong         `json:"song,omitempty"`
 		Album         *SubsonicAlbum        `json:"album,omitempty"`
 	} `json:"subsonic-response"`
-}
-
-type PlaybackInfo struct {
-	Manifest string `json:"manifest,omitempty"`
-}
-
-type ManifestData struct {
-	Urls []string `json:"urls,omitempty"`
 }
