@@ -55,8 +55,8 @@ type TidalAlbumResponse struct {
 			Explicit        bool   `json:"explicit"`
 			StreamStartDate string `json:"streamStartDate,omitempty"`
 			TrackNumber     int    `json:"trackNumber,omitempty"`
-
-			Artist struct {
+			Cover           string `json:"cover,omitempty"`
+			Artist          struct {
 				ID      int    `json:"id,omitempty"`
 				Name    string `json:"name,omitempty"`
 				Picture string `json:"picture,omitempty"`
