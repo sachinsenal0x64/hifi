@@ -279,6 +279,8 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		}
 
 		sub.Subsonic.Album.ID = id
+		sub.Subsonic.Album.CoverArt = tidalAlbum.Items[0].Item.Album.Cover
+
 		json.NewEncoder(w).Encode(sub)
 
 	// -------------------- getArtists --------------------
