@@ -271,6 +271,8 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			}
 
 			sub.Subsonic.Album.ID = id
+			sub.Subsonic.Album.Parent = item.Item.Artist.ID
+			sub.Subsonic.Album.ArtistID = item.Item.Artist.ID
 			sub.Subsonic.Album.IsDir = true
 			sub.Subsonic.Album.Name = item.Item.Album.Title
 			sub.Subsonic.Album.Artist = item.Item.Artist.Name

@@ -110,7 +110,7 @@ type SubsonicArtist struct {
 
 type SubsonicAlbum struct {
 	ID        string         `json:"id"`
-	Parent    string         `json:"parent"`
+	Parent    int            `json:"parent"`
 	Title     string         `json:"title"`
 	Name      string         `json:"name"`
 	IsDir     bool           `json:"isDir"`
@@ -119,7 +119,7 @@ type SubsonicAlbum struct {
 	Created   string         `json:"created,omitempty"`
 	Duration  int            `json:"duration"`
 	PlayCount int            `json:"playCount,omitempty"`
-	ArtistID  string         `json:"artistId"`
+	ArtistID  int            `json:"artistId"`
 	Artist    string         `json:"artist"`
 	Year      string         `json:"year,omitempty"`
 	Genre     string         `json:"genre,omitempty"`
