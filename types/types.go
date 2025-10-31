@@ -90,7 +90,7 @@ type SubsonicSong struct {
 	CoverArt    string `json:"coverArt"`
 	Type        string `json:"type"`
 	IsVideo     bool   `json:"isVideo"`
-	Parent      string `json:"parent"`
+	Parent      int    `json:"parent"`
 	Year        string `json:"year,omitempty"`
 	Track       int    `json:"track,omitempty"`
 	ContentType string `json:"contentType"`

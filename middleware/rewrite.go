@@ -261,6 +261,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				Album:    item.Item.Album.Title,
 				Artist:   item.Item.Artist.Name,
 				CoverArt: item.Item.Album.Cover,
+				Parent:   item.Item.Artist.ID,
 				Type:     "music",
 				IsVideo:  false,
 				Suffix:   "flac",
