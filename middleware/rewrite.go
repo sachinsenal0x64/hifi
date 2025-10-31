@@ -248,14 +248,11 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		sub := types.MetaBanner()
 
-		sub.Subsonic.Album = &types.SubsonicAlbum{
-
-			Duration: tidalAlbum.Duration,
-		}
+		sub.Subsonic.Album = &types.SubsonicAlbum{}
 
 		for _, item := range tidalAlbum.Items {
 
-			albumID := fmt.Sprint(item.Item.ID)
+			albumSongID := fmt.Sprint(item.Item.ID)
 
 			song := types.SubsonicSong{
 				ID:       fmt.Sprint(item.Item.ID),
@@ -274,7 +271,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			sub.Subsonic.Album.Song = append(sub.Subsonic.Album.Song, song)
 
 			songMu.Lock()
-			songMap[albumID] = song
+			songMap[albumSongID] = song
 			songMu.Unlock()
 
 		}
