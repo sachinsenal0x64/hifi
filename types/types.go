@@ -109,22 +109,23 @@ type SubsonicArtist struct {
 }
 
 type SubsonicAlbum struct {
-	ID        string         `json:"id"`
-	Album     string         `json:"album,omitempty"`
-	Parent    int            `json:"parent"`
-	Title     string         `json:"title"`
-	Name      string         `json:"name"`
-	IsDir     bool           `json:"isDir"`
-	CoverArt  string         `json:"coverArt"`
-	SongCount int            `json:"songCount"`
-	Created   string         `json:"created,omitempty"`
-	Duration  int            `json:"duration"`
-	PlayCount int            `json:"playCount,omitempty"`
-	ArtistID  int            `json:"artistId"`
-	Artist    string         `json:"artist"`
-	Year      string         `json:"year,omitempty"`
-	Genre     string         `json:"genre,omitempty"`
-	Song      []SubsonicSong `json:"song,omitempty"`
+	ID          string         `json:"id"`
+	Album       string         `json:"album,omitempty"`
+	Parent      int            `json:"parent"`
+	Title       string         `json:"title"`
+	Name        string         `json:"name"`
+	IsDir       bool           `json:"isDir"`
+	CoverArt    string         `json:"coverArt"`
+	SongCount   int            `json:"songCount"`
+	Created     string         `json:"created,omitempty"`
+	Duration    int            `json:"duration"`
+	PlayCount   int            `json:"playCount,omitempty"`
+	ArtistID    int            `json:"artistId"`
+	Artist      string         `json:"artist"`
+	Year        string         `json:"year,omitempty"`
+	TrackNumber int            `json:"trackNumber,omitempty"`
+	Genre       string         `json:"genre,omitempty"`
+	Song        []SubsonicSong `json:"song,omitempty"`
 }
 
 type SubsonicSearchResult struct {
