@@ -111,7 +111,6 @@ type SubsonicArtist struct {
 type SubsonicAlbum struct {
 	ID        string         `json:"id"`
 	Parent    string         `json:"parent"`
-	Album     string         `json:"album"`
 	Title     string         `json:"title"`
 	Name      string         `json:"name"`
 	IsDir     bool           `json:"isDir"`

@@ -270,6 +270,12 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				AlbumID:  fmt.Sprint(item.Item.Album.ID),
 			}
 
+			sub.Subsonic.Album.ID = id
+			sub.Subsonic.Album.IsDir = true
+			sub.Subsonic.Album.Name = item.Item.Album.Title
+			sub.Subsonic.Album.Artist = item.Item.Artist.Name
+			sub.Subsonic.Album.CoverArt = item.Item.Album.Cover
+
 			sub.Subsonic.Album.Song = append(sub.Subsonic.Album.Song, song)
 
 			songMu.Lock()
@@ -277,9 +283,6 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			songMu.Unlock()
 
 		}
-
-		sub.Subsonic.Album.ID = id
-		sub.Subsonic.Album.CoverArt = tidalAlbum.Items[0].Item.Album.Cover
 
 		json.NewEncoder(w).Encode(sub)
 
