@@ -11,7 +11,6 @@ func MetaBanner() SubsonicWrapper {
 }
 
 // -------------------- TRANSFORM --------------------
-
 type TidalSearchResponse struct {
 	Items []struct {
 		ID       int    `json:"id"`
