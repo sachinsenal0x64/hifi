@@ -264,6 +264,8 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				Type:     "music",
 				IsVideo:  false,
 				Suffix:   "flac",
+				Year:     item.Item.StreamStartDate,
+				Track:    item.Item.TrackNumber,
 				ArtistID: fmt.Sprint(item.Item.Artist.ID),
 				AlbumID:  fmt.Sprint(item.Item.Album.ID),
 			}
@@ -276,6 +278,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		}
 
+		sub.Subsonic.Album.ID = id
 		json.NewEncoder(w).Encode(sub)
 
 	// -------------------- getArtists --------------------
