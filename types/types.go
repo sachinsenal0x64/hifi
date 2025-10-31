@@ -31,6 +31,29 @@ type TidalSearchResponse struct {
 	} `json:"items"`
 }
 
+type TidalAlbumResponse struct {
+	Items []struct {
+		Item struct {
+			ID       int    `json:"id"`
+			Title    string `json:"title"`
+			Duration int    `json:"duration"`
+			Explicit bool   `json:"explicit"`
+			Artist   struct {
+				ID      int    `json:"id,omitempty"`
+				Name    string `json:"name,omitempty"`
+				Picture string `json:"picture,omitempty"`
+			} `json:"artist"`
+			Album struct {
+				ID           int    `json:"id"`
+				Title        string `json:"title"`
+				Cover        string `json:"cover"`
+				VibrantColor string `json:"vibrantColor"`
+				VideoCover   string `json:"videoCover"`
+			} `json:"album"`
+		} `json:"item"`
+	} `json:"items"`
+}
+
 type TidalArtistResponse struct {
 	Items []struct {
 		ID      int    `json:"id"`
@@ -66,10 +89,14 @@ type SubsonicArtist struct {
 }
 
 type SubsonicAlbum struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Artist   string `json:"artist"`
-	CoverArt string `json:"coverArt"`
+	ID       string         `json:"id"`
+	Name     string         `json:"name"`
+	Artist   string         `json:"artist"`
+	Parent   int            `json:"parent"`
+	Duration int            `json:"duration"`
+	CoverArt string         `json:"coverArt"`
+	IsDir    bool           `json:"isDir"`
+	Song     []SubsonicSong `json:"song,omitempty"`
 }
 
 type SubsonicSearchResult struct {
@@ -98,6 +125,7 @@ type SubsonicWrapper struct {
 		SearchResult3 *SubsonicSearchResult `json:"searchResult3,omitempty"`
 		Artists       *SubsonicArtists      `json:"artists,omitempty"`
 		Song          *SubsonicSong         `json:"song,omitempty"`
+		Album         *SubsonicAlbum        `json:"album,omitempty"`
 	} `json:"subsonic-response"`
 }
 
