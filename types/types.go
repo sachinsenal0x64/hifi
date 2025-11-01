@@ -45,7 +45,6 @@ type TidalAlbumBannerResponse []struct {
 	ID       int    `json:"id,omitempty"`
 	Title    string `json:"title,omitempty"`
 	Duration int    `json:"duration,omitempty"`
-	Cover    string `json:"cover,omitempty"`
 	Artist   struct {
 		ID int `json:"id"`
 	} `json:"artist"`
