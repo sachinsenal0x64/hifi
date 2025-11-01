@@ -213,7 +213,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		json.NewEncoder(w).Encode(sub)
 
-		// -------------------- getAlbumList2 --------------------
+	// -------------------- getAlbumList2 --------------------
 	case rest.GetAlbumList2View():
 		albumMu.RLock()
 		ids := album[user]
@@ -267,8 +267,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		json.NewEncoder(w).Encode(sub)
 
-		// -------------------- getAlbum --------------------
-
+	// -------------------- getAlbum --------------------
 	case rest.GetAlbumView():
 		id := r.URL.Query().Get("id")
 		if id == "" {
