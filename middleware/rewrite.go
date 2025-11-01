@@ -294,20 +294,21 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		for _, item := range tidalAlbum.Items {
 			song := types.SubsonicSong{
-				ID:       fmt.Sprint(item.Item.ID),
-				Duration: item.Item.Duration,
-				Title:    item.Item.Title,
-				Album:    item.Item.Album.Title,
-				Artist:   item.Item.Artist.Name,
-				CoverArt: item.Item.Album.Cover,
-				Parent:   item.Item.Artist.ID,
-				Type:     "music",
-				IsVideo:  false,
-				Suffix:   "flac",
-				Year:     item.Item.StreamStartDate[0:4],
-				Track:    item.Item.TrackNumber,
-				ArtistID: fmt.Sprint(item.Item.Artist.ID),
-				AlbumID:  fmt.Sprint(item.Item.Album.ID),
+				ID:          fmt.Sprint(item.Item.ID),
+				Duration:    item.Item.Duration,
+				Title:       item.Item.Title,
+				Album:       item.Item.Album.Title,
+				Artist:      item.Item.Artist.Name,
+				CoverArt:    item.Item.Album.Cover,
+				Parent:      item.Item.Artist.ID,
+				Type:        "music",
+				IsVideo:     false,
+				ContentType: "audio/flac",
+				Suffix:      "flac",
+				Year:        item.Item.StreamStartDate[0:4],
+				Track:       item.Item.TrackNumber,
+				ArtistID:    fmt.Sprint(item.Item.Artist.ID),
+				AlbumID:     fmt.Sprint(item.Item.Album.ID),
 			}
 
 			albumResp.Parent = item.Item.Artist.ID
