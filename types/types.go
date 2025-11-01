@@ -41,7 +41,7 @@ type TidalSearchResponse struct {
 	} `json:"items"`
 }
 
-type TidalAlbumBannerResponse []struct {
+type TidalAlbumBannerResponse struct {
 	ID       int    `json:"id,omitempty"`
 	Title    string `json:"title,omitempty"`
 	Duration int    `json:"duration,omitempty"`
