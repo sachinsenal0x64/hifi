@@ -33,14 +33,15 @@ type TidalSearchResponse struct {
 			Picture string `json:"picture,omitempty"`
 		} `json:"artist"`
 		Album struct {
-			ID    int    `json:"id,omitempty"`
-			Title string `json:"title,omitempty"`
-			Cover string `json:"cover,omitempty"`
+			ID       int    `json:"id,omitempty"`
+			Title    string `json:"title,omitempty"`
+			Cover    string `json:"cover,omitempty"`
+			Duration int    `json:"duration,omitempty"`
 		} `json:"album"`
 	} `json:"items"`
 }
 
-type TidalAlbumResponse struct {
+type TidalAlbumBannerResponse []struct {
 	ID       int    `json:"id,omitempty"`
 	Title    string `json:"title,omitempty"`
 	Duration int    `json:"duration,omitempty"`
@@ -48,6 +49,9 @@ type TidalAlbumResponse struct {
 	Artist   struct {
 		ID int `json:"id"`
 	} `json:"artist"`
+}
+
+type TidalAlbumResponse struct {
 	Items []struct {
 		Item struct {
 			ID              int    `json:"id"`
@@ -110,23 +114,24 @@ type SubsonicArtist struct {
 }
 
 type SubsonicAlbum struct {
-	ID          string         `json:"id"`
-	Album       string         `json:"album,omitempty"`
-	Parent      int            `json:"parent"`
-	Title       string         `json:"title"`
-	Name        string         `json:"name"`
-	IsDir       bool           `json:"isDir"`
-	CoverArt    string         `json:"coverArt"`
-	SongCount   int            `json:"songCount"`
-	Created     string         `json:"created,omitempty"`
-	Duration    int            `json:"duration"`
-	PlayCount   int            `json:"playCount,omitempty"`
-	ArtistID    int            `json:"artistId"`
-	Artist      string         `json:"artist"`
-	Year        string         `json:"year,omitempty"`
-	TrackNumber int            `json:"trackNumber,omitempty"`
-	Genre       string         `json:"genre,omitempty"`
-	Song        []SubsonicSong `json:"song,omitempty"`
+	ID          string `json:"id"`
+	Album       string `json:"album,omitempty"`
+	Parent      int    `json:"parent"`
+	Title       string `json:"title"`
+	Name        string `json:"name"`
+	IsDir       bool   `json:"isDir"`
+	CoverArt    string `json:"coverArt"`
+	SongCount   int    `json:"songCount"`
+	Created     string `json:"created,omitempty"`
+	Duration    int    `json:"duration"`
+	PlayCount   int    `json:"playCount,omitempty"`
+	ArtistID    int    `json:"artistId"`
+	Artist      string `json:"artist"`
+	Year        string `json:"year,omitempty"`
+	TrackNumber int    `json:"trackNumber,omitempty"`
+	Genre       string `json:"genre,omitempty"`
+
+	Song []SubsonicSong `json:"song,omitempty"`
 }
 
 type SubsonicSearchResult struct {

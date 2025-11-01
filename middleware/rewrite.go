@@ -30,6 +30,7 @@ var (
 	tidalSearch types.TidalSearchResponse
 	tidalArtist types.TidalArtistResponse
 	tidalAlbum  types.TidalAlbumResponse
+	tidalBanner types.TidalAlbumBannerResponse
 
 	queryMu sync.RWMutex
 	songMu  sync.RWMutex
