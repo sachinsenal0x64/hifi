@@ -286,7 +286,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			sub.Subsonic.Album.Artist = item.Item.Artist.Name
 			sub.Subsonic.Album.CoverArt = item.Item.Album.Cover
 			sub.Subsonic.Album.Year = item.Item.StreamStartDate[0:4]
-			sub.Subsonic.Album.SongCount = item.Item.TrackNumber
+			sub.Subsonic.Album.SongCount = len(tidalAlbum.Items)
 
 			sub.Subsonic.Album.Song = append(sub.Subsonic.Album.Song, song)
 
