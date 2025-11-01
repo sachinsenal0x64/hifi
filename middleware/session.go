@@ -36,7 +36,8 @@ func Session(userName, passWord, targetHost string, exclude []string) func(http.
 			case rest.Search3View(), rest.GetArtistsView(),
 				rest.GetCoverArtView(), rest.Stream(),
 				rest.GetSong(), rest.Scrobble(),
-				rest.GetAlbumView():
+				rest.GetAlbumView(), rest.GetAlbumList2View():
+
 				RewriteRequest(w, r)
 				return
 

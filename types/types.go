@@ -149,6 +149,10 @@ type SubsonicArtistIndexItem struct {
 	Artist []SubsonicArtist `json:"artist,omitempty"`
 }
 
+type SubsonicAlbumList struct {
+	Album []SubsonicAlbum `json:"album"`
+}
+
 type SubsonicWrapper struct {
 	Subsonic struct {
 		Status        string                `json:"status"`
@@ -160,5 +164,6 @@ type SubsonicWrapper struct {
 		Artists       *SubsonicArtists      `json:"artists,omitempty"`
 		Song          *SubsonicSong         `json:"song,omitempty"`
 		Album         *SubsonicAlbum        `json:"album,omitempty"`
+		AlbumList2    *SubsonicAlbumList    `json:"albumList2,omitempty"`
 	} `json:"subsonic-response"`
 }

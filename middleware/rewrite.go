@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 	"unicode"
 )
 
@@ -23,18 +24,21 @@ var (
 	query    = make(map[string]string)
 	songMap  = make(map[string]types.SubsonicSong)
 	coverMap = make(map[string]string)
+	album    = make(map[string]string)
 
 	playback types.PlaybackInfo
 	manifest types.ManifestData
 
 	tidalSearch types.TidalSearchResponse
 	tidalArtist types.TidalArtistResponse
-	tidalAlbum  types.TidalAlbumResponse
-	// tidalBanner types.TidalAlbumBannerResponse
 
 	queryMu sync.RWMutex
 	songMu  sync.RWMutex
 	coverMu sync.RWMutex
+	albumMu sync.RWMutex
+
+	userTidalAlbums = make(map[string]types.TidalAlbumResponse)
+	userAlbumMu     sync.RWMutex
 )
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
@@ -209,57 +213,21 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		json.NewEncoder(w).Encode(sub)
 
-	// -------------------- getAlbum --------------------
-
-	case rest.GetAlbumView():
-		id := r.URL.Query().Get("id")
-
-		// Tidal search URL
-		tidalURL := &url.URL{
-			Scheme: config.Scheme,
-			Host:   config.TidalHost,
-			Path:   fmt.Sprintf("/v1/albums/%s/items", id),
-		}
-		q := tidalURL.Query()
-		q.Set("countryCode", "US")
-		q.Set("limit", "100")
-		q.Set("offset", "0")
-		tidalURL.RawQuery = q.Encode()
-
-		fmt.Println(tidalURL)
-
-		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
-		req.Header.Set("Authorization", "Bearer "+TidalAuth())
-
-		resp, err := http.DefaultClient.Do(req)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("tidal error: %v", err), http.StatusBadGateway)
-			return
-		}
-		defer resp.Body.Close()
-
-		body, err := io.ReadAll(resp.Body)
-
-		fmt.Println(string(body))
-
-		if err != nil {
-			http.Error(w, "failed to read Tidal response", http.StatusInternalServerError)
-			return
-		}
-
-		if err := json.Unmarshal(body, &tidalAlbum); err != nil {
-			http.Error(w, fmt.Sprintf("parse error: %v", err), http.StatusInternalServerError)
-			return
-		}
+		// -------------------- getAlbumList2 --------------------
+	case rest.GetAlbumList2View():
+		albumMu.RLock()
+		ids := album[user]
+		albumMu.RUnlock()
 
 		sub := types.MetaBanner()
+		var subsonicAlbum types.SubsonicAlbum
+		subsonicAlbum.ID = ids
+		subsonicAlbum.IsDir = true
+		subsonicAlbum.Created = time.Now().Format(time.RFC3339)
 
-		sub.Subsonic.Album = &types.SubsonicAlbum{}
+		userAlbumData := userTidalAlbums[user]
 
-		for _, item := range tidalAlbum.Items {
-
-			albumSongID := fmt.Sprint(item.Item.ID)
-
+		for _, item := range userAlbumData.Items {
 			song := types.SubsonicSong{
 				ID:       fmt.Sprint(item.Item.ID),
 				Duration: item.Item.Duration,
@@ -277,27 +245,124 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				AlbumID:  fmt.Sprint(item.Item.Album.ID),
 			}
 
-			sub.Subsonic.Album.ID = id
-			sub.Subsonic.Album.Parent = item.Item.Artist.ID
-			sub.Subsonic.Album.ArtistID = item.Item.Artist.ID
-			sub.Subsonic.Album.IsDir = true
-			sub.Subsonic.Album.Name = item.Item.Album.Title
-			sub.Subsonic.Album.Title = item.Item.Album.Title
-			sub.Subsonic.Album.Album = item.Item.Album.Title
-			sub.Subsonic.Album.Artist = item.Item.Artist.Name
-			sub.Subsonic.Album.CoverArt = item.Item.Album.Cover
-			sub.Subsonic.Album.Year = item.Item.StreamStartDate[0:4]
-			sub.Subsonic.Album.SongCount = len(tidalAlbum.Items)
-			sub.Subsonic.Album.Duration += item.Item.Duration
-
-			sub.Subsonic.Album.Song = append(sub.Subsonic.Album.Song, song)
+			subsonicAlbum.Parent = item.Item.Artist.ID
+			subsonicAlbum.ArtistID = item.Item.Artist.ID
+			subsonicAlbum.Name = item.Item.Album.Title
+			subsonicAlbum.Title = item.Item.Album.Title
+			subsonicAlbum.Artist = item.Item.Artist.Name
+			subsonicAlbum.CoverArt = item.Item.Album.Cover
+			subsonicAlbum.Year = item.Item.StreamStartDate[0:4]
+			subsonicAlbum.SongCount = len(userAlbumData.Items)
+			subsonicAlbum.Duration += item.Item.Duration
+			subsonicAlbum.Song = append(subsonicAlbum.Song, song)
 
 			songMu.Lock()
-			songMap[albumSongID] = song
+			songMap[song.ID] = song
 			songMu.Unlock()
-
 		}
 
+		sub.Subsonic.AlbumList2 = &types.SubsonicAlbumList{
+			Album: []types.SubsonicAlbum{subsonicAlbum},
+		}
+
+		json.NewEncoder(w).Encode(sub)
+
+		// -------------------- getAlbum --------------------
+
+	case rest.GetAlbumView():
+		id := r.URL.Query().Get("id")
+		if id == "" {
+			http.Error(w, "missing album id", http.StatusBadRequest)
+			return
+		}
+
+		albumMu.Lock()
+		album[user] = id
+		albumMu.Unlock()
+
+		fmt.Printf("[Get Album Request] User: %s | Album ID: %s\n", user, id)
+
+		// Build Tidal request
+		tidalURL := &url.URL{
+			Scheme: config.Scheme,
+			Host:   config.TidalHost,
+			Path:   fmt.Sprintf("/v1/albums/%s/items", id),
+		}
+		q := tidalURL.Query()
+		q.Set("countryCode", "US")
+		q.Set("limit", "100")
+		q.Set("offset", "0")
+		tidalURL.RawQuery = q.Encode()
+
+		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
+		req.Header.Set("Authorization", "Bearer "+TidalAuth())
+
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("tidal error: %v", err), http.StatusBadGateway)
+			return
+		}
+		defer resp.Body.Close()
+
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			http.Error(w, "failed to read Tidal response", http.StatusInternalServerError)
+			return
+		}
+
+		// Local struct — don't use any global tidalAlbum
+		var tidalAlbum types.TidalAlbumResponse
+		if err := json.Unmarshal(body, &tidalAlbum); err != nil {
+			http.Error(w, fmt.Sprintf("parse error: %v", err), http.StatusInternalServerError)
+			return
+		}
+
+		// ✅ Store album data per user to avoid shared state
+		userAlbumMu.Lock()
+		userTidalAlbums[user] = tidalAlbum
+		userAlbumMu.Unlock()
+
+		// Prepare Subsonic response
+		sub := types.MetaBanner()
+		albumResp := &types.SubsonicAlbum{}
+
+		for _, item := range tidalAlbum.Items {
+			song := types.SubsonicSong{
+				ID:       fmt.Sprint(item.Item.ID),
+				Duration: item.Item.Duration,
+				Title:    item.Item.Title,
+				Album:    item.Item.Album.Title,
+				Artist:   item.Item.Artist.Name,
+				CoverArt: item.Item.Album.Cover,
+				Parent:   item.Item.Artist.ID,
+				Type:     "music",
+				IsVideo:  false,
+				Suffix:   "flac",
+				Year:     item.Item.StreamStartDate[0:4],
+				Track:    item.Item.TrackNumber,
+				ArtistID: fmt.Sprint(item.Item.Artist.ID),
+				AlbumID:  fmt.Sprint(item.Item.Album.ID),
+			}
+
+			albumResp.ID = id
+			albumResp.Parent = item.Item.Artist.ID
+			albumResp.ArtistID = item.Item.Artist.ID
+			albumResp.IsDir = true
+			albumResp.Name = item.Item.Album.Title
+			albumResp.Title = item.Item.Album.Title
+			albumResp.Artist = item.Item.Artist.Name
+			albumResp.CoverArt = item.Item.Album.Cover
+			albumResp.Year = item.Item.StreamStartDate[0:4]
+			albumResp.SongCount = len(tidalAlbum.Items)
+			albumResp.Duration += item.Item.Duration
+			albumResp.Song = append(albumResp.Song, song)
+
+			songMu.Lock()
+			songMap[song.ID] = song
+			songMu.Unlock()
+		}
+
+		sub.Subsonic.Album = albumResp
 		json.NewEncoder(w).Encode(sub)
 
 	// -------------------- getArtists --------------------
