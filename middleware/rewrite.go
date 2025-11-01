@@ -24,8 +24,9 @@ var (
 	songMap  = make(map[string]types.SubsonicSong)
 	coverMap = make(map[string]string)
 
-	playback    types.PlaybackInfo
-	manifest    types.ManifestData
+	playback types.PlaybackInfo
+	manifest types.ManifestData
+
 	tidalSearch types.TidalSearchResponse
 	tidalArtist types.TidalArtistResponse
 	tidalAlbum  types.TidalAlbumResponse
