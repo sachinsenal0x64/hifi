@@ -30,7 +30,7 @@ var (
 	tidalSearch types.TidalSearchResponse
 	tidalArtist types.TidalArtistResponse
 	tidalAlbum  types.TidalAlbumResponse
-	tidalBanner types.TidalAlbumBannerResponse
+	// tidalBanner types.TidalAlbumBannerResponse
 
 	queryMu sync.RWMutex
 	songMu  sync.RWMutex
@@ -136,6 +136,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 					Duration: item.Duration,
 				})
 				albumMap[item.Album.ID] = true
+
 			}
 
 			// Song
@@ -287,6 +288,7 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			sub.Subsonic.Album.CoverArt = item.Item.Album.Cover
 			sub.Subsonic.Album.Year = item.Item.StreamStartDate[0:4]
 			sub.Subsonic.Album.SongCount = len(tidalAlbum.Items)
+			sub.Subsonic.Album.Duration += item.Item.Duration
 
 			sub.Subsonic.Album.Song = append(sub.Subsonic.Album.Song, song)
 
