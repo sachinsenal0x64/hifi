@@ -37,8 +37,8 @@ var (
 	coverMu sync.RWMutex
 	albumMu sync.RWMutex
 
-	userTidalAlbums = make(map[string]types.TidalAlbumResponse)
-	userAlbumMu     sync.RWMutex
+	userAlbumCache = make(map[string]map[string]types.SubsonicAlbum)
+	userAlbumMu    sync.RWMutex
 )
 
 func RewriteRequest(w http.ResponseWriter, r *http.Request) {
@@ -213,56 +213,27 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 
 		json.NewEncoder(w).Encode(sub)
 
-	// -------------------- getAlbumList2 --------------------
+		// -------------------- getAlbumList2 --------------------
+
 	case rest.GetAlbumList2View():
-		albumMu.RLock()
-		ids := album[user]
-		albumMu.RUnlock()
+		userAlbumMu.RLock()
+		albumsMap := userAlbumCache[user]
+		userAlbumMu.RUnlock()
 
-		sub := types.MetaBanner()
-		var subsonicAlbum types.SubsonicAlbum
-		subsonicAlbum.ID = ids
-		subsonicAlbum.IsDir = true
-		subsonicAlbum.Created = time.Now().Format(time.RFC3339)
-
-		userAlbumData := userTidalAlbums[user]
-
-		for _, item := range userAlbumData.Items {
-			song := types.SubsonicSong{
-				ID:       fmt.Sprint(item.Item.ID),
-				Duration: item.Item.Duration,
-				Title:    item.Item.Title,
-				Album:    item.Item.Album.Title,
-				Artist:   item.Item.Artist.Name,
-				CoverArt: item.Item.Album.Cover,
-				Parent:   item.Item.Artist.ID,
-				Type:     "music",
-				IsVideo:  false,
-				Suffix:   "flac",
-				Year:     item.Item.StreamStartDate[0:4],
-				Track:    item.Item.TrackNumber,
-				ArtistID: fmt.Sprint(item.Item.Artist.ID),
-				AlbumID:  fmt.Sprint(item.Item.Album.ID),
-			}
-
-			subsonicAlbum.Parent = item.Item.Artist.ID
-			subsonicAlbum.ArtistID = item.Item.Artist.ID
-			subsonicAlbum.Name = item.Item.Album.Title
-			subsonicAlbum.Title = item.Item.Album.Title
-			subsonicAlbum.Artist = item.Item.Artist.Name
-			subsonicAlbum.CoverArt = item.Item.Album.Cover
-			subsonicAlbum.Year = item.Item.StreamStartDate[0:4]
-			subsonicAlbum.SongCount = len(userAlbumData.Items)
-			subsonicAlbum.Duration += item.Item.Duration
-			subsonicAlbum.Song = append(subsonicAlbum.Song, song)
-
-			songMu.Lock()
-			songMap[song.ID] = song
-			songMu.Unlock()
+		if len(albumsMap) == 0 {
+			http.Error(w, "no cached albums for this user", http.StatusNotFound)
+			return
 		}
 
+		// Collect all user albums into a slice
+		allAlbums := make([]types.SubsonicAlbum, 0, len(albumsMap))
+		for _, alb := range albumsMap {
+			allAlbums = append(allAlbums, alb)
+		}
+
+		sub := types.MetaBanner()
 		sub.Subsonic.AlbumList2 = &types.SubsonicAlbumList{
-			Album: []types.SubsonicAlbum{subsonicAlbum},
+			Album: allAlbums,
 		}
 
 		json.NewEncoder(w).Encode(sub)
@@ -309,21 +280,17 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Local struct — don't use any global tidalAlbum
 		var tidalAlbum types.TidalAlbumResponse
 		if err := json.Unmarshal(body, &tidalAlbum); err != nil {
 			http.Error(w, fmt.Sprintf("parse error: %v", err), http.StatusInternalServerError)
 			return
 		}
 
-		// ✅ Store album data per user to avoid shared state
-		userAlbumMu.Lock()
-		userTidalAlbums[user] = tidalAlbum
-		userAlbumMu.Unlock()
-
-		// Prepare Subsonic response
-		sub := types.MetaBanner()
-		albumResp := &types.SubsonicAlbum{}
+		// Build Subsonic album
+		var albumResp types.SubsonicAlbum
+		albumResp.ID = id
+		albumResp.IsDir = true
+		albumResp.Created = time.Now().Format(time.RFC3339)
 
 		for _, item := range tidalAlbum.Items {
 			song := types.SubsonicSong{
@@ -343,10 +310,8 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 				AlbumID:  fmt.Sprint(item.Item.Album.ID),
 			}
 
-			albumResp.ID = id
 			albumResp.Parent = item.Item.Artist.ID
 			albumResp.ArtistID = item.Item.Artist.ID
-			albumResp.IsDir = true
 			albumResp.Name = item.Item.Album.Title
 			albumResp.Title = item.Item.Album.Title
 			albumResp.Artist = item.Item.Artist.Name
@@ -361,7 +326,15 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 			songMu.Unlock()
 		}
 
-		sub.Subsonic.Album = albumResp
+		userAlbumMu.Lock()
+		if userAlbumCache[user] == nil {
+			userAlbumCache[user] = make(map[string]types.SubsonicAlbum)
+		}
+		userAlbumCache[user][id] = albumResp
+		userAlbumMu.Unlock()
+
+		sub := types.MetaBanner()
+		sub.Subsonic.Album = &albumResp
 		json.NewEncoder(w).Encode(sub)
 
 	// -------------------- getArtists --------------------
