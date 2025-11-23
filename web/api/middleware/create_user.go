@@ -10,6 +10,8 @@ import (
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/alexedwards/argon2id"
 )
 
 func SignupUser(w http.ResponseWriter, r *http.Request) {
@@ -64,6 +66,11 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
 	go func() {
 		defer close(out)
 
+		hash, err := argon2id.CreateHash(newPass, argon2id.DefaultParams)
+		if err != nil {
+			out <- types.CreateResult{Status: 0, Body: nil, Err: err}
+		}
+
 		payload := strings.NewReader(fmt.Sprintf(`{
   "secrets": [
     {
@@ -75,7 +82,7 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
 
     }
   ]
-}`, newUser, newPass))
+}`, newUser, hash))
 
 		req, err := http.NewRequestWithContext(ctx, http.MethodPost, createURL, payload)
 
