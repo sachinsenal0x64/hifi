@@ -25,7 +25,14 @@ var (
 	}
 
 	// ENV
-	Key = os.Getenv("KEY")
+	Salt = os.Getenv("KEY")
+
+	Http = os.Getenv("SCHEME")
+
+	ProxyHost = os.Getenv("SYNC_HOST")
+	ProxyKey  = os.Getenv("SYNC_KEY")
+	AppID     = os.Getenv("APP_ID")
+	ENV       = os.Getenv("ENV")
 
 	ClientID     = os.Getenv("CLIENT_ID")
 	ClientSecret = os.Getenv("CLIENT_SECRET")

@@ -2,9 +2,11 @@ package middleware
 
 import (
 	"encoding/json"
+	"fmt"
 	"hifi/config"
 	"hifi/routes/rest"
 	"hifi/types"
+	"io"
 	"log/slog"
 	"net/http"
 	"net/url"
@@ -61,8 +63,8 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 			// -------------------- SESSION --------------------
 
-			salt := Salt(config.Key) //random string
-			token := Token("Password", salt)
+			salt := Salt(config.Salt)
+			token := Token("password", salt)
 			_ = token
 
 			params := map[string]string{
@@ -96,6 +98,32 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			// r.Host = target.Host
 
 			// Mock Subsonic response for /ping endpoint
+
+			url := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s&tags=hifi", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
+			method := "GET"
+
+			client := &http.Client{}
+			req, err := http.NewRequest(method, url, nil)
+
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			req.Header.Add("Authorization", "Bearer {token}")
+
+			res, err := client.Do(req)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			defer res.Body.Close()
+
+			body, err := io.ReadAll(res.Body)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			fmt.Println(string(body))
 
 			var resp types.SubsonicWrapper
 			resp.Subsonic.Status = "ok"
