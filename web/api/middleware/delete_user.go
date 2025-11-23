@@ -100,7 +100,9 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
 	defer cancel()
 
-	createCh := startDeleteUser(ctx, client, base+"/admin/delete_user_do", req.Username, startLogin(ctx, client, base+"/admin/login_do", config.ProxyKey))
+	deleteURL := base + "/v1/secrets/?app_id=" + config.AppID + "&env=" + config.ENV
+
+	createCh := startDeleteUser(ctx, client, deleteURL, req.Username)
 
 	res := <-createCh
 
@@ -119,22 +121,10 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewEncoder(w).Encode(map[string]string{"message": "User deleted successfully"})
 }
 
-func startDeleteUser(ctx context.Context, client *http.Client, deleteURL, username string, loginCh <-chan types.LoginResult) <-chan types.CreateResult {
+func startDeleteUser(ctx context.Context, client *http.Client, deleteURL, username string) <-chan types.CreateResult {
 	out := make(chan types.CreateResult, 1)
 	go func() {
 		defer close(out)
-
-		select {
-		case lr := <-loginCh:
-			if lr.Err != nil || !lr.OK {
-				out <- types.CreateResult{Err: fmt.Errorf("login failed")}
-				return
-			}
-
-		case <-ctx.Done():
-			out <- types.CreateResult{Status: 0, Body: nil, Err: ctx.Err()}
-			return
-		}
 
 		u, _ := url.Parse(deleteURL)
 		q := u.Query()
