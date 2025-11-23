@@ -104,3 +104,38 @@ func (r *Router) Del(ctx context.Context, key string) (bool, error) {
 
 	return false, nil
 }
+
+// Usage example:
+
+// ctx, store, err := Con()
+// if err != nil {
+// 	slog.Log(context.Background(), slog.LevelError, "Failed to connect to Valkey", "error", err)
+// }
+// defer store.Valkey.Close()
+
+// // SET
+// ok, err := store.Set(ctx, "cloud", "abc123")
+// if err != nil {
+// 	fmt.Println("SET error:", err)
+// }
+// fmt.Println("SET ok:", ok)
+
+// // GET
+// v, err := store.Get(ctx, "cloud")
+// if err != nil {
+// 	fmt.Println("GET error:", err)
+// }
+// fmt.Println("GET cloud:", v)
+
+// // DEL
+// // deleted, err := store.Del(ctx, "cloud")
+// // if err != nil {
+// // 	fmt.Println("DEL error:", err)
+// // }
+// // fmt.Println("DEL cloud:", deleted)
+
+// v3, err := store.Get(ctx, "cloud")
+// if err != nil {
+// 	fmt.Println("GET error:", err)
+// }
+// fmt.Println("GET cloud:", v3)
