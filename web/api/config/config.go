@@ -25,6 +25,8 @@ var (
 	JwtSecret = []byte(os.Getenv("JWT_SECRET"))
 	ProxyHost = os.Getenv("SYNC_HOST")
 	ProxyKey  = os.Getenv("SYNC_KEY")
+	AppID     = os.Getenv("APP_ID")
+	ENV       = os.Getenv("ENV")
 )
 
 const (
