@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log/slog"
 	"net/http"
 	"strings"
 	"time"
@@ -98,16 +97,12 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
 
 		body, _ := io.ReadAll(resp.Body)
 
-		slog.Info(string(body))
-
 		var c types.AppCreate
 
 		if err := json.Unmarshal(body, &c); err != nil {
 			out <- types.CreateResult{Status: resp.StatusCode, Body: body, Err: nil}
 			return
 		}
-
-		fmt.Println("Created user:", c[0].Name)
 
 		out <- types.CreateResult{Status: resp.StatusCode, Body: body, Err: nil}
 	}()
