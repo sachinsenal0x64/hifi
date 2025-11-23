@@ -43,7 +43,7 @@ func SignupUser(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
 	defer cancel()
 
-	createCh := startCreateUser(ctx, client, base+"/v1/apps/secrets", req.Username, req.Password, startLogin(ctx, client, base+"/admin/login_do", config.ProxyKey))
+	createCh := startCreateUser(ctx, client, base+"/v1/apps/secrets", req.Username, req.Password)
 
 	res := <-createCh
 
@@ -62,27 +62,55 @@ func SignupUser(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewEncoder(w).Encode(map[string]string{"message": "User created successfully"})
 }
 
-func startCreateUser(ctx context.Context, client *http.Client, createURL, newUser, newPass string, loginCh <-chan types.LoginResult) <-chan types.CreateResult {
+func startCreateUser(ctx context.Context, client *http.Client, createURL, newUser, newPass string) <-chan types.CreateResult {
 	out := make(chan types.CreateResult, 1)
 	go func() {
 		defer close(out)
 
-		select {
-		case lr := <-loginCh:
-			if lr.Err != nil || !lr.OK {
-				out <- types.CreateResult{Err: fmt.Errorf("login failed")}
-				return
-			}
+		base := fmt.Sprintf("%s://%s", config.HifiScheme, config.ProxyHost)
 
-		case <-ctx.Done():
-			out <- types.CreateResult{Status: 0, Body: nil, Err: ctx.Err()}
+		form1 := url.Values{}
+		form1.Set("name", newUser)
+		form1.Set("scope[type]", "account")
+
+		check, err := http.NewRequestWithContext(
+			ctx, http.MethodGet,
+			base+"/v1/apps/secrets/find",
+			strings.NewReader(form1.Encode()),
+		)
+
+		if err != nil {
+			out <- types.CreateResult{Status: 0, Body: nil, Err: err}
+			return
+		}
+
+		checkResp, err := client.Do(check)
+		if err != nil {
+			out <- types.CreateResult{Status: 0, Body: nil, Err: err}
+			return
+		}
+
+		defer checkResp.Body.Close()
+
+		checkBody, _ := io.ReadAll(checkResp.Body)
+
+		var f types.AppFind
+
+		if err := json.Unmarshal(checkBody, &f); err != nil {
+			out <- types.CreateResult{Status: checkResp.StatusCode, Body: checkBody, Err: err}
+			return
+		}
+
+		if f.Name == newUser {
+			out <- types.CreateResult{Status: checkResp.StatusCode, Body: checkBody,
+				Err: fmt.Errorf("user already exists")}
 			return
 		}
 
 		form := url.Values{}
-		form.Set("username", newUser)
-		form.Set("password_one", newPass)
-		form.Set("password_two", newPass)
+		form.Set("name", newUser)
+		form.Set("payload", newPass)
+		form.Set("scope[type]", "account")
 
 		req, err := http.NewRequestWithContext(ctx, http.MethodPost, createURL, strings.NewReader(form.Encode()))
 
@@ -90,7 +118,6 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
 			out <- types.CreateResult{Status: 0, Body: nil, Err: err}
 			return
 		}
-		req.Header.Set(config.HeaderContentType, config.ContentTypeForm)
 
 		resp, err := client.Do(req)
 		if err != nil {
