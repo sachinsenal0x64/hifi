@@ -18,11 +18,12 @@ var (
 	Port = []string{"5002", "5006"}
 
 	// Hifi Scheme
-	HifiScheme = "http"
+	HifiScheme = os.Getenv("HIFI_SCHEME")
+	HifiProxy  = os.Getenv("HIFI_PROXY")
 
 	// ENV
-	Scheme    = os.Getenv("SCHEME")
 	JwtSecret = []byte(os.Getenv("JWT_SECRET"))
+	Scheme    = os.Getenv("SCHEME")
 	ProxyHost = os.Getenv("SYNC_HOST")
 	ProxyKey  = os.Getenv("SYNC_KEY")
 	AppID     = os.Getenv("APP_ID")

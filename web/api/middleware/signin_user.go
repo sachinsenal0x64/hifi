@@ -40,7 +40,7 @@ func SigninUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	base := fmt.Sprintf("%s://%s", config.Scheme, config.ProxyHost)
+	base := fmt.Sprintf("%s://%s", config.HifiScheme, config.HifiProxy)
 
 	jar, _ := cookiejar.New(nil)
 	client := &http.Client{Jar: jar}

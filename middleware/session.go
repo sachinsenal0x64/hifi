@@ -100,6 +100,9 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			// Mock Subsonic response for /ping endpoint
 
 			url := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s&tags=hifi", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
+
+			slog.Info(url)
+
 			method := "GET"
 
 			client := &http.Client{}
