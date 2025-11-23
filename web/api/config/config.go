@@ -24,6 +24,7 @@ var (
 	// ENV
 	JwtSecret = []byte(os.Getenv("JWT_SECRET"))
 	Scheme    = os.Getenv("SCHEME")
+	HifiHost  = os.Getenv("HIFI_HOST")
 	ProxyHost = os.Getenv("SYNC_HOST")
 	ProxyKey  = os.Getenv("SYNC_KEY")
 	AppID     = os.Getenv("APP_ID")
