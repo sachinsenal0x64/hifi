@@ -7,8 +7,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
-	"net/http/cookiejar"
 	"net/url"
 	"strings"
 	"time"
@@ -37,13 +37,12 @@ func SignupUser(w http.ResponseWriter, r *http.Request) {
 
 	base := fmt.Sprintf("%s://%s", config.Scheme, config.ProxyHost)
 
-	jar, _ := cookiejar.New(nil)
-	client := &http.Client{Jar: jar}
+	slog.Info(base)
 
 	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
 	defer cancel()
 
-	createCh := startCreateUser(ctx, client, base+"/v1/apps/secrets", req.Username, req.Password)
+	createCh := startCreateUser(ctx, &http.Client{}, base+"/v1/apps/secrets", req.Username, req.Password)
 
 	res := <-createCh
 
@@ -127,6 +126,15 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
 		defer resp.Body.Close()
 
 		body, _ := io.ReadAll(resp.Body)
+
+		var c types.AppCreate
+
+		if err := json.Unmarshal(checkBody, &c); err != nil {
+			out <- types.CreateResult{Status: checkResp.StatusCode, Body: checkBody, Err: err}
+			return
+		}
+
+		fmt.Println(c.Name)
 
 		out <- types.CreateResult{Status: resp.StatusCode, Body: body, Err: nil}
 	}()

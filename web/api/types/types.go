@@ -8,6 +8,10 @@ type AppFind struct {
 	Name string `json:"name"`
 }
 
+type AppCreate struct {
+	Name string `json:"name"`
+}
+
 type DeleteRequest struct {
 	Username string `json:"username"`
 }
