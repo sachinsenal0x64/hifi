@@ -22,7 +22,7 @@ type Router struct {
 	MemMu  sync.Mutex
 }
 
-type AppGet struct {
+type AppGet []struct {
 	Name     string `json:"key"`
 	Password string `json:"value"`
 }

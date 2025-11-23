@@ -99,7 +99,7 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 			// Mock Subsonic response for /ping endpoint
 
-			url := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s&tags=hifi", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
+			url := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
 
 			slog.Info(url)
 
@@ -127,11 +127,15 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				fmt.Println(err)
 				return
 			}
-			var g types.AppGet
 
-			if err := json.Unmarshal(body, &g); err != nil {
-				return
-			}
+			fmt.Println(string(body))
+
+			// var g types.AppGet
+
+			// if err := json.Unmarshal(body, &g); err != nil {
+			// 	slog.Error("error unmarshalling response", "error", err)
+			// 	return
+			// }
 
 			var resp types.SubsonicWrapper
 			resp.Subsonic.Status = "ok"

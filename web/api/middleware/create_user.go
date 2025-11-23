@@ -77,7 +77,6 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
       "key": %q,
       "value": %q,
       "comment": "Hifi DB",
-      "tags": ["hifi"],
 	  "path": "/hifi_users"
 
     }
