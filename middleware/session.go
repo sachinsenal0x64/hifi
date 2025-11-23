@@ -11,6 +11,8 @@ import (
 	"net/http"
 	"net/url"
 	"slices"
+
+	"github.com/alexedwards/argon2id"
 )
 
 // -------------------- SESSION --------------------
@@ -134,6 +136,28 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				slog.Error("error unmarshalling response", "error", err)
 				return
 			}
+
+			match, err := argon2id.ComparePasswordAndHash(passWord, g[0].Password)
+			if err != nil {
+				var resp types.SubsonicWrapper
+				resp.Subsonic.Status = "failed"
+				resp.Subsonic.Version = "2.0.0"
+				resp.Subsonic.Type = "hifi"
+				resp.Subsonic.ServerVersion = "2.0.0"
+				resp.Subsonic.OpenSubsonic = true
+
+				w.Header().Set(config.HeaderContentType, config.ContentTypeJSON)
+				w.WriteHeader(http.StatusOK)
+
+				b, err := json.Marshal(resp)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return
+				}
+				_, _ = w.Write(b)
+			}
+
+			slog.Info(fmt.Sprintf("Match: %v", match))
 
 			var resp types.SubsonicWrapper
 			resp.Subsonic.Status = "ok"
