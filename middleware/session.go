@@ -65,9 +65,14 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 			// -------------------- SESSION --------------------
 
-			// salt := Salt(config.Salt)
-			// token := Token(passWord, salt)
-			// _ = token
+			salt := Salt(t)
+			token := Token(s, salt)
+
+			slog.Info("session details",
+				"user", userName,
+				"salt", salt,
+				"token", token,
+			)
 
 			params := map[string]string{
 				"u": userName,
