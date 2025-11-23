@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log/slog"
 	"net/http"
 	"net/url"
 	"strings"
@@ -36,8 +35,6 @@ func SignupUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	base := fmt.Sprintf("%s://%s", config.Scheme, config.ProxyHost)
-
-	slog.Info(base)
 
 	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
 	defer cancel()
@@ -83,6 +80,8 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
 			return
 		}
 
+		check.SetBasicAuth(config.ProxyKey, "")
+
 		checkResp, err := client.Do(check)
 		if err != nil {
 			out <- types.CreateResult{Status: 0, Body: nil, Err: err}
@@ -117,6 +116,8 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
 			out <- types.CreateResult{Status: 0, Body: nil, Err: err}
 			return
 		}
+
+		req.SetBasicAuth(config.ProxyKey, "")
 
 		resp, err := client.Do(req)
 		if err != nil {
