@@ -128,14 +128,12 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				return
 			}
 
-			fmt.Println(string(body))
+			var g types.AppGet
 
-			// var g types.AppGet
-
-			// if err := json.Unmarshal(body, &g); err != nil {
-			// 	slog.Error("error unmarshalling response", "error", err)
-			// 	return
-			// }
+			if err := json.Unmarshal(body, &g); err != nil {
+				slog.Error("error unmarshalling response", "error", err)
+				return
+			}
 
 			var resp types.SubsonicWrapper
 			resp.Subsonic.Status = "ok"
