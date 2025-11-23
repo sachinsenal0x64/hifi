@@ -25,7 +25,7 @@ var (
 	}
 
 	// ENV
-	Salt      = os.Getenv("KEY")
+	// Salt      = os.Getenv("KEY")
 	Http      = os.Getenv("SCHEME")
 	ProxyHost = os.Getenv("SYNC_HOST")
 	ProxyKey  = os.Getenv("SYNC_KEY")
