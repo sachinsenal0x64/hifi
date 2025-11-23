@@ -4,11 +4,6 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-type AppGet struct {
-	Name     string `json:"key"`
-	Password string `json:"value"`
-}
-
 type AppCreate []struct {
 	Name     string `json:"key"`
 	Password string `json:"value"`

@@ -127,13 +127,17 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				fmt.Println(err)
 				return
 			}
-			fmt.Println(string(body))
+			var g types.AppGet
+
+			if err := json.Unmarshal(body, &g); err != nil {
+				return
+			}
 
 			var resp types.SubsonicWrapper
 			resp.Subsonic.Status = "ok"
-			resp.Subsonic.Version = "1.15.0"
+			resp.Subsonic.Version = "2.0.0"
 			resp.Subsonic.Type = "hifi"
-			resp.Subsonic.ServerVersion = "0.19.0"
+			resp.Subsonic.ServerVersion = "2.0.0"
 			resp.Subsonic.OpenSubsonic = true
 
 			w.Header().Set(config.HeaderContentType, config.ContentTypeJSON)
@@ -147,7 +151,7 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			_, _ = w.Write(b)
 
 			/* Forward the request to the
-			subsonic server -> (gonic) */
+			subsonic server -> */
 
 			// proxy.ServeHTTP(w, r)
 		})

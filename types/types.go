@@ -22,6 +22,11 @@ type Router struct {
 	MemMu  sync.Mutex
 }
 
+type AppGet struct {
+	Name     string `json:"key"`
+	Password string `json:"value"`
+}
+
 // -------------------- TRANSFORM --------------------
 
 // Subsonic User
