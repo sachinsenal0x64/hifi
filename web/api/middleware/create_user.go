@@ -35,7 +35,7 @@ func SignupUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	base := fmt.Sprintf("%s://%s", config.HifiScheme, config.ProxyHost)
+	base := fmt.Sprintf("%s://%s", config.Scheme, config.ProxyHost)
 
 	jar, _ := cookiejar.New(nil)
 	client := &http.Client{Jar: jar}
@@ -67,7 +67,7 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
 	go func() {
 		defer close(out)
 
-		base := fmt.Sprintf("%s://%s", config.HifiScheme, config.ProxyHost)
+		base := fmt.Sprintf("%s://%s", config.Scheme, config.ProxyHost)
 
 		form1 := url.Values{}
 		form1.Set("name", newUser)
