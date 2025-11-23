@@ -65,9 +65,9 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 			// -------------------- SESSION --------------------
 
-			salt := Salt(config.Salt)
-			token := Token(passWord, salt)
-			_ = token
+			// salt := Salt(config.Salt)
+			// token := Token(passWord, salt)
+			// _ = token
 
 			params := map[string]string{
 				"u": userName,
@@ -138,7 +138,6 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			}
 
 			match, err := argon2id.ComparePasswordAndHash(passWord, g[0].Password)
-
 			if err != nil {
 				writeSubsonic(w, "failed", http.StatusBadRequest)
 			}
