@@ -65,10 +65,9 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 			// -------------------- SESSION --------------------
 
-			salt := Salt(s)
-			token := Token("pol123Ss@", salt)
-
-			fmt.Println(token)
+			// salt := Salt(config.Salt)
+			// token := Token(passWord, salt)
+			// _ = token
 
 			params := map[string]string{
 				"u": userName,
