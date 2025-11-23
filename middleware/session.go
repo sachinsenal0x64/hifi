@@ -139,42 +139,14 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 			match, err := argon2id.ComparePasswordAndHash(passWord, g[0].Password)
 			if err != nil {
-				var resp types.SubsonicWrapper
-				resp.Subsonic.Status = "failed"
-				resp.Subsonic.Version = "2.0.0"
-				resp.Subsonic.Type = "hifi"
-				resp.Subsonic.ServerVersion = "2.0.0"
-				resp.Subsonic.OpenSubsonic = true
-
-				w.Header().Set(config.HeaderContentType, config.ContentTypeJSON)
-				w.WriteHeader(http.StatusOK)
-
-				b, err := json.Marshal(resp)
-				if err != nil {
-					http.Error(w, err.Error(), http.StatusInternalServerError)
-					return
-				}
-				_, _ = w.Write(b)
+				writeSubsonic(w, "failed", http.StatusBadRequest)
 			}
 
-			slog.Info(fmt.Sprintf("Match: %v", match))
-
-			var resp types.SubsonicWrapper
-			resp.Subsonic.Status = "ok"
-			resp.Subsonic.Version = "2.0.0"
-			resp.Subsonic.Type = "hifi"
-			resp.Subsonic.ServerVersion = "2.0.0"
-			resp.Subsonic.OpenSubsonic = true
-
-			w.Header().Set(config.HeaderContentType, config.ContentTypeJSON)
-			w.WriteHeader(http.StatusOK)
-
-			b, err := json.Marshal(resp)
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
-				return
+			if !match {
+				writeSubsonic(w, "failed", http.StatusBadRequest)
+			} else {
+				writeSubsonic(w, "ok", http.StatusOK)
 			}
-			_, _ = w.Write(b)
 
 			/* Forward the request to the
 			subsonic server -> */
