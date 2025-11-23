@@ -100,7 +100,7 @@ func startCreateUser(ctx context.Context, client *http.Client, createURL, newUse
 		}
 
 		if f.Name == newUser {
-			out <- types.CreateResult{Status: checkResp.StatusCode, Body: checkBody,
+			out <- types.CreateResult{Status: http.StatusBadRequest, Body: checkBody,
 				Err: fmt.Errorf("user already exists")}
 			return
 		}
