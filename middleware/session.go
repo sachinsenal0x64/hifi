@@ -61,8 +61,9 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 			// -------------------- SESSION --------------------
 
-			// salt := Salt("Key") //random string
-			// token := Token("Password", salt)
+			salt := Salt(config.Key) //random string
+			token := Token("Password", salt)
+			_ = token
 
 			params := map[string]string{
 				"u": userName,

@@ -25,6 +25,7 @@ var (
 	}
 
 	// ENV
+	Key = os.Getenv("KEY")
 
 	ClientID     = os.Getenv("CLIENT_ID")
 	ClientSecret = os.Getenv("CLIENT_SECRET")
