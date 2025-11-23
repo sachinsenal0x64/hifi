@@ -112,7 +112,8 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				fmt.Println(err)
 				return
 			}
-			req.Header.Add("Authorization", "Bearer {token}")
+			req.Header.Add("Authorization", "Bearer User "+config.ProxyKey)
+			req.Header.Add(config.HeaderContentType, config.ContentTypeJSON)
 
 			res, err := client.Do(req)
 			if err != nil {
