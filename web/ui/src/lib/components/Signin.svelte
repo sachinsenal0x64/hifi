@@ -43,9 +43,7 @@
 </script>
 
 <div class="flex flex-col gap-6">
-	<Card.Root
-		class="mx-auto max-w-md border border-zinc-700 bg-transparent  xl:w-[350px]"
-	>
+	<Card.Root class="mx-auto max-w-md border border-zinc-700 bg-transparent  xl:w-[350px]">
 		<Card.Header class="text-center">
 			<Empty.Header>
 				<Empty.Media variant="icon">
@@ -66,6 +64,7 @@
 										class="border-zinc-700 text-white"
 										placeholder="Joe Doe"
 										type="text"
+										autocomplete="on"
 										{...props}
 										bind:value={$formData.username}
 									/>
