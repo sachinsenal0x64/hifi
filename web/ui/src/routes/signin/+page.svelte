@@ -33,7 +33,7 @@
 								</TabsTrigger>
 							</TabsList>
 							<TabsContent value="tab-1">
-								<div class="mt-5 flex w-full max-w-sm flex-col gap-6">
+								<div class="mt-10 flex w-full max-w-sm flex-col gap-6">
 									<LoginForm />
 								</div>
 							</TabsContent>
