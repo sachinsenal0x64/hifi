@@ -17,7 +17,7 @@
 		{ label: 'Hostname', value: user?.host },
 		{ label: 'Username', value: user?.username },
 		{ label: 'Password', value: user?.password },
-		{ label: 'Legacy Password', value: 'True' }
+		{ label: 'Legacy Password', value: 'Enabled' }
 	];
 
 	const fields = baseFields.map((f, i) => ({
