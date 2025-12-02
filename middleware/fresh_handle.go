@@ -82,6 +82,7 @@ func getFreshCachedItems() []types.ExploreItem {
 	freshCacheMu.RLock()
 	valid := freshCache != nil && now.Before(freshCacheExp)
 	items := freshCache
+
 	freshCacheMu.RUnlock()
 
 	if valid {

@@ -30,6 +30,7 @@ func GetTopItems() []types.ExploreItem {
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
+
 	if err != nil {
 		slog.Error("failed to read Tidal response (top)", "error", err)
 		return nil
@@ -40,5 +41,5 @@ func GetTopItems() []types.ExploreItem {
 		return nil
 	}
 
-	return extractItems(&tidalNew, 2)
+	return extractItems(&tidalNew, 3)
 }
