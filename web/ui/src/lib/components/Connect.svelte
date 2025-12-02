@@ -16,7 +16,8 @@
 	const baseFields = [
 		{ label: 'Hostname', value: user?.host },
 		{ label: 'Username', value: user?.username },
-		{ label: 'Password', value: user?.password }
+		{ label: 'Password', value: user?.password },
+		{ label: 'Legacy Password', value: 'True' }
 	];
 
 	const fields = baseFields.map((f, i) => ({
