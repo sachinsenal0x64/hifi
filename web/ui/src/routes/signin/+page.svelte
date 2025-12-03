@@ -6,15 +6,17 @@
 	let currentTab = 'tab-0';
 </script>
 
-<div class="flex min-h-screen items-start justify-center overflow-hidden bg-black">
-	<div class="fixed mx-auto w-full max-w-7xl py-4">
+<div
+	class="flex min-h-screen items-start justify-center overflow-x-hidden bg-black md:overflow-hidden"
+>
+	<div class="mx-auto w-full max-w-7xl py-4 md:fixed">
 		<div class="px-4 py-4">
 			<Header />
 		</div>
 
 		<Tabs
 			value={currentTab}
-			class="flex max-h-[calc(100dvh-3rem)]  w-full flex-col gap-8 md:flex-row lg:max-h-[calc(95dvh-3rem)]"
+			class="flex w-full flex-col gap-8 md:max-h-[calc(100dvh-3rem)] md:flex-row"
 		>
 			<div class="grid w-full grid-cols-1 gap-4 overflow-y-auto px-10 pb-20 md:grid-cols-2">
 				<div
