@@ -25,7 +25,7 @@
 
 		<Tabs
 			value={currentTab}
-			class="flex max-h-[calc(85dvh-3rem)] min-h-[600px]  w-full flex-col gap-8 md:max-h-[calc(100dvh-3rem)] md:flex-row"
+			class="flex max-h-[calc(85dvh-3rem)] w-full flex-col gap-8 md:max-h-[calc(100dvh-3rem)] md:flex-row"
 		>
 			<div class="grid w-full grid-cols-1 gap-4 overflow-y-auto px-10 pb-20 md:grid-cols-2">
 				<div
