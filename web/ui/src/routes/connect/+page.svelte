@@ -46,23 +46,6 @@
 				<div
 					class="border-border relative col-span-1 min-w-[300px] rounded-lg border bg-zinc-900 p-8 md:col-span-2 md:min-h-[480px] md:overflow-y-hidden"
 				>
-					<TabsContent value="tab-6" class="min-h-[480px] md:h-[600px] xl:h-[600px]">
-						<Tabs value="tab-6" class=" items-center">
-							<TabsList
-								class="border-border h-auto gap-2 rounded-full border-b bg-zinc-800 px-10 py-2 text-zinc-400"
-							>
-								<TabsTrigger
-									value="tab-6"
-									class="relative cursor-pointer after:absolute  after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5  hover:text-white hover:after:bg-white data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:after:bg-white data-[state=active]:hover:text-white"
-								>
-									Account
-								</TabsTrigger>
-							</TabsList>
-							<TabsContent value="tab-6">
-								<Deactivate username={data.user?.username} />
-							</TabsContent>
-						</Tabs>
-					</TabsContent>
 					<TabsContent value="tab-5" class="h-auto min-h-[300px]">
 						<Tabs value="tab-4" class=" items-center">
 							<TabsList

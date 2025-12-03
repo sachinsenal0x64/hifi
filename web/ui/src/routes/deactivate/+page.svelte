@@ -95,23 +95,6 @@
 							</TabsContent>
 						</Tabs>
 					</TabsContent>
-
-					<TabsContent value="tab-4" class="h-auto min-h-[300px]">
-						<Tabs value="tab-4" class=" items-center">
-							<TabsList
-								class="border-border h-auto gap-2 rounded-full border-b bg-zinc-800 px-10 py-2 text-zinc-400"
-							>
-								<TabsTrigger
-									value="tab-4"
-									class="relative cursor-pointer after:absolute  after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5  hover:text-white hover:after:bg-white data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:after:bg-white data-[state=active]:hover:text-white"
-								>
-									Profile
-								</TabsTrigger>
-							</TabsList>
-
-							<TabsContent value="tab-4"></TabsContent>
-						</Tabs>
-					</TabsContent>
 				</div>
 			</div>
 		</Tabs>
