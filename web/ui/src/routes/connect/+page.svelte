@@ -11,12 +11,17 @@
 	const { data } = $props();
 </script>
 
-<div class="flex min-h-screen items-start justify-center overflow-hidden bg-black">
-	<div class="fixed mx-auto w-full max-w-7xl py-4">
+<div
+	class="flex min-h-screen items-start justify-center overflow-x-hidden bg-black md:overflow-hidden"
+>
+	<div class="mx-auto w-full max-w-7xl py-4 md:fixed">
 		<div class="px-4 py-4">
 			<Header />
 		</div>
-		<Tabs value={currentTab} class="flex max-h-[calc(100dvh-3rem)] w-full flex-col md:flex-row">
+		<Tabs
+			value={currentTab}
+			class="flex w-full flex-col gap-8 md:max-h-[calc(100dvh-3rem)] md:flex-row"
+		>
 			<TabsList class="sticky top-6 flex w-80 flex-col gap-2 self-start bg-transparent p-4">
 				<TabsTrigger
 					value="tab-5"
@@ -35,11 +40,11 @@
 				</TabsTrigger>
 			</TabsList>
 
-			<div class="grid w-full grid-cols-1 gap-4 overflow-y-auto px-10 pb-20 md:grid-cols-2">
+			<div class="grid w-full grid-cols-1 gap-4 px-10 pb-20 md:grid-cols-2 md:overflow-y-auto">
 				<div
 					class="border-border relative col-span-1 min-w-[300px] rounded-lg border bg-zinc-900 p-8 md:col-span-2 md:min-h-[480px] md:overflow-y-hidden"
 				>
-					<TabsContent value="tab-6" class="h-auto min-h-[300px]">
+					<TabsContent value="tab-6" class="min-h-[480px] md:h-[600px] xl:h-[600px]">
 						<Tabs value="tab-6" class=" items-center">
 							<TabsList
 								class="border-border h-auto gap-2 rounded-full border-b bg-zinc-800 px-10 py-2 text-zinc-400"
