@@ -27,7 +27,7 @@
 				<TabsTrigger
 					value="tab-5"
 					onclick={() => goto('/connect')}
-					class="hidden w-full cursor-pointer items-center  justify-start gap-3 rounded-md px-6 py-4 text-3xl font-bold text-white transition data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=inactive]:text-zinc-400 data-[state=inactive]:hover:bg-zinc-800 data-[state=inactive]:hover:text-white md:flex"
+					class="hidden w-full cursor-pointer items-center justify-start gap-3 rounded-md px-6 py-4 text-3xl font-bold text-white transition data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=inactive]:text-zinc-400 data-[state=inactive]:hover:bg-zinc-800 data-[state=inactive]:hover:text-white md:flex"
 				>
 					<Unplug class="h-8 w-8" /> Connect
 				</TabsTrigger>
