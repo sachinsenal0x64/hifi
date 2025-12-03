@@ -1,10 +1,8 @@
 <script lang="ts">
 	import Deactivate from '$lib/components/Account.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import Profile from '$lib/components/Profile.svelte';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 	import { Unplug, ShieldMinus } from 'lucide-svelte';
-	import Textarea from '$lib/components/Connect.svelte';
 	import { goto } from '$app/navigation';
 
 	let currentTab = 'tab-6';
