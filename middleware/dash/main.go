@@ -91,6 +91,6 @@ func dashHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/dash", dashHandler)
 
-	fmt.Println("DASH server running at http://localhost:8080/dash?id=105504512")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	fmt.Println("DASH server running at http://localhost:8030/dash?id=105504512")
+	log.Fatal(http.ListenAndServe(":8030", nil))
 }
