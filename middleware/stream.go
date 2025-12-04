@@ -23,7 +23,7 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 	}
 
 	q := tidalURL.Query()
-	q.Set("audioquality", "HI_RES_LOSSLESS")
+	q.Set("audioquality", "LOSSLESS")
 	q.Set("playbackmode", "STREAM")
 	q.Set("assetpresentation", "FULL")
 	tidalURL.RawQuery = q.Encode()

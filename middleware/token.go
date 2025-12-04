@@ -168,6 +168,7 @@ func refreshToken() (string, error) {
 	defer res.Body.Close()
 
 	body, _ := io.ReadAll(res.Body)
+
 	if res.StatusCode != http.StatusOK {
 		slog.Error("Tidal API error", "status", res.StatusCode, "body", string(body))
 		return "", errors.New("tidal API error")
