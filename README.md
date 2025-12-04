@@ -12,7 +12,7 @@
 
 <img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/download-1.64eau537wz.webp" />
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/20251103_214937.3gotbafa0y.webp" />
+<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/Untitled.9rjuho5l5w.webp" />
 
 HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
