@@ -15,12 +15,11 @@
 	import ArrowUpRightIcon from '@lucide/svelte/icons/arrow-up-right';
 	import Loader2 from '@lucide/svelte/icons/loader-2';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 
 	let open = $state(false);
 
-	const { data } = $props();
-
-	const form = superForm(data.form, {
+	const form = superForm(page.data.form, {
 		resetForm: true,
 		validators: zod4(formSchema),
 		onSubmit: async () => {
@@ -62,14 +61,14 @@
 		</Empty.Media>
 
 		<Empty.Title class=" text-gray-200">
-			{#if data.user}
-				Welcome back, {data.user.username}!
+			{#if page.data.user}
+				Welcome back, {page.data.user.username}!
 			{:else}
 				Let’s Get Started
 			{/if}</Empty.Title
 		>
 		<Empty.Description class="text-gray-400">
-			{#if data.user}
+			{#if page.data.user}
 				<div class="inline-flex items-center gap-1">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
 						><path
@@ -88,7 +87,7 @@
 		</Empty.Description>
 	</Empty.Header>
 	<Empty.Content>
-		{#if !data.user}
+		{#if !page.data.user}
 			<div class="flex gap-2">
 				<Dialog.Root bind:open>
 					<Dialog.Trigger
@@ -171,7 +170,7 @@
 					><g fill="#dfdede"><circle cx="19" cy="33" r="9" /><path d="M24 6v27h4V14l11 3v-7z" /></g
 					></svg
 				>
-				{data.titles[0]}</span
+				{page.data.titles[0]}</span
 			>
 			<span
 				class="inline-flex items-center gap-x-1.5 text-nowrap rounded-full bg-zinc-700 px-3 py-1.5 text-xs font-semibold text-white dark:bg-white/10 dark:text-white"
@@ -180,7 +179,7 @@
 					><g fill="#dfdede"><circle cx="19" cy="33" r="9" /><path d="M24 6v27h4V14l11 3v-7z" /></g
 					></svg
 				>
-				{data.titles[1]}</span
+				{page.data.titles[1]}</span
 			>
 		{/if}
 	</Empty.Content>
