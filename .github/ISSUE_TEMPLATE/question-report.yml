@@ -1,12 +1,12 @@
 name: Questions
 description: Question for hifi.
-title: "[QUESTION]: "
-labels: [question]
+title: "[QUESTION]:"
+labels: ["question"]
 body:
   - type: markdown
     attributes:
       value: |
-        Please search for this issue in the Issues page or Discussions page first to avoid duplication.
+        Please search for this issue in the Issues page or Discussions page first. Avoid duplication.
 
   - type: textarea
     id: which-tool
