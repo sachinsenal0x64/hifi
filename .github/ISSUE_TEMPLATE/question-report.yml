@@ -1,12 +1,13 @@
 name: Questions
-description: Question for the hifi.
+description: Question for hifi.
 title: "[QUESTION]: "
-labels: question
+labels: [question]
 body:
   - type: markdown
     attributes:
       value: |
-        Please search for this issue in issues-page or discussions-page first. Avoid duplication.
+        Please search for this issue in the Issues page or Discussions page first to avoid duplication.
+
   - type: textarea
     id: which-tool
     attributes:
@@ -15,7 +16,8 @@ body:
       placeholder: |
         hifi
     validations:
-      required: true
+      required: false
+
   - type: textarea
     id: question
     attributes:
@@ -23,6 +25,7 @@ body:
       description: Describe your question as accurately as possible.
     validations:
       required: true
+
   - type: textarea
     id: screenshots
     attributes:
