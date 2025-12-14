@@ -40,7 +40,7 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			}
 
 			if !slices.Contains(ValidPaths, r.URL.Path) {
-				w.WriteHeader(config.StatusNotFound)
+				http.Redirect(w, r, rest.Ping(), http.StatusTemporaryRedirect)
 				return
 			}
 
