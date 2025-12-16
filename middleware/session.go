@@ -15,21 +15,48 @@ import (
 	"github.com/alexedwards/argon2id"
 )
 
-// -------------------- SESSION --------------------
-
 func setQueryParams(q url.Values, params map[string]string) {
 	for k, v := range params {
 		q.Set(k, v)
 	}
 }
 
-func Session(userName string, passWord string, ValidPaths []string) func(http.Handler) http.Handler {
-	// proxy := httputil.NewSingleHostReverseProxy(target)
+// Helper to write standard Subsonic JSON responses for mocks
+func writeMockResponse(w http.ResponseWriter, data interface{}) {
+	resp := map[string]interface{}{
+		"subsonic-response": map[string]interface{}{
+			"status":  "ok",
+			"version": "1.16.1",
+		},
+	}
 
-	// proxy.ModifyResponse = func(resp *http.Response) error {
-	// 	resp.Header.Del("Access-Control-Allow-Origin")
-	// 	return nil
-	// }
+	// Merge the data into the inner map
+	subResponse := resp["subsonic-response"].(map[string]interface{})
+
+	// If data is a map, merge it. If it's nil, we just send status/version.
+	if dataMap, ok := data.(map[string]interface{}); ok {
+		for k, v := range dataMap {
+			subResponse[k] = v
+		}
+	}
+
+	w.Header().Set(config.HeaderContentType, config.ContentTypeJSON)
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(resp)
+}
+
+func Session(userName string, passWord string, ValidPaths []string) func(http.Handler) http.Handler {
+
+	// Define internal mock paths that don't need the Rewrite logic but need valid JSON responses
+	mockPaths := []string{
+		"/rest/getUser.view",
+		"/rest/getMusicFolders.view",
+		"/rest/getLicense.view",
+		"/rest/getPlaylists.view",
+		"/rest/getGenres.view",
+		"/rest/getStarred.view",
+		"/rest/getStarred2.view",
+	}
 
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -39,84 +66,66 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				return
 			}
 
-			if !slices.Contains(ValidPaths, r.URL.Path) {
+			// 2. CHECK PATH VALIDITY
+			isValidPath := slices.Contains(ValidPaths, r.URL.Path)
+			isMockPath := slices.Contains(mockPaths, r.URL.Path)
+
+			if !isValidPath && !isMockPath {
 				w.WriteHeader(config.StatusNotFound)
 				return
 			}
 
-			if slices.Contains(ValidPaths, r.URL.Path) && r.URL.Path != rest.Ping() {
+			// 3. HANDLE MOCK ROUTES IMMEDIATELY
+			if isMockPath {
+				handleMockRoutes(w, r)
+				return
+			}
+			
+			if isValidPath && r.URL.Path != rest.Ping() {
 				RewriteRequest(w, r)
 				return
 			}
 
-			/* Add authentication parameters
-
-			to the URL query like -> (https://) */
+			// 5. AUTHENTICATION & PING HANDLING
+			// Only /rest/ping.view reaches here usually.
 
 			q := r.URL.Query()
-
+			userName := q.Get("u")
+			passWord := q.Get("p")
 			s := q.Get("s")
 			t := q.Get("t")
 			f := q.Get("f")
 			c := q.Get("c")
 
-			userName := q.Get("u")
-			passWord := q.Get("p")
-
-			// -------------------- SESSION --------------------
-
-			// salt := Salt(t)
-			// token := Token(s, salt)
-
-			// slog.Info("session details",
-			// 	"user", userName,
-			// 	"salt", salt,
-			// 	"token", token,
-			// )
-
+			// Reconstruct query params for consistency
 			params := map[string]string{
 				"u": userName,
 				"c": c,
 				"f": f,
 			}
 
-			// Check if s and t exist in query
-
 			if s != "" && t != "" {
-				// Use token authentication
 				params["s"] = s
 				params["t"] = t
 			} else {
-				/* Fallback to legacy password
-				authentication */
 				params["p"] = passWord
 			}
 
 			setQueryParams(q, params)
-
 			r.URL.RawQuery = q.Encode()
+
 			slog.Info("incoming request",
 				"path", r.URL.Path,
-				"raw", r.URL.RawQuery,
+				"user", userName,
 			)
 
-			// r.URL.Scheme = target.Scheme
-			// r.URL.Host = target.Host
-			// r.Host = target.Host
-
-			// Mock Subsonic response for /ping endpoint
-
-			url := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
-
-			slog.Info(url)
-
-			method := "GET"
+			authUrl := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
 
 			client := &http.Client{}
-			req, err := http.NewRequest(method, url, nil)
+			req, err := http.NewRequest("GET", authUrl, nil)
 
 			if err != nil {
-				fmt.Println(err)
+				slog.Error("failed to create auth request", "error", err)
 				return
 			}
 			req.Header.Add("Authorization", "Bearer User "+config.ProxyKey)
@@ -124,39 +133,108 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 			res, err := client.Do(req)
 			if err != nil {
-				fmt.Println(err)
+				slog.Error("failed to contact auth server", "error", err)
+				http.Error(w, "Auth server unavailable", http.StatusBadGateway)
 				return
 			}
 			defer res.Body.Close()
 
 			body, err := io.ReadAll(res.Body)
 			if err != nil {
-				fmt.Println(err)
+				slog.Error("failed to read auth body", "error", err)
 				return
 			}
 
 			var g types.AppGet
 
 			if err := json.Unmarshal(body, &g); err != nil {
-				slog.Error("error unmarshalling response", "error", err)
+				slog.Error("error unmarshalling auth response", "error", err)
 				return
 			}
 
-			match, err := argon2id.ComparePasswordAndHash(passWord, g[0].Password)
-			if err != nil {
-				writeSubsonic(w, "failed", http.StatusBadRequest)
+			// Check password
+			match := false
+			if len(g) > 0 {
+				match, _ = argon2id.ComparePasswordAndHash(passWord, g[0].Password)
 			}
 
 			if !match {
-				writeSubsonic(w, "failed", http.StatusBadRequest)
+				writeSubsonic(w, "failed", http.StatusBadRequest) // Subsonic expects 200 OK with failed body usually, or 401
 			} else {
 				writeSubsonic(w, "ok", http.StatusOK)
 			}
+		})
+	}
+}
 
-			/* Forward the request to the
-			subsonic server -> */
+func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
+	path := r.URL.Path
+	user := r.URL.Query().Get("u")
+	if user == "" {
+		user = "admin"
+	}
 
-			// proxy.ServeHTTP(w, r)
+	switch path {
+	case "/rest/getUser.view":
+		slog.Info("🎭 Mocking getUser", "user", user)
+		writeMockResponse(w, map[string]interface{}{
+			"user": map[string]interface{}{
+				"username":          user,
+				"email":             "user@hifi.local",
+				"scrobblingEnabled": true,
+				"adminRole":         true,
+				"settingsRole":      true,
+				"downloadRole":      true,
+				"streamRole":        true,
+				"coverArtRole":      true,
+				"shareRole":         true,
+				"jukeboxRole":       false,
+			},
+		})
+
+	case "/rest/getMusicFolders.view":
+		slog.Info("🎭 Mocking getMusicFolders")
+		writeMockResponse(w, map[string]interface{}{
+			"musicFolders": map[string]interface{}{
+				"musicFolder": []map[string]interface{}{
+					{"id": 1, "name": "Tidal/Hifi"},
+				},
+			},
+		})
+
+	case "/rest/getLicense.view":
+		writeMockResponse(w, map[string]interface{}{
+			"license": map[string]interface{}{
+				"valid":          true,
+				"email":          "valid@hifi.local",
+				"licenseExpires": "2099-01-01T00:00:00",
+			},
+		})
+
+	case "/rest/getPlaylists.view":
+		slog.Info("🎭 Mocking getPlaylists (Empty)")
+		writeMockResponse(w, map[string]interface{}{
+			"playlists": map[string]interface{}{
+				"playlist": []interface{}{},
+			},
+		})
+
+	case "/rest/getGenres.view":
+		slog.Info("🎭 Mocking getGenres (Empty)")
+		writeMockResponse(w, map[string]interface{}{
+			"genres": map[string]interface{}{
+				"genre": []interface{}{},
+			},
+		})
+
+	case "/rest/getStarred.view", "/rest/getStarred2.view":
+		slog.Info("🎭 Mocking getStarred (Empty)")
+		writeMockResponse(w, map[string]interface{}{
+			"starred": map[string]interface{}{
+				"song":   []interface{}{},
+				"album":  []interface{}{},
+				"artist": []interface{}{},
+			},
 		})
 	}
 }
