@@ -24,6 +24,13 @@ var (
 		rest.GetTopSongs(),
 		rest.GetUserView(),
 		rest.GetMusicFoldersView(),
+
+		// Internal Mock Paths
+		"/rest/getLicense.view",
+		"/rest/getPlaylists.view",
+		"/rest/getGenres.view",
+		"/rest/getStarred.view",
+		"/rest/getStarred2.view",
 	}
 
 	// ENV
