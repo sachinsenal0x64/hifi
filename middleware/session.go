@@ -139,10 +139,13 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 				if r.URL.Path == rest.GetUserView() {
 					writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
-						"user": map[string]string{"username": userName},
+						"user": map[string]any{"username": userName},
 					})
 				}
-				writeSubsonic(w, "ok", http.StatusOK)
+				if r.URL.Path == rest.Ping() {
+					slog.Info("🏓 Ping request successful")
+					writeSubsonic(w, "ok", http.StatusOK)
+				}
 			}
 		})
 	}
