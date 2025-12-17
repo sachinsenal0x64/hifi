@@ -97,8 +97,6 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				}
 			}
 
-			// -------------------- SESSION --------------------
-
 			// salt := Salt(t)
 			// token := Token(s, salt)
 
