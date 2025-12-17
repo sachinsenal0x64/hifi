@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"maps"
 	"encoding/json"
 	"fmt"
 	"hifi/config"
@@ -35,9 +36,7 @@ func writeMockResponse(w http.ResponseWriter, data any) {
 
 	// If data is a map, merge it. If it's nil, we just send status/version.
 	if dataMap, ok := data.(map[string]any); ok {
-		for k, v := range dataMap {
-			subResponse[k] = v
-		}
+		maps.Copy(subResponse, dataMap)
 	}
 
 	w.Header().Set(config.HeaderContentType, config.ContentTypeJSON)
