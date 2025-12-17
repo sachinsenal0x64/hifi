@@ -15,7 +15,7 @@
 
 - Do not delete commented lines.
 
-- Only modify/update or add extra code if needed, and do not break the current code style or structure. If a method is deprecated, you can replace it with the current one, for example The current code is inefficient; you may replace it with a more efficient version.
+- Only modify/update or add extra code if needed (Except for redundant code blocks.), and do not break the current code style or structure. If a method is deprecated, you can replace it with the current one, for example The current code is inefficient; you may replace it with a more efficient version.
 
 - Get familiar with https://github.com/sachinsenal0x64/hifi/tree/main/routes
   , https://github.com/sachinsenal0x64/hifi/tree/main/config
