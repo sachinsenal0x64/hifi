@@ -80,6 +80,15 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			/* Add authentication parameters
 			to the URL query like -> (https://) */
 
+			// salt := Salt(t)
+			// token := Token(s, salt)
+
+			// slog.Info("session details",
+			// 	"user", userName,
+			// 	"salt", salt,
+			// 	"token", token,
+			// )
+
 			q := r.URL.Query()
 
 			s := q.Get("s")
@@ -96,15 +105,6 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 					passWord = string(bp)
 				}
 			}
-
-			// salt := Salt(t)
-			// token := Token(s, salt)
-
-			// slog.Info("session details",
-			// 	"user", userName,
-			// 	"salt", salt,
-			// 	"token", token,
-			// )
 
 			// Reconstruct query params for consistency
 			params := map[string]string{
