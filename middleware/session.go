@@ -113,10 +113,15 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				"f": f,
 			}
 
+			// Check if s and t exist in query
+
 			if s != "" && t != "" {
+				// Use token authentication
 				params["s"] = s
 				params["t"] = t
 			} else {
+				/* Fallback to legacy password
+				authentication */
 				params["p"] = passWord
 			}
 
