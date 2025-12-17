@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"hifi/config"
@@ -11,9 +12,12 @@ import (
 	"net/http"
 	"net/url"
 	"slices"
+	"strings"
 
 	"github.com/alexedwards/argon2id"
 )
+
+// -------------------- SESSION --------------------
 
 func setQueryParams(q url.Values, params map[string]string) {
 	for k, v := range params {
@@ -22,6 +26,13 @@ func setQueryParams(q url.Values, params map[string]string) {
 }
 
 func Session(userName string, passWord string, ValidPaths []string) func(http.Handler) http.Handler {
+
+	// proxy := httputil.NewSingleHostReverseProxy(target)
+
+	// proxy.ModifyResponse = func(resp *http.Response) error {
+	// 	resp.Header.Del("Access-Control-Allow-Origin")
+	// 	return nil
+	// }
 
 	// Define internal mock paths that don't need the Rewrite logic but need valid JSON responses
 	mockPaths := []string{
@@ -64,13 +75,36 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			// 5. AUTHENTICATION & PING HANDLING
 			// Only /rest/ping.view reaches here usually.
 
+			/* Add authentication parameters
+			to the URL query like -> (https://) */
+
 			q := r.URL.Query()
-			userName := q.Get("u")
-			passWord := q.Get("p")
+
 			s := q.Get("s")
 			t := q.Get("t")
 			f := q.Get("f")
 			c := q.Get("c")
+
+			userName := q.Get("u")
+			passWord := q.Get("p")
+
+			if strings.HasPrefix(passWord, "enc:") {
+				bp, err := hex.DecodeString(passWord[4:])
+				if err == nil {
+					passWord = string(bp)
+				}
+			}
+
+			// -------------------- SESSION --------------------
+
+			// salt := Salt(t)
+			// token := Token(s, salt)
+
+			// slog.Info("session details",
+			// 	"user", userName,
+			// 	"salt", salt,
+			// 	"token", token,
+			// )
 
 			// Reconstruct query params for consistency
 			params := map[string]string{
@@ -93,6 +127,12 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				"path", r.URL.Path,
 				"user", userName,
 			)
+
+			// r.URL.Scheme = target.Scheme
+			// r.URL.Host = target.Host
+			// r.Host = target.Host
+
+			// Mock Subsonic response for /ping endpoint
 
 			authUrl := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
 
@@ -148,6 +188,11 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				}
 			}
 		})
+
+		/* Forward the request to the
+		subsonic server -> */
+
+		// proxy.ServeHTTP(w, r)
 	}
 }
 
