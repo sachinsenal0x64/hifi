@@ -22,33 +22,10 @@ func setQueryParams(q url.Values, params map[string]string) {
 	}
 }
 
-// Helper to write standard Subsonic JSON responses for mocks
-func writeMockResponse(w http.ResponseWriter, data any) {
-	resp := map[string]any{
-		"subsonic-response": map[string]any{
-			"status":  "ok",
-			"version": "1.16.1",
-		},
-	}
-
-	// Merge the data into the inner map
-	subResponse := resp["subsonic-response"].(map[string]any)
-
-	// If data is a map, merge it. If it's nil, we just send status/version.
-	if dataMap, ok := data.(map[string]any); ok {
-		maps.Copy(subResponse, dataMap)
-	}
-
-	w.Header().Set(config.HeaderContentType, config.ContentTypeJSON)
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(resp)
-}
-
 func Session(userName string, passWord string, ValidPaths []string) func(http.Handler) http.Handler {
 
 	// Define internal mock paths that don't need the Rewrite logic but need valid JSON responses
 	mockPaths := []string{
-		rest.GetUserView(),
 		rest.GetMusicFoldersView(),
 		"/rest/getLicense.view",
 		"/rest/getPlaylists.view",
@@ -160,37 +137,47 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			if !match {
 				writeSubsonic(w, "failed", http.StatusBadRequest) // Subsonic expects 200 OK with failed body usually, or 401
 			} else {
+
+				if r.URL.Path == rest.GetUserView() {
+					writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
+						"user": map[string]any{"username": userName},
+					})
+				}
 				writeSubsonic(w, "ok", http.StatusOK)
 			}
 		})
 	}
 }
 
-func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
-	path := r.URL.Path
-	user := r.URL.Query().Get("u")
-	if user == "" {
-		user = "admin"
+// Mock Responses
+
+// Helper to write standard Subsonic JSON responses for mocks
+func writeMockResponse(w http.ResponseWriter, data any) {
+	resp := map[string]any{
+		"subsonic-response": map[string]any{
+			"status":  "ok",
+			"version": "1.16.1",
+		},
 	}
 
-	switch path {
-	case "/rest/getUser.view":
-		slog.Info("🎭 Mocking getUser", "user", user)
-		writeMockResponse(w, map[string]any{
-			"user": map[string]any{
-				"username":          user,
-				"email":             "user@hifi.local",
-				"scrobblingEnabled": true,
-				"adminRole":         true,
-				"settingsRole":      true,
-				"downloadRole":      true,
-				"streamRole":        true,
-				"coverArtRole":      true,
-				"shareRole":         true,
-				"jukeboxRole":       false,
-			},
-		})
+	// Merge the data into the inner map
+	subResponse := resp["subsonic-response"].(map[string]any)
 
+	// If data is a map, merge it. If it's nil, we just send status/version.
+	if dataMap, ok := data.(map[string]any); ok {
+		maps.Copy(subResponse, dataMap)
+	}
+
+	w.Header().Set(config.HeaderContentType, config.ContentTypeJSON)
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(resp)
+}
+
+// Handle internal mock routes with standard responses
+func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
+	path := r.URL.Path
+
+	switch path {
 	case "/rest/getMusicFolders.view":
 		slog.Info("🎭 Mocking getMusicFolders")
 		writeMockResponse(w, map[string]any{
