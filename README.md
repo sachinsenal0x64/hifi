@@ -38,6 +38,9 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 >
 > #### Create your HiFi account here, and then use the account with supported Subsonic client.
 
+> [!IMPORTANT]
+>
+> #### Use the latest stable release of the supported clients.
 - [hifi.401658.xyz](https://hifi.401658.xyz)
 
 <br>
