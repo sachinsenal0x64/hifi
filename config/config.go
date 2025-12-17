@@ -22,6 +22,7 @@ var (
 		rest.GetArtistView(),
 		rest.Fresh(),
 		rest.GetTopSongs(),
+		rest.GetUserView(),
 	}
 
 	// ENV

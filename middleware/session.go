@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"maps"
 	"encoding/json"
 	"fmt"
 	"hifi/config"
@@ -9,6 +8,7 @@ import (
 	"hifi/types"
 	"io"
 	"log/slog"
+	"maps"
 	"net/http"
 	"net/url"
 	"slices"
@@ -48,7 +48,7 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 	// Define internal mock paths that don't need the Rewrite logic but need valid JSON responses
 	mockPaths := []string{
-		"/rest/getUser.view",
+		rest.GetUserView(),
 		"/rest/getMusicFolders.view",
 		"/rest/getLicense.view",
 		"/rest/getPlaylists.view",
@@ -80,7 +80,7 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				return
 			}
 
-			if isValidPath && r.URL.Path != rest.Ping() {
+			if isValidPath && r.URL.Path != rest.Ping() && r.URL.Path != rest.GetUserView() {
 				RewriteRequest(w, r)
 				return
 			}
