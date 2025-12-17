@@ -49,7 +49,7 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 	// Define internal mock paths that don't need the Rewrite logic but need valid JSON responses
 	mockPaths := []string{
 		rest.GetUserView(),
-		"/rest/getMusicFolders.view",
+		rest.GetMusicFoldersView(),
 		"/rest/getLicense.view",
 		"/rest/getPlaylists.view",
 		"/rest/getGenres.view",
