@@ -8,7 +8,6 @@ import (
 	"hifi/types"
 	"io"
 	"log/slog"
-	"maps"
 	"net/http"
 	"net/url"
 	"slices"
@@ -149,29 +148,6 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 	}
 }
 
-// Mock Responses
-// Helper to write standard Subsonic JSON responses for mocks
-func writeMockResponse(w http.ResponseWriter, data any) {
-	resp := map[string]any{
-		"subsonic-response": map[string]any{
-			"status":  "ok",
-			"version": "1.16.1",
-		},
-	}
-
-	// Merge the data into the inner map
-	subResponse := resp["subsonic-response"].(map[string]any)
-
-	// If data is a map, merge it. If it's nil, we just send status/version.
-	if dataMap, ok := data.(map[string]any); ok {
-		maps.Copy(subResponse, dataMap)
-	}
-
-	w.Header().Set(config.HeaderContentType, config.ContentTypeJSON)
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(resp)
-}
-
 // Handle internal mock routes with standard responses
 func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
@@ -179,7 +155,7 @@ func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 	switch path {
 	case "/rest/getMusicFolders.view":
 		slog.Info("🎭 Mocking getMusicFolders")
-		writeMockResponse(w, map[string]any{
+		writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
 			"musicFolders": map[string]any{
 				"musicFolder": []map[string]any{
 					{"id": 1, "name": "Tidal/Hifi"},
@@ -188,7 +164,7 @@ func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 		})
 
 	case "/rest/getLicense.view":
-		writeMockResponse(w, map[string]any{
+		writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
 			"license": map[string]any{
 				"valid":          true,
 				"email":          "valid@hifi.local",
@@ -198,7 +174,7 @@ func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 
 	case "/rest/getPlaylists.view":
 		slog.Info("🎭 Mocking getPlaylists (Empty)")
-		writeMockResponse(w, map[string]any{
+		writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
 			"playlists": map[string]any{
 				"playlist": []any{},
 			},
@@ -206,7 +182,7 @@ func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 
 	case "/rest/getGenres.view":
 		slog.Info("🎭 Mocking getGenres (Empty)")
-		writeMockResponse(w, map[string]any{
+		writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
 			"genres": map[string]any{
 				"genre": []any{},
 			},
@@ -214,7 +190,7 @@ func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 
 	case "/rest/getStarred.view", "/rest/getStarred2.view":
 		slog.Info("🎭 Mocking getStarred (Empty)")
-		writeMockResponse(w, map[string]any{
+		writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
 			"starred": map[string]any{
 				"song":   []any{},
 				"album":  []any{},
