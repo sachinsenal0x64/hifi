@@ -22,19 +22,19 @@ func setQueryParams(q url.Values, params map[string]string) {
 }
 
 // Helper to write standard Subsonic JSON responses for mocks
-func writeMockResponse(w http.ResponseWriter, data interface{}) {
-	resp := map[string]interface{}{
-		"subsonic-response": map[string]interface{}{
+func writeMockResponse(w http.ResponseWriter, data any) {
+	resp := map[string]any{
+		"subsonic-response": map[string]any{
 			"status":  "ok",
 			"version": "1.16.1",
 		},
 	}
 
 	// Merge the data into the inner map
-	subResponse := resp["subsonic-response"].(map[string]interface{})
+	subResponse := resp["subsonic-response"].(map[string]any)
 
 	// If data is a map, merge it. If it's nil, we just send status/version.
-	if dataMap, ok := data.(map[string]interface{}); ok {
+	if dataMap, ok := data.(map[string]any); ok {
 		for k, v := range dataMap {
 			subResponse[k] = v
 		}
@@ -80,7 +80,7 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				handleMockRoutes(w, r)
 				return
 			}
-			
+
 			if isValidPath && r.URL.Path != rest.Ping() {
 				RewriteRequest(w, r)
 				return
@@ -177,8 +177,8 @@ func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 	switch path {
 	case "/rest/getUser.view":
 		slog.Info("🎭 Mocking getUser", "user", user)
-		writeMockResponse(w, map[string]interface{}{
-			"user": map[string]interface{}{
+		writeMockResponse(w, map[string]any{
+			"user": map[string]any{
 				"username":          user,
 				"email":             "user@hifi.local",
 				"scrobblingEnabled": true,
@@ -194,17 +194,17 @@ func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 
 	case "/rest/getMusicFolders.view":
 		slog.Info("🎭 Mocking getMusicFolders")
-		writeMockResponse(w, map[string]interface{}{
-			"musicFolders": map[string]interface{}{
-				"musicFolder": []map[string]interface{}{
+		writeMockResponse(w, map[string]any{
+			"musicFolders": map[string]any{
+				"musicFolder": []map[string]any{
 					{"id": 1, "name": "Tidal/Hifi"},
 				},
 			},
 		})
 
 	case "/rest/getLicense.view":
-		writeMockResponse(w, map[string]interface{}{
-			"license": map[string]interface{}{
+		writeMockResponse(w, map[string]any{
+			"license": map[string]any{
 				"valid":          true,
 				"email":          "valid@hifi.local",
 				"licenseExpires": "2099-01-01T00:00:00",
@@ -213,27 +213,27 @@ func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 
 	case "/rest/getPlaylists.view":
 		slog.Info("🎭 Mocking getPlaylists (Empty)")
-		writeMockResponse(w, map[string]interface{}{
-			"playlists": map[string]interface{}{
-				"playlist": []interface{}{},
+		writeMockResponse(w, map[string]any{
+			"playlists": map[string]any{
+				"playlist": []any{},
 			},
 		})
 
 	case "/rest/getGenres.view":
 		slog.Info("🎭 Mocking getGenres (Empty)")
-		writeMockResponse(w, map[string]interface{}{
-			"genres": map[string]interface{}{
-				"genre": []interface{}{},
+		writeMockResponse(w, map[string]any{
+			"genres": map[string]any{
+				"genre": []any{},
 			},
 		})
 
 	case "/rest/getStarred.view", "/rest/getStarred2.view":
 		slog.Info("🎭 Mocking getStarred (Empty)")
-		writeMockResponse(w, map[string]interface{}{
-			"starred": map[string]interface{}{
-				"song":   []interface{}{},
-				"album":  []interface{}{},
-				"artist": []interface{}{},
+		writeMockResponse(w, map[string]any{
+			"starred": map[string]any{
+				"song":   []any{},
+				"album":  []any{},
+				"artist": []any{},
 			},
 		})
 	}
