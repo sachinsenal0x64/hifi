@@ -2,7 +2,9 @@
 
 <br>
 
-### If the below guidelines are not complied with, your PR will be marked as invalid and closed without merging.
+> [!IMPORTANT]
+>
+> ### If the below guidelines are not complied with, your PR will be marked as invalid and closed without merging.
 
 - Please check that your proposal is valid for the HiFi project.
   https://github.com/sachinsenal0x64/hifi?tab=readme-ov-file#hifi-proposal-check
