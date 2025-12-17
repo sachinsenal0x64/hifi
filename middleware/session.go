@@ -150,7 +150,6 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 }
 
 // Mock Responses
-
 // Helper to write standard Subsonic JSON responses for mocks
 func writeMockResponse(w http.ResponseWriter, data any) {
 	resp := map[string]any{
