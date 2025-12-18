@@ -27,3 +27,5 @@
 - Feel free to send PR's regarding spelling mistakes, incorrect grammar etc.
 
 - Always add a comment when adding a new code block.
+
+- When submitting a PR, include a clear title and description—for example, what the PR is for and what it fixes. If you have screenshots, they’ll be even more helpful.
