@@ -49,14 +49,21 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-			if r.URL.Path == rest.Fresh() {
+			path := r.URL.Path
+
+			// Ensure path ends with .view (for Tempo)
+			if !strings.HasSuffix(path, ".view") {
+				path += ".view"
+			}
+
+			if path == rest.Fresh() {
 				next.ServeHTTP(w, r)
 				return
 			}
 
 			// 2. CHECK PATH VALIDITY
-			isValidPath := slices.Contains(ValidPaths, r.URL.Path)
-			isMockPath := slices.Contains(mockPaths, r.URL.Path)
+			isValidPath := slices.Contains(ValidPaths, path)
+			isMockPath := slices.Contains(mockPaths, path)
 
 			if !isValidPath && !isMockPath {
 				w.WriteHeader(config.StatusNotFound)
@@ -69,7 +76,7 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				return
 			}
 
-			if isValidPath && r.URL.Path != rest.Ping() && r.URL.Path != rest.GetUserView() {
+			if isValidPath && path != rest.Ping() && path != rest.GetUserView() {
 				RewriteRequest(w, r)
 				return
 			}
@@ -129,7 +136,7 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			r.URL.RawQuery = q.Encode()
 
 			slog.Info("incoming request",
-				"path", r.URL.Path,
+				"path", path,
 				"user", userName,
 			)
 
@@ -182,12 +189,12 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 				writeSubsonic(w, "failed", http.StatusBadRequest) // Subsonic expects 200 OK with failed body usually, or 401
 			} else {
 
-				if r.URL.Path == rest.GetUserView() {
+				if path == rest.GetUserView() {
 					writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
 						"user": map[string]any{"username": userName},
 					})
 				}
-				if r.URL.Path == rest.Ping() {
+				if path == rest.Ping() {
 					slog.Info("🏓 Ping request successful")
 					writeSubsonic(w, "ok", http.StatusOK)
 				}
@@ -204,6 +211,11 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 // Handle internal mock routes with standard responses
 func handleMockRoutes(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
+
+	// Ensure path ends with .view (for Tempo)
+	if !strings.HasSuffix(path, ".view") {
+		path += ".view"
+	}
 
 	switch path {
 	case "/rest/getMusicFolders.view":
