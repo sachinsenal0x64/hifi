@@ -4,6 +4,7 @@ import (
 	"hifi/routes/rest"
 	"hifi/types"
 	"net/http"
+	"strings"
 	"sync"
 )
 
@@ -29,7 +30,15 @@ func RewriteRequest(w http.ResponseWriter, r *http.Request) {
 		id     = r.URL.Query().Get("id")
 		size   = r.URL.Query().Get("size")
 	)
-	switch r.URL.Path {
+
+	path := r.URL.Path
+
+	// Ensure path ends with .view (for Tempo)
+	if !strings.HasSuffix(path, ".view") {
+		path += ".view"
+	}
+
+	switch path {
 
 	// -------------------- Search3 --------------------
 	case rest.Search3View():
