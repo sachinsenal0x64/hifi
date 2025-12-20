@@ -24,7 +24,7 @@ func getAlbumList2(user string, w http.ResponseWriter) {
 	// Collect all user albums into a slice
 	allAlbums := make([]types.SubsonicAlbum, 0, len(albumsMap))
 	for _, alb := range albumsMap {
-		alb.Created = 1
+		alb.Created = alb.Year + "-01-01T01:00:00Z"
 		allAlbums = append(allAlbums, alb)
 	}
 
