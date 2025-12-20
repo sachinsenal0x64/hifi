@@ -239,7 +239,7 @@ type SubsonicAlbum struct {
 	TrackNumber int            `json:"trackNumber,omitempty"`
 	Genre       string         `json:"genre,omitempty"`
 	Song        []SubsonicSong `json:"song,omitempty"`
-	Created     int            `json:"created,omitempty"` // For Tempo compat
+	Created     string         `json:"created,omitempty"` // For Tempo compat
 }
 
 type SubsonicSearchResult struct {
