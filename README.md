@@ -6,7 +6,11 @@
 
 </h4>
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/foamshot-2025-11-19-02-30-23-(Edit)-1.8l0imacwd1.webp" />
+<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/castafiore-1.9o0985zqqu.webp" />
+
+<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/castafiore-1.9o0985zqqu.webp" />
+
+HiFi running on - [Castafiore](https://github.com/sawyerf/Castafiore)
 
 <br>
 
@@ -41,6 +45,7 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 > [!IMPORTANT]
 >
 > #### Use the latest stable release of the supported clients.
+
 - [hifi.401658.xyz](https://hifi.401658.xyz)
 
 <br>
@@ -134,6 +139,7 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 <br>
 
 ## Installation (Self-host Hifi)
+
 > [!NOTE]
 >
 > #### Tidal subscription required.
