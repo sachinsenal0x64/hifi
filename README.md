@@ -14,6 +14,12 @@ HiFi running on - [Castafiore](https://github.com/sawyerf/Castafiore)
 
 <br>
 
+<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/Tempus.4clcngw11x.webp" />
+
+HiFi running on - [Tempus](https://github.com/eddyizm/tempus) Mobile app
+
+<br>
+
 <img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/download-1.64eau537wz.webp" />
 
 <img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/Untitled.9rjuho5l5w.webp" />
