@@ -336,5 +336,154 @@
 				<path d="M144.796 17.8784H133.658V185.294H144.796V17.8784Z" fill="#F24B6A" />
 			</svg>
 		</a>
+		<a
+			aria-label="Open Castafiore on Website"
+			href="https://github.com/sawyerf/Castafiore"
+			class="text-sm text-zinc-400 hover:opacity-80"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<svg
+				width="32"
+				height="32"
+				viewBox="0 0 521 521"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					d="M450.15 0H70.15C31.4072 0 0 31.4072 0 70.15V450.15C0 488.893 31.4072 520.3 70.15 520.3H450.15C488.893 520.3 520.3 488.893 520.3 450.15V70.15C520.3 31.4072 488.893 0 450.15 0Z"
+					fill="#660000"
+				/>
+				<path
+					d="M92.7 216.8C105.6 216.4 118.5 215.9 131.4 215.5"
+					stroke="#FF9F00"
+					stroke-width="8"
+					stroke-miterlimit="10"
+					stroke-linecap="round"
+				/>
+				<path
+					d="M95.7 240.6C108.3 234 121 227.4 133.6 220.8"
+					stroke="#FF9F00"
+					stroke-width="8"
+					stroke-miterlimit="10"
+					stroke-linecap="round"
+				/>
+				<path
+					d="M343.009 346.495C374.233 309.468 356.416 243.082 303.214 198.218C250.012 153.354 181.571 147.001 150.347 184.029C119.123 221.056 136.939 287.442 190.141 332.306C243.344 377.17 311.785 383.523 343.009 346.495Z"
+					fill="white"
+					stroke="black"
+					stroke-width="13"
+					stroke-miterlimit="10"
+				/>
+				<path
+					d="M316.794 185.201L292.02 200.845L344.877 284.554L369.651 268.91L316.794 185.201Z"
+					fill="white"
+				/>
+				<path
+					d="M277.7 295.6C322.9 282.6 363.8 280 389.4 269.3C400.1 264.8 420.5 249.5 423.5 240.6C425.2 235.6 428.2 233.6 424.1 228.4C419.8 222.9 417.8 216.2 403.1 218.6C392.4 220.4 375.2 227.2 374.7 225.9C373.8 223.8 391.5 216.6 390.8 209.6C390.3 204.9 380.8 201.3 372.8 200.6C353.7 199 337.8 214 336.8 212.6C336 211.4 348.7 203.7 354.8 188.6C356.9 183.3 354.7 184.8 352.9 182.2C347.5 174.5 320 181.2 301.8 190.6C283.121 200.374 266.218 213.22 251.8 228.6"
+					fill="white"
+				/>
+				<path
+					d="M277.7 295.6C322.9 282.6 363.8 280 389.4 269.3C400.1 264.8 420.5 249.5 423.5 240.6C425.2 235.6 428.2 233.6 424.1 228.4C419.8 222.9 417.8 216.2 403.1 218.6C392.4 220.4 375.2 227.2 374.7 225.9C373.8 223.8 391.5 216.6 390.8 209.6C390.3 204.9 380.8 201.3 372.8 200.6C353.7 199 337.8 214 336.8 212.6C336 211.4 348.7 203.7 354.8 188.6C356.9 183.3 354.7 184.8 352.9 182.2C347.5 174.5 320 181.2 301.8 190.6C283.121 200.374 266.218 213.22 251.8 228.6"
+					stroke="black"
+					stroke-width="13"
+					stroke-miterlimit="10"
+					stroke-linecap="round"
+				/>
+				<path
+					d="M391.6 401.5C368.7 388.9 345.9 376.2 323 363.6"
+					stroke="black"
+					stroke-width="9"
+					stroke-miterlimit="10"
+				/>
+				<path
+					d="M415.8 368.5C394.5 358.833 373.233 349.167 352 339.5"
+					stroke="black"
+					stroke-width="8"
+					stroke-miterlimit="10"
+				/>
+				<path
+					d="M393.3 422.9C390.6 414 388 405.2 385.3 396.3"
+					stroke="black"
+					stroke-width="9"
+					stroke-miterlimit="10"
+					stroke-linecap="round"
+				/>
+				<path
+					d="M409.1 413.2C401.3 408.2 393.5 403.2 385.8 398.2"
+					stroke="black"
+					stroke-width="9"
+					stroke-miterlimit="10"
+					stroke-linecap="round"
+				/>
+				<path
+					d="M407.2 395.5C399.4 395.7 391.6 396 383.9 396.2"
+					stroke="black"
+					stroke-width="9"
+					stroke-miterlimit="10"
+					stroke-linecap="round"
+				/>
+				<path
+					d="M429.3 374.9C423.4 371.7 417.5 368.6 411.6 365.4"
+					stroke="black"
+					stroke-width="9"
+					stroke-miterlimit="10"
+					stroke-linecap="round"
+				/>
+				<path
+					d="M433.3 358.5C424.2 360.2 415.1 361.8 406 363.5"
+					stroke="black"
+					stroke-width="9"
+					stroke-miterlimit="10"
+					stroke-linecap="round"
+				/>
+				<path
+					d="M413.4 386.2C411.8 379.9 410.2 373.5 408.6 367.2"
+					stroke="black"
+					stroke-width="9"
+					stroke-miterlimit="10"
+					stroke-linecap="round"
+				/>
+				<path
+					d="M168.6 216.5C172.908 216.5 176.4 213.008 176.4 208.7C176.4 204.392 172.908 200.9 168.6 200.9C164.292 200.9 160.8 204.392 160.8 208.7C160.8 213.008 164.292 216.5 168.6 216.5Z"
+					fill="black"
+				/>
+				<path
+					d="M231.9 188.9C237.8 176.5 237.3 162.6 230.1 153.3C217.8 137.4 190.1 140.6 179.4 152.4C174 158.4 176.3 167.7 177.6 166.5"
+					stroke="black"
+					stroke-width="9"
+					stroke-miterlimit="10"
+				/>
+				<path
+					d="M227 215.1C234.125 215.1 239.9 209.324 239.9 202.2C239.9 195.076 234.125 189.3 227 189.3C219.876 189.3 214.1 195.076 214.1 202.2C214.1 209.324 219.876 215.1 227 215.1Z"
+					fill="#FF9F00"
+					stroke="black"
+					stroke-width="9"
+					stroke-miterlimit="10"
+				/>
+				<path
+					d="M233.1 325.2C209.2 325.5 212.2 305.9 214.2 302C216.5 297.4 219.3 296.5 229.5 290.7C238.7 285.4 246.9 275 244 269.7C240.4 263.3 224 270.3 203.6 261.4C195.3 257.8 190.5 252.6 191.8 247.1C193.1 241.6 211.2 240.8 220 232C225.6 226.4 224.1 220.2 224.4 214.9"
+					stroke="black"
+					stroke-linejoin="round"
+				/>
+				<path
+					d="M264.2 315.3H233.3V335.6H264.2V315.3Z"
+					stroke="black"
+					stroke-width="5"
+					stroke-linejoin="round"
+				/>
+				<path
+					d="M265.352 315.031L246.884 341.599L259.676 350.491L278.144 323.923L265.352 315.031Z"
+					fill="white"
+				/>
+				<path
+					d="M264.1 307.3C262.4 324 252.8 335.7 235.9 342.6"
+					stroke="black"
+					stroke-width="4"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</a>
 	</div>
 </div>
