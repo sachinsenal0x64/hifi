@@ -311,7 +311,7 @@
 
 		<a
 			aria-label="Open tempo on Website"
-			href="https://github.com/grafana/tempo"
+			href="https://github.com/CappielloAntonio/tempo"
 			class="text-sm text-zinc-400 hover:opacity-80"
 			target="_blank"
 			rel="noopener noreferrer"
