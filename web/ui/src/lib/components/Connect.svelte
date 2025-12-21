@@ -310,8 +310,8 @@
 		</a>
 
 		<a
-			aria-label="Open tempo on Website"
-			href="https://github.com/CappielloAntonio/tempo"
+			aria-label="Open tempus on Website"
+			href="https://github.com/eddyizm/tempus"
 			class="text-sm text-zinc-400 hover:opacity-80"
 			target="_blank"
 			rel="noopener noreferrer"
