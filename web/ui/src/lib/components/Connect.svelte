@@ -308,5 +308,33 @@
 				class="h-8 w-8"
 			/>
 		</a>
+
+		<a
+			aria-label="Open tempo on Website"
+			href="https://github.com/grafana/tempo"
+			class="text-sm text-zinc-400 hover:opacity-80"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<svg
+				width="32"
+				height="32"
+				viewBox="0 0 234 227"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path d="M122.519 0H111.38V227H122.519V0Z" fill="#F24B6A" />
+				<path d="M100.241 17.8784H89.1019V185.294H100.241V17.8784Z" fill="#F24B6A" />
+				<path d="M77.9723 35.7568H66.8334V89.3921H77.9723V35.7568Z" fill="#F24B6A" />
+				<path d="M11.1389 35.7568H0V89.3921H11.1389V35.7568Z" fill="#F24B6A" />
+				<path d="M233.908 35.7568H222.769V89.3921H233.908V35.7568Z" fill="#F24B6A" />
+				<path d="M55.6945 17.8784H44.5556V107.261H55.6945V17.8784Z" fill="#F24B6A" />
+				<path d="M189.352 17.8784H178.213V107.261H189.352V17.8784Z" fill="#F24B6A" />
+				<path d="M33.4167 0H22.2778V125.139H33.4167V0Z" fill="#F24B6A" />
+				<path d="M211.63 0H200.491V125.139H211.63V0Z" fill="#F24B6A" />
+				<path d="M167.074 35.7568H155.935V89.3921H167.074V35.7568Z" fill="#F24B6A" />
+				<path d="M144.796 17.8784H133.658V185.294H144.796V17.8784Z" fill="#F24B6A" />
+			</svg>
+		</a>
 	</div>
 </div>
