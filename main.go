@@ -27,7 +27,7 @@ func main() {
 	validPaths := config.ValidPaths
 
 	if config.MODE == "managed" {
-		slog.Info("Running in MANAGED mode")
+		slog.Info("Hifi Running in MANAGED mode")
 	} else {
 		go middleware.StartTidalRefresher()
 		go middleware.StartFreshRefresher()
