@@ -47,7 +47,7 @@ func search3(search string, user string, w http.ResponseWriter) {
 	req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
 
 	if config.MODE == "managed" {
-		req.Header.Set("x-tidal-token:", config.ClientID)
+		req.Header.Set("x-tidal-token", config.ClientID)
 	} else {
 		req.Header.Set("Authorization", "Bearer "+TidalAuth())
 	}
