@@ -15,10 +15,19 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 
 	var playback types.PlaybackInfo
 	var manifest types.ManifestData
+	var host string
+
+	mode := config.MODE
+
+	if mode == "managed" {
+		host = config.ManageHost
+	} else {
+		host = config.TidalHost
+	}
 
 	tidalURL := &url.URL{
 		Scheme: config.Scheme,
-		Host:   config.TidalHost,
+		Host:   host,
 		Path:   fmt.Sprintf("/v1/tracks/%s/playbackinfopostpaywall/v4", id),
 	}
 
