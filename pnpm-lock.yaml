@@ -14,6 +14,10 @@ importers:
       minidenticons:
         specifier: ^4.2.1
         version: 4.2.1
+    devDependencies:
+      svelte-render-scan:
+        specifier: ^1.1.0
+        version: 1.1.0(svelte@5.43.6)
 
 packages:
 
@@ -687,6 +691,11 @@ packages:
 
   stringify-entities@4.0.4:
     resolution: {integrity: sha512-IwfBptatlO+QCJUo19AqvrPNqlVMpW9YEL2LIVY+Rpv2qsjCGxaDLNRgeGsQWJhfItebuJhsGSLjaBbNSQ+ieg==}
+
+  svelte-render-scan@1.1.0:
+    resolution: {integrity: sha512-9S73wEtcnn9Hn0HsOSufm+AC+3Es2rMXoWMEWk6Fa3w3yORBg6khOSsZ8+kj/rY4BJRZTyjuFQBytFPGC8YHGQ==}
+    peerDependencies:
+      svelte: ^5.0.0
 
   svelte@5.43.6:
     resolution: {integrity: sha512-RnyO9VXI85Bmsf4b8AuQFBKFYL3LKUl+ZrifOjvlrQoboAROj5IITVLK1yOXBjwUWUn2BI5cfmurktgCzuZ5QA==}
@@ -1364,6 +1373,10 @@ snapshots:
     dependencies:
       character-entities-html4: 2.1.0
       character-entities-legacy: 3.0.0
+
+  svelte-render-scan@1.1.0(svelte@5.43.6):
+    dependencies:
+      svelte: 5.43.6
 
   svelte@5.43.6:
     dependencies:

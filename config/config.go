@@ -68,7 +68,7 @@ var (
 const (
 
 	// TIDAL API
-	Scheme          = "https"
+	Scheme          = "http"
 	TidalStaticHost = "resources.tidal.com"
 	TidalAuthHost   = "auth.tidal.com"
 

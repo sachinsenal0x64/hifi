@@ -8,6 +8,7 @@ import (
 	"hifi/types"
 	"io"
 	"net/http"
+	"net/http/httputil"
 	"net/url"
 )
 
@@ -21,6 +22,7 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 
 	if mode == "managed" {
 		host = config.ManageHost
+
 	} else {
 		host = config.TidalHost
 	}
@@ -37,46 +39,47 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 	q.Set("assetpresentation", "FULL")
 	tidalURL.RawQuery = q.Encode()
 
-	req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
-
 	if config.MODE == "managed" {
-		req.Header.Set("x-tidal-token", config.ClientID)
+		fmt.Println(tidalURL)
+		proxy := httputil.NewSingleHostReverseProxy(tidalURL)
+		proxy.ServeHTTP(w, r)
 	} else {
+		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
 		req.Header.Set("Authorization", "Bearer "+TidalAuth())
+		res, err := http.DefaultClient.Do(req)
+		if err != nil {
+			http.Error(w, "failed to request Tidal API", config.StatusInternalServerError)
+			return
+		}
+		defer res.Body.Close()
+
+		body, _ := io.ReadAll(res.Body)
+
+		if err := json.Unmarshal(body, &playback); err != nil {
+			http.Error(w, "failed to parse playback info", config.StatusInternalServerError)
+			return
+		}
+
+		decoded, err := base64.StdEncoding.DecodeString(playback.Manifest)
+
+		if err != nil {
+			http.Error(w, "failed to decode manifest", config.StatusInternalServerError)
+			return
+		}
+
+		if err := json.Unmarshal(decoded, &manifest); err != nil {
+			http.Error(w, "failed to parse manifest JSON", config.StatusInternalServerError)
+			return
+		}
+
+		if len(manifest.Urls) == 0 {
+			http.Error(w, "no stream URLs found", config.StatusNotFound)
+			return
+		}
+
+		streamURL := manifest.Urls[0]
+
+		http.Redirect(w, r, streamURL, config.StatusRedirectPermanent)
 	}
 
-	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-		http.Error(w, "failed to request Tidal API", config.StatusInternalServerError)
-		return
-	}
-	defer res.Body.Close()
-
-	body, _ := io.ReadAll(res.Body)
-
-	if err := json.Unmarshal(body, &playback); err != nil {
-		http.Error(w, "failed to parse playback info", config.StatusInternalServerError)
-		return
-	}
-
-	decoded, err := base64.StdEncoding.DecodeString(playback.Manifest)
-
-	if err != nil {
-		http.Error(w, "failed to decode manifest", config.StatusInternalServerError)
-		return
-	}
-
-	if err := json.Unmarshal(decoded, &manifest); err != nil {
-		http.Error(w, "failed to parse manifest JSON", config.StatusInternalServerError)
-		return
-	}
-
-	if len(manifest.Urls) == 0 {
-		http.Error(w, "no stream URLs found", config.StatusNotFound)
-		return
-	}
-
-	streamURL := manifest.Urls[0]
-
-	http.Redirect(w, r, streamURL, config.StatusRedirectPermanent)
 }
