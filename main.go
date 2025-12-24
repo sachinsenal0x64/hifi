@@ -26,9 +26,13 @@ func main() {
 	// Hifi proxy
 	validPaths := config.ValidPaths
 
-	go middleware.StartTidalRefresher()
+	if config.MODE == "managed" {
+		slog.Info("Running in MANAGED mode")
+	} else {
+		go middleware.StartTidalRefresher()
+		go middleware.StartFreshRefresher()
+	}
 	go middleware.RecentAlbum()
-	go middleware.StartFreshRefresher()
 
 	// HTTP server setup
 	mux := http.NewServeMux()
