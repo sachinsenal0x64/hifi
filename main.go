@@ -30,9 +30,9 @@ func main() {
 		slog.Info("Hifi Running in MANAGED mode")
 	} else {
 		go middleware.StartTidalRefresher()
-		go middleware.StartFreshRefresher()
 	}
 	go middleware.RecentAlbum()
+	go middleware.StartFreshRefresher()
 
 	// HTTP server setup
 	mux := http.NewServeMux()
