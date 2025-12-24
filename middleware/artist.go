@@ -42,7 +42,13 @@ func getArtist(id string, user string, w http.ResponseWriter) {
 	tidalURL.RawQuery = q.Encode()
 
 	req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
-	req.Header.Set("Authorization", "Bearer "+TidalAuth())
+
+	if config.MODE == "managed" {
+		req.Header.Set("x-tidal-token:", config.ClientID)
+	} else {
+		req.Header.Set("Authorization", "Bearer "+TidalAuth())
+	}
+
 	req.Header.Set("x-tidal-client-version", "2025.11.3")
 
 	resp, err := http.DefaultClient.Do(req)

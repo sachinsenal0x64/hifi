@@ -33,7 +33,12 @@ func fetchAndCacheAlbum(user, id string) types.SubsonicAlbum {
 	tidalURL.RawQuery = q.Encode()
 
 	req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
-	req.Header.Set("Authorization", "Bearer "+TidalAuth())
+
+	if config.MODE == "managed" {
+		req.Header.Set("x-tidal-token:", config.ClientID)
+	} else {
+		req.Header.Set("Authorization", "Bearer "+TidalAuth())
+	}
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
