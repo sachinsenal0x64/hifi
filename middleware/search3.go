@@ -33,11 +33,11 @@ func search3(search string, user string, w http.ResponseWriter) {
 	tidalURL := &url.URL{
 		Scheme: config.Scheme,
 		Host:   config.TidalHost,
-		Path:   "/v2/search",
+		Path:   "/v1/search",
 	}
 	q := tidalURL.Query()
 	q.Set("query", qu)
-	q.Set("limit", "100") // Max limit = 100
+	q.Set("limit", "10000") // Max limit = 1000
 	q.Set("offset", "0")
 	q.Set("types", "ARTISTS,ALBUMS,TRACKS")
 	q.Set("countryCode", "US")

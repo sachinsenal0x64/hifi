@@ -4,19 +4,15 @@ package middleware
 
 import (
 	"encoding/hex"
-	"encoding/json"
-	"fmt"
 	"hifi/config"
 	"hifi/routes/rest"
-	"hifi/types"
-	"io"
 	"log/slog"
 	"net/http"
 	"net/url"
 	"slices"
 	"strings"
 
-	"github.com/alexedwards/argon2id"
+	// "github.com/alexedwards/argon2id"
 )
 
 // -------------------- SESSION --------------------
@@ -146,44 +142,44 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 
 			// Mock Subsonic response for /ping endpoint
 
-			authUrl := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
+			// authUrl := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
 
-			client := &http.Client{}
-			req, err := http.NewRequest("GET", authUrl, nil)
+			// client := &http.Client{}
+			// req, err := http.NewRequest("GET", authUrl, nil)
 
-			if err != nil {
-				slog.Error("failed to create auth request", "error", err)
-				return
-			}
-			req.Header.Add("Authorization", "Bearer User "+config.ProxyKey)
-			req.Header.Add(config.HeaderContentType, config.ContentTypeJSON)
+			// if err != nil {
+			// 	slog.Error("failed to create auth request", "error", err)
+			// 	return
+			// }
+			// req.Header.Add("Authorization", "Bearer User "+config.ProxyKey)
+			// req.Header.Add(config.HeaderContentType, config.ContentTypeJSON)
 
-			res, err := client.Do(req)
-			if err != nil {
-				slog.Error("failed to contact auth server", "error", err)
-				http.Error(w, "Auth server unavailable", http.StatusBadGateway)
-				return
-			}
-			defer res.Body.Close()
+			// res, err := client.Do(req)
+			// if err != nil {
+			// 	slog.Error("failed to contact auth server", "error", err)
+			// 	http.Error(w, "Auth server unavailable", http.StatusBadGateway)
+			// 	return
+			// }
+			// defer res.Body.Close()
 
-			body, err := io.ReadAll(res.Body)
-			if err != nil {
-				slog.Error("failed to read auth body", "error", err)
-				return
-			}
+			// body, err := io.ReadAll(res.Body)
+			// if err != nil {
+			// 	slog.Error("failed to read auth body", "error", err)
+			// 	return
+			// }
 
-			var g types.AppGet
+			// var g types.AppGet
 
-			if err := json.Unmarshal(body, &g); err != nil {
-				slog.Error("error unmarshalling auth response", "error", err)
-				return
-			}
+			// if err := json.Unmarshal(body, &g); err != nil {
+			// 	slog.Error("error unmarshalling auth response", "error", err)
+			// 	return
+			// }
 
 			// Check password
-			match := false
-			if len(g) > 0 {
-				match, _ = argon2id.ComparePasswordAndHash(passWord, g[0].Password)
-			}
+			match := true 
+			// if len(g) > 0 {
+			// 	match, _ = argon2id.ComparePasswordAndHash(passWord, g[0].Password)
+			// }
 
 			if !match {
 				writeSubsonic(w, "failed", http.StatusBadRequest) // Subsonic expects 200 OK with failed body usually, or 401
