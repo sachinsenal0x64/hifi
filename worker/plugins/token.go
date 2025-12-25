@@ -19,10 +19,10 @@ import (
 )
 
 const (
-	kvNamespace   = "TIDAL" // KV namespace for token
+	kvNamespace   = "TIDAL"
 	tokenKey      = "TIDAL_TOKEN"
-	kvTTL         = 3600 // seconds
-	earlyRenewSec = 10   // seconds before expiry to auto-refresh
+	kvTTL         = 3600
+	earlyRenewSec = 10
 )
 
 func TidalAuth(ctx context.Context) (string, error) {
@@ -44,12 +44,12 @@ func TidalAuth(ctx context.Context) (string, error) {
 				slog.Info("💾 KV cache hit", "expiresInSec", data.ExpiryUnix-now)
 				return data.Token, nil
 			}
-			slog.Info("⚠️ Token near expiry, refreshing")
+			slog.Info("⚠️ KV token near expiry, refreshing", "expiresInSec", data.ExpiryUnix-now)
 		} else {
-			slog.Warn("⚠️ Failed to unmarshal KV data", "error", err)
+			slog.Warn("⚠️ Failed to unmarshal KV data, fetching new token", "error", err)
 		}
 	} else {
-		slog.Info("❌ KV cache miss")
+		slog.Info("❌ KV cache miss, fetching new token")
 	}
 
 	token, expiry, err := fetchToken(ctx)
@@ -67,6 +67,8 @@ func TidalAuth(ctx context.Context) (string, error) {
 	bytes, _ := json.Marshal(data)
 	if err := tokenKV.PutString(tokenKey, string(bytes), &kv.PutOptions{ExpirationTTL: kvTTL}); err != nil {
 		slog.Warn("⚠️ Failed to write token to KV", "error", err)
+	} else {
+		slog.Info("✅ Token cached in KV", "expiresAt", time.Unix(expiry, 0).Local().Format("15:04:05"))
 	}
 
 	return token, nil
