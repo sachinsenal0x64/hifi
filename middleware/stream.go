@@ -8,7 +8,6 @@ import (
 	"hifi/types"
 	"io"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 )
 
@@ -40,9 +39,7 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 	tidalURL.RawQuery = q.Encode()
 
 	if config.MODE == "managed" {
-		fmt.Println(tidalURL)
-		proxy := httputil.NewSingleHostReverseProxy(tidalURL)
-		proxy.ServeHTTP(w, r)
+		http.Redirect(w, r, tidalURL.String(), config.StatusRedirectPermanent)
 	} else {
 		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
 		req.Header.Set("Authorization", "Bearer "+TidalAuth())
