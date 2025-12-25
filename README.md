@@ -131,7 +131,7 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 <img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/hifi.b9c0j0foq.webp" />
 
-## Installation (Self-Hosted, Managed HiFi)
+## Installation (Managed HiFi)
 
 > [!IMPORTANT]
 > Unfortunately, if we detect spam bots abusing the managed server, we have to ban you.
