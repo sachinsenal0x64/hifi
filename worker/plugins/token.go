@@ -9,39 +9,47 @@ import (
 	"log/slog"
 	"net/url"
 	"strings"
-	"sync"
 	"time"
 
 	"worker/config"
 	"worker/types"
 
 	"github.com/syumai/workers/cloudflare/fetch"
+	"github.com/syumai/workers/cloudflare/kv"
 )
 
-var (
-	mu          sync.Mutex
-	cachedToken string
-	tokenExpiry int64
+const (
+	kvNamespace   = "TIDAL" // KV namespace for token
+	tokenKey      = "TIDAL_TOKEN"
+	kvTTL         = 3600 // seconds
+	earlyRenewSec = 10   // seconds before expiry to auto-refresh
 )
-
-const earlyRenewSec = 10
 
 func TidalAuth(ctx context.Context) (string, error) {
-	mu.Lock()
-	defer mu.Unlock()
 
-	now := time.Now().Unix()
-
-	// Cache hit
-	if cachedToken != "" && now < tokenExpiry-earlyRenewSec {
-		slog.Info("💾 Cache hit", "expiresInSec", tokenExpiry-now)
-		return cachedToken, nil
+	tokenKV, err := kv.NewNamespace(kvNamespace)
+	if err != nil {
+		return "", err
 	}
 
-	if cachedToken != "" {
-		slog.Info("⚠️ Token near expiry, refreshing")
+	val, err := tokenKV.GetString(tokenKey, nil)
+	if err == nil && val != "" {
+		var data struct {
+			Token      string `json:"token"`
+			ExpiryUnix int64  `json:"expiry"`
+		}
+		if err := json.Unmarshal([]byte(val), &data); err == nil {
+			now := time.Now().Unix()
+			if now < data.ExpiryUnix-earlyRenewSec {
+				slog.Info("💾 KV cache hit", "expiresInSec", data.ExpiryUnix-now)
+				return data.Token, nil
+			}
+			slog.Info("⚠️ Token near expiry, refreshing")
+		} else {
+			slog.Warn("⚠️ Failed to unmarshal KV data", "error", err)
+		}
 	} else {
-		slog.Info("❌ Cache miss, fetching new token")
+		slog.Info("❌ KV cache miss")
 	}
 
 	token, expiry, err := fetchToken(ctx)
@@ -49,9 +57,19 @@ func TidalAuth(ctx context.Context) (string, error) {
 		return "", err
 	}
 
-	cachedToken = token
-	tokenExpiry = expiry
-	return cachedToken, nil
+	data := struct {
+		Token      string `json:"token"`
+		ExpiryUnix int64  `json:"expiry"`
+	}{
+		Token:      token,
+		ExpiryUnix: expiry,
+	}
+	bytes, _ := json.Marshal(data)
+	if err := tokenKV.PutString(tokenKey, string(bytes), &kv.PutOptions{ExpirationTTL: kvTTL}); err != nil {
+		slog.Warn("⚠️ Failed to write token to KV", "error", err)
+	}
+
+	return token, nil
 }
 
 func fetchToken(ctx context.Context) (string, int64, error) {
