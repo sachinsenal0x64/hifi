@@ -7,22 +7,15 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"worker/plugins"
 	"worker/types"
 
 	"github.com/syumai/workers"
-	"github.com/syumai/workers/cloudflare"
 	"github.com/syumai/workers/cloudflare/fetch"
 )
 
 var playback types.PlaybackInfo
 var manifest types.ManifestData
-
-func TidalAuth() string {
-	if token := cloudflare.Getenv("TIDAL_TOKEN"); token != "" {
-		return strings.TrimSpace(token)
-	}
-	return ""
-}
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	trackID := strings.TrimPrefix(r.URL.Path, "/v1/tracks/")
@@ -45,7 +38,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	req.Header.Set("Authorization", "Bearer "+TidalAuth())
+	req.Header.Set("Authorization", "Bearer "+plugins.TidalAuth())
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
 
 	res, err := cli.Do(req, nil)
@@ -86,5 +79,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	go plugins.StartTidalRefresher()
 	workers.Serve(http.HandlerFunc(handler))
 }

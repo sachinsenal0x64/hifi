@@ -1,6 +1,7 @@
 package plugins
 
 import (
+	"context"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
@@ -17,6 +18,8 @@ import (
 	"time"
 	"worker/config"
 	"worker/types"
+
+	"github.com/syumai/workers/cloudflare/fetch"
 
 	"github.com/go-co-op/gocron/v2"
 )
@@ -152,7 +155,7 @@ func refreshToken() (string, error) {
 	}
 
 	apiURL := URLBuild(config.TidalAuthHost, "/v1/oauth2/token")
-	req, err := http.NewRequest(http.MethodPost, apiURL, strings.NewReader(form.Encode()))
+	req, err := fetch.NewRequest(context.Background(), http.MethodPost, apiURL, strings.NewReader(form.Encode()))
 	if err != nil {
 		return "", err
 	}
@@ -161,7 +164,9 @@ func refreshToken() (string, error) {
 	req.Header.Set("Authorization", "Basic "+auth)
 	req.Header.Set("Content-Type", config.ContentTypeForm)
 
-	res, err := http.DefaultClient.Do(req)
+	cli := fetch.NewClient()
+
+	res, err := cli.Do(req, nil)
 	if err != nil {
 		return "", err
 	}

@@ -1,16 +1,16 @@
 package config
 
 import (
-	"os"
+	"github.com/syumai/workers/cloudflare"
 )
 
 var (
-	ClientID     = os.Getenv("CLIENT_ID")
-	ClientSecret = os.Getenv("CLIENT_SECRET")
+	ClientID     = cloudflare.Getenv("CLIENT_ID")
+	ClientSecret = cloudflare.Getenv("CLIENT_SECRET")
 
 	// TIDAL API
-	TidalHost    = os.Getenv("TIDAL_HOST")
-	RefreshToken = os.Getenv("TIDAL_REFRESH")
+	TidalHost    = cloudflare.Getenv("TIDAL_HOST")
+	RefreshToken = cloudflare.Getenv("TIDAL_REFRESH")
 )
 
 const (
