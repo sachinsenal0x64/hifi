@@ -5,10 +5,11 @@ import (
 )
 
 var (
+
+	// Environment variables
 	ClientID     = cloudflare.Getenv("CLIENT_ID")
 	ClientSecret = cloudflare.Getenv("CLIENT_SECRET")
 
-	// TIDAL API
 	TidalHost    = cloudflare.Getenv("TIDAL_HOST")
 	RefreshToken = cloudflare.Getenv("TIDAL_REFRESH")
 )
