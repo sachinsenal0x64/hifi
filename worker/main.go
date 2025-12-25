@@ -27,7 +27,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tidalURL := fmt.Sprintf(
-		"https://api.tidal.com/v1/tracks/%s/playbackinfopostpaywall/v4?audioquality=LOSSLESS&playbackmode=STREAM&assetpresentation=FULL",
+		"https://%s/v1/tracks/%s/playbackinfopostpaywall/v4?audioquality=LOSSLESS&playbackmode=STREAM&assetpresentation=FULL",
+		config.TidalHost,
 		trackID,
 	)
 
