@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"worker/config"
 	"worker/plugins"
 	"worker/types"
 
