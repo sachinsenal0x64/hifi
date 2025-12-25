@@ -149,12 +149,16 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 > `2025/12/26 00:22:52 INFO Hifi Running in MANAGED mode` </br>
 > `2025/12/26 00:22:52 INFO Hifi API server running host=0.0.0.0 port=8080 url=http://0.0.0.0:8080`
 
+<br/>
+
 ```sh
  git clone https://github.com/sachinsenal0x64/hifi
  go mod tidy
  export MANAGE_HOST="value" TIDAL_HOST="value" MODE="value" CLIENT_ID="value" SCHEME="value"
  go run .
 ```
+
+</br>
 
 > [!NOTE]
 > How to add Subsonic credentials after the HiFi server is up and running.
