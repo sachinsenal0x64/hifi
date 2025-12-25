@@ -40,7 +40,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	req.Header.Set("Authorization", "Bearer "+plugins.TidalAuth())
+	token, err := plugins.TidalAuth(r.Context())
+	if err != nil {
+		http.Error(w, "failed to get Tidal auth token", http.StatusInternalServerError)
+		return
+	}
+
+	req.Header.Set("Authorization", "Bearer "+token)
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
 
 	res, err := cli.Do(req, nil)
@@ -81,6 +87,5 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	go plugins.StartTidalRefresher()
 	workers.Serve(http.HandlerFunc(handler))
 }
