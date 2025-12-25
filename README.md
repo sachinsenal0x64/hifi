@@ -164,8 +164,9 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 </br>
 
+## Adding HiFi Credentials to a Subsonic Client After Server Startup
+
 > [!NOTE]
-> How to add Subsonic credentials after the HiFi server is up and running.
 > HiFi has a fully self-hosted version with a database setup, but in the managed version, the database is optional. Therefore, we use the credentials below.
 
 > [!NOTE]
