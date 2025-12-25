@@ -136,12 +136,17 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 > [!IMPORTANT]
 > If we detect spam bots that are abusing the managed server, we have to ban the entire ASN for that.
->```sh
-> git clone https://github.com/sachinsenal0x64/hifi
-> go mod tidy
-> 
->```
 
+> [!NOTE]
+> Please obtain the HiFi managed server values https://gist.github.com/sachinsenal0x64/0b7945a4a0df4c77ecf3bc7b7a7ee2f5.
+
+
+```sh
+ git clone https://github.com/sachinsenal0x64/hifi
+ go mod tidy
+ export MANAGE_HOST="value" TIDAL_HOST="value" MODE="value" CLIENT_ID="value" SCHEME="value"
+ go run .
+```
 
 <br>
 
