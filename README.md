@@ -1,4 +1,4 @@
-<div align="center">
+\<div align="center">
 
 <h1 align="center"> Hifi </h1>
 
@@ -137,12 +137,14 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 > [!IMPORTANT]
 > If we detect spam bots that are abusing the managed server, we have to ban the entire ASN for that.
 
-> [!IMPORTANT]
-> Install the latest Go version. https://go.dev/doc/install
-
 > [!NOTE]
+> First Install the latest Go version. https://go.dev/doc/install </br>
 > Please obtain the HiFi managed server values https://gist.github.com/sachinsenal0x64/0b7945a4a0df4c77ecf3bc7b7a7ee2f5.
 
+> [!NOTE]
+> HiFi runs on port 8080 by default. If all is working, the logs below will appear, and it’s ready for use with a supported subsonic client.
+> `2025/12/26 00:22:52 INFO Hifi Running in MANAGED mode` </br>
+> `2025/12/26 00:22:52 INFO Hifi API server running host=0.0.0.0 port=8080 url=http://0.0.0.0:8080`
 
 ```sh
  git clone https://github.com/sachinsenal0x64/hifi
