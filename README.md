@@ -119,8 +119,7 @@ All other clients should work as well, since they all use Jellyfin’s API. If t
 
 ## API
 
-[API Docs](https://opensubsonic.netlify.app/docs) |
-[Hosted API](https://hifi.401658.xyz)
+[API Docs](https://opensubsonic.netlify.app/docs)
 
 ## How can I create my own app based on HiFi?
 
