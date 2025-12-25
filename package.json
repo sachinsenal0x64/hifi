@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"@selemondev/svelte-marquee": "^0.1.1",
+		"minidenticons": "^4.2.1"
+	},
+	"devDependencies": {
+		"svelte-render-scan": "^1.1.0"
+	}
+}
