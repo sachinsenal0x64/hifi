@@ -157,8 +157,6 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
  chmod +x ./autoenv.sh && ./autoenv.sh
 
- or
-
  export MANAGE_HOST="value" TIDAL_HOST="value" MODE="value" CLIENT_ID="value" SCHEME="value"
 
  go run .
@@ -192,10 +190,6 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
  git pull
 
  go mod tidy
-
- chmod +x ./autoenv.sh && ./autoenv.sh
-
- or
 
  export MANAGE_HOST="value" TIDAL_HOST="value" MODE="value" CLIENT_ID="value" SCHEME="value"
 
