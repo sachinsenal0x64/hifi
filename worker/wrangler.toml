@@ -6,7 +6,7 @@ main = "./build/worker.mjs"
 compatibility_date = "2025-11-17"
 
 [build]
-command = "pnpm build"
+command = "npm run build"
 
 [observability]
 enabled = false
