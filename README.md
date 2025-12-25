@@ -131,7 +131,6 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 <img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/hifi.b9c0j0foq.webp" />
 
-
 ## Installation (Self-Hosted, Managed HiFi)
 
 > [!IMPORTANT]
@@ -147,8 +146,7 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 > [!NOTE]
 > HiFi runs on port `8080` or `5000` or `5005` by default. If all is working, the logs below will appear.</br>
 >
-> `2025/12/26 00:22:52 INFO Hifi Running in MANAGED mode` </br>
-> `2025/12/26 00:22:52 INFO Hifi API server running host=0.0.0.0 port=8080 url=http://0.0.0.0:8080`
+> `2025/12/26 00:22:52 INFO Hifi Running in MANAGED mode` </br> > `2025/12/26 00:22:52 INFO Hifi API server running host=0.0.0.0 port=8080 url=http://0.0.0.0:8080`
 
 <br/>
 
@@ -156,6 +154,10 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
  git clone https://github.com/sachinsenal0x64/hifi
 
  go mod tidy
+
+ chmod +x ./autoenv.sh && ./autoenv.sh
+
+ or
 
  export MANAGE_HOST="value" TIDAL_HOST="value" MODE="value" CLIENT_ID="value" SCHEME="value"
 
@@ -172,14 +174,13 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 > [!NOTE]
 > For multiple family members, setting up a database and hifi webui is important. See the self-host guide below.
 
-| Field                  | Value       |
-|------------------------|------------|
-| Server name            | HiFi       |
+| Field                  | Value                 |
+| ---------------------- | --------------------- |
+| Server name            | HiFi                  |
 | Server URL             | http://127.0.0.1:8080 |
-| Username               | hifi       |
-| Password               | local      |
-| Enable legacy password | Enabled    |
-
+| Username               | hifi                  |
+| Password               | local                 |
+| Enable legacy password | Enabled               |
 
 </br>
 
@@ -191,6 +192,10 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
  git pull
 
  go mod tidy
+
+ chmod +x ./autoenv.sh && ./autoenv.sh
+
+ or
 
  export MANAGE_HOST="value" TIDAL_HOST="value" MODE="value" CLIENT_ID="value" SCHEME="value"
 
