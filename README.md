@@ -138,6 +138,8 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 > [!IMPORTANT]
 > Unfortunately, if we detect spam bots abusing the managed server, we have to ban you.
 
+<br/>
+
 > [!NOTE]
 > First Install the latest Go version. https://go.dev/doc/install </br>
 >
