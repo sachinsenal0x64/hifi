@@ -150,9 +150,15 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			if config.MODE == "managed" {
 				if userName == "hifi" && passWord == "local" {
 					slog.Info("Skipping local auth server check")
-					writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
-						"user": map[string]any{"username": userName},
-					})
+					if path == rest.GetUserView() {
+						writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
+							"user": map[string]any{"username": userName},
+						})
+					}
+					if path == rest.Ping() {
+						slog.Info("🏓 Ping request successful")
+						writeSubsonic(w, "ok", http.StatusOK)
+					}
 					return
 				}
 			}
