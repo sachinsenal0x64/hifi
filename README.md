@@ -155,8 +155,6 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
  go mod tidy
 
- chmod +x ./autoenv.sh && ./autoenv.sh
-
  export MANAGE_HOST="value" TIDAL_HOST="value" MODE="value" CLIENT_ID="value" SCHEME="value"
 
  go run .
