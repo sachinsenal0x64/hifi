@@ -147,12 +147,14 @@ func Session(userName string, passWord string, ValidPaths []string) func(http.Ha
 			// Mock Subsonic response for /ping endpoint
 
 			// Admin bypass: skip authUrl entirely
-			if userName == "admin" && passWord == "admin" {
-				slog.Info("Admin bypass, skipping auth server check")
-				writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
-					"user": map[string]any{"username": userName},
-				})
-				return
+			if config.MODE == "managed" {
+				if userName == "hifi" && passWord == "local" {
+					slog.Info("Skipping local auth server check")
+					writeSubsonicv2(w, "ok", http.StatusOK, map[string]any{
+						"user": map[string]any{"username": userName},
+					})
+					return
+				}
 			}
 
 			authUrl := fmt.Sprintf("%s://%s/v1/secrets/?env=%s&path=/hifi_users&key=%s&app_id=%s", config.Http, config.ProxyHost, config.ENV, userName, config.AppID)
