@@ -1,12 +1,5 @@
 #!/bin/sh
 
-# Check if jq is installed
-if ! command -v jq &> /dev/null
-then
-    echo "Error: jq is not installed. Please install jq and try again."
-    exit 1
-fi
-
 JSON_URL="https://gist.githubusercontent.com/sachinsenal0x64/0b7945a4a0df4c77ecf3bc7b7a7ee2f5/raw/167abddc3923799aef143e2a863bcf3db8314959/hifi-managed.json"
 
 JSON=$(curl -s "$JSON_URL")
