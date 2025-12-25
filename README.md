@@ -132,17 +132,18 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 <img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/hifi.b9c0j0foq.webp" />
 
+
 ## Installation (Self-Hosted, Managed HiFi)
 
 > [!IMPORTANT]
-> If we detect spam bots that are abusing the managed server, we have to ban the entire ASN for that.
+> Unfortunately, if we detect spam bots abusing the managed server, we have to ban you.
 
 > [!NOTE]
 > First Install the latest Go version. https://go.dev/doc/install </br>
 > Please obtain the HiFi managed server values https://gist.github.com/sachinsenal0x64/0b7945a4a0df4c77ecf3bc7b7a7ee2f5.
 
 > [!NOTE]
-> HiFi runs on port 8080 by default. If all is working, the logs below will appear, and it’s ready for use with a supported subsonic client.</br>
+> HiFi runs on port 8080 by default. If all is working, the logs below will appear.</br>
 > `2025/12/26 00:22:52 INFO Hifi Running in MANAGED mode` </br>
 > `2025/12/26 00:22:52 INFO Hifi API server running host=0.0.0.0 port=8080 url=http://0.0.0.0:8080`
 
@@ -152,6 +153,9 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
  export MANAGE_HOST="value" TIDAL_HOST="value" MODE="value" CLIENT_ID="value" SCHEME="value"
  go run .
 ```
+
+
+</br>
 
 > [!NOTE]
 > Update Hifi
@@ -175,6 +179,17 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 Pending...
 
 Reason: The current installation is a little bit complex, so I will make this as simple as possible.
+
+<br>
+
+## Recommended Subsonic Clients
+
+- https://github.com/jeffvli/feishin (Desktop/Web)
+- https://github.com/eddyizm/tempus (Mobile)
+- https://github.com/CappielloAntonio/tempo (Mobile)
+- https://github.com/sawyerf/Castafiore (Web/Mobile)
+- https://ultrasonic.github.io/download (Mobile)
+- https://substreamerapp.com (Mobile)
 
 <br>
 
