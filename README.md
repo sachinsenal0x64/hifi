@@ -40,22 +40,6 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 <br>
 
-# Quickstart
-
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/hifi.b9c0j0foq.webp" />
-
-> [!NOTE]
->
-> #### Create your HiFi account here, and then use the account with supported Subsonic client.
-
-> [!IMPORTANT]
->
-> #### Use the latest stable release of the supported clients.
-
-- [hifi.401658.xyz](https://hifi.401658.xyz)
-
-<br>
-
 ## Jellyfin Music Clients Support (WIP)
 
 > [!IMPORTANT]
@@ -144,7 +128,24 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 <br>
 
-## Installation (Self-host Hifi)
+# Quickstart
+
+<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/hifi.b9c0j0foq.webp" />
+
+## Installation (Self-Hosted, Managed HiFi)
+
+> [!IMPORTANT]
+> If we detect spam bots that are abusing the managed server, we have to ban the entire ASN for that.
+>```sh
+> git clone https://github.com/sachinsenal0x64/hifi
+> go mod tidy
+> 
+>```
+
+
+<br>
+
+## Installation (Self-Hosted, HiFi)
 
 > [!NOTE]
 >
