@@ -8,6 +8,7 @@ import (
 	"io"
 	"log/slog"
 	"net/url"
+	"strconv"
 	"strings"
 	"time"
 
@@ -21,60 +22,45 @@ import (
 const (
 	kvNamespace   = "TIDAL"
 	tokenKey      = "TIDAL_TOKEN"
+	expiryKey     = "TIDAL_TOKEN_EXPIRY"
 	earlyRenewSec = 10
 )
 
 func TidalAuth(ctx context.Context) (string, error) {
-
 	tokenKV, err := kv.NewNamespace(kvNamespace)
 	if err != nil {
 		return "", err
 	}
 
-	val, err := tokenKV.GetString(tokenKey, nil)
-	if err == nil && val != "" {
-		var data struct {
-			Token      string `json:"token"`
-			ExpiryUnix int64  `json:"expiry"`
+	// Try fetching token and expiry from KV
+	token, _ := tokenKV.GetString(tokenKey, nil)
+	expiryStr, _ := tokenKV.GetString(expiryKey, nil)
+
+	if token != "" && expiryStr != "" {
+		expiryUnix, err := strconv.ParseInt(expiryStr, 10, 64)
+		if err == nil && time.Now().Unix() < expiryUnix-earlyRenewSec {
+			slog.Info("💾 KV cache hit", "expiresInSec", expiryUnix-time.Now().Unix())
+			return token, nil
 		}
-		if err := json.Unmarshal([]byte(val), &data); err == nil {
-			now := time.Now().Unix()
-			if now < data.ExpiryUnix-earlyRenewSec {
-				slog.Info("💾 KV cache hit", "expiresInSec", data.ExpiryUnix-now)
-				return data.Token, nil
-			}
-			slog.Info("⚠️ KV token near expiry, refreshing", "expiresInSec", data.ExpiryUnix-now)
-		} else {
-			slog.Warn("⚠️ Failed to unmarshal KV data, fetching new token", "error", err)
-		}
+		slog.Info("⚠️ KV token expired or near expiry, refreshing")
 	} else {
 		slog.Info("❌ KV cache miss, fetching new token")
 	}
 
-	token, expiry, err := fetchToken(ctx)
+	// Fetch new token
+	newToken, expiry, err := fetchToken(ctx)
 	if err != nil {
 		return "", err
 	}
 
-	data := struct {
-		Token      string `json:"token"`
-		ExpiryUnix int64  `json:"expiry"`
-	}{
-		Token:      token,
-		ExpiryUnix: expiry,
-	}
-	bytes, _ := json.Marshal(data)
-	ttl := int(data.ExpiryUnix - time.Now().Unix() - earlyRenewSec)
-	if ttl < 1 {
-		ttl = 1
-	}
-	if err := tokenKV.PutString(tokenKey, string(bytes), &kv.PutOptions{ExpirationTTL: ttl}); err != nil {
-		slog.Warn("⚠️ Failed to write token to KV", "error", err)
-	} else {
-		slog.Info("✅ Token cached in KV", "expiresAt", time.Unix(expiry, 0).Local().Format("15:04:05"))
-	}
+	// Store token and expiry separately in KV
+	ttl := int(expiry - time.Now().Unix() - earlyRenewSec)
+	tokenKV.PutString(tokenKey, newToken, &kv.PutOptions{ExpirationTTL: ttl})
+	tokenKV.PutString(expiryKey, strconv.FormatInt(expiry, 10), &kv.PutOptions{ExpirationTTL: ttl})
 
-	return token, nil
+	slog.Info("✅ Token and expiry cached in KV", "expiresAt", time.Unix(expiry, 0).Local().Format("15:04:05"))
+
+	return newToken, nil
 }
 
 func fetchToken(ctx context.Context) (string, int64, error) {
