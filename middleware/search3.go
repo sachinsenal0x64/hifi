@@ -37,7 +37,7 @@ func search3(search string, user string, w http.ResponseWriter) {
 	}
 	q := tidalURL.Query()
 	q.Set("query", qu)
-	q.Set("limit", "100") // Max limit = 1000
+	q.Set("limit", "100") // Max limit = 100
 	q.Set("offset", "0")
 	q.Set("types", "ARTISTS,ALBUMS,TRACKS")
 	q.Set("countryCode", "US")
