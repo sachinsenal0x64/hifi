@@ -21,7 +21,6 @@ import (
 const (
 	kvNamespace   = "TIDAL"
 	tokenKey      = "TIDAL_TOKEN"
-	kvTTL         = 3600
 	earlyRenewSec = 10
 )
 
@@ -65,7 +64,11 @@ func TidalAuth(ctx context.Context) (string, error) {
 		ExpiryUnix: expiry,
 	}
 	bytes, _ := json.Marshal(data)
-	if err := tokenKV.PutString(tokenKey, string(bytes), &kv.PutOptions{ExpirationTTL: kvTTL}); err != nil {
+	ttl := int(data.ExpiryUnix - time.Now().Unix() - earlyRenewSec)
+	if ttl < 1 {
+		ttl = 1
+	}
+	if err := tokenKV.PutString(tokenKey, string(bytes), &kv.PutOptions{ExpirationTTL: ttl}); err != nil {
 		slog.Warn("⚠️ Failed to write token to KV", "error", err)
 	} else {
 		slog.Info("✅ Token cached in KV", "expiresAt", time.Unix(expiry, 0).Local().Format("15:04:05"))
