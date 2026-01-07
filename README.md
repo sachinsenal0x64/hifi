@@ -165,10 +165,14 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 ## Adding HiFi Credentials to a Subsonic Client After Server Startup
 
 > [!NOTE]
-> HiFi has a fully self-hosted version with a database setup, but in the managed version, the database is optional. Therefore, we use the credentials below.
+>The managed Hi-Fi server is designed for individual users, with support for multiple members and user customization coming in the future.
+
 
 > [!NOTE]
-> For multiple family members, setting up a database and hifi webui is important. See the self-host guide below.
+>For a complete self-hosted setup including WebUI, multi-member support, and full database integration follow the guide below.
+
+
+</br>
 
 | Field                  | Value                 |
 | ---------------------- | --------------------- |
