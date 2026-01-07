@@ -169,7 +169,7 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 
 > [!NOTE]
->For a complete self-hosted setup including WebUI, multi-member support, and full database integration follow the guide below.
+>For a complete self-hosted setup including WebUI, multi-member support, and full database integration follow the guide below. [installation-self-hosted-hifi](https://github.com/sachinsenal0x64/hifi?tab=readme-ov-file#installation-self-hosted-hifi)
 
 
 </br>
