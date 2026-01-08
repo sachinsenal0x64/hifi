@@ -24,7 +24,11 @@ func cover(id string, size string, w http.ResponseWriter, r *http.Request) {
 	}
 
 	s, _ := strconv.ParseInt(size, 10, 64)
-	mappedSize := sizeMapping[int(s)]
+	mappedSize, exists := sizeMapping[int(s)]
+
+	if !exists {
+		mappedSize = 160
+	}
 
 	redirectURL := fmt.Sprintf(
 		"%s://%s/images/%s/%dx%d.jpg",
