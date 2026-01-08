@@ -11,6 +11,7 @@ func cover(id string, size string, w http.ResponseWriter, r *http.Request) {
 	sizeMapping := map[int]int{
 		0:    750,
 		20:   80,
+		80:   80,
 		100:  160,
 		200:  320,
 		256:  320,
