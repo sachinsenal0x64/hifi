@@ -38,6 +38,14 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 > 🍻 Join the community: <a href="https://discord.gg/EbfftZ5Dd4">Discord</a> [![](https://cdn.statically.io/gh/sachinsenal0x64/picx-images-hosting@master/discord.72y8nlaw5mdc.webp)](https://discord.gg/EbfftZ5Dd4)
 
+
+<br>
+
+### Roadmap
+- [ ] Easy Installer (Self-Hosted HiFi)
+- [ ] Jellyfin Integration
+- [ ] Recommender system 
+
 <br>
 
 ## Jellyfin Music Clients Support (WIP)
