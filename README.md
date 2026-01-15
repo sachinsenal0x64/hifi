@@ -44,6 +44,7 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 ### Roadmap
 - [ ] Easy Installer (Self-Hosted HiFi)
 - [ ] Jellyfin Integration
+- [ ] Plexamp Integration
 - [ ] Recommender system 
 
 <br>
