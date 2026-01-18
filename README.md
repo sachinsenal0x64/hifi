@@ -239,7 +239,3 @@ Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
 ## Security Policy
 
 Please refer to [SECURITY.md](./SECURITY.md).
-
-## License
-
-Hifi is released under the [MIT License](https://opensource.org/license/MIT).
