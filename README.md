@@ -90,7 +90,7 @@ All other clients should work as well, since they all use Jellyfin’s API. If t
 
 - HiFi project requires a valid Tidal subscription. We encourage users to maintain an active subscription.
 
-- The subsonic client use the maximum quality available from the HiFi API.
+- Maximum audio quality available from the HiFi API.
 
 - Community projects may be inspired by or related to the HiFi Project but aren’t officially part of it. These projects are run independently, and the HiFi team isn’t responsible for their content or actions. Each project team should follow any relevant laws and handle its own checks and compliance.
 
@@ -110,11 +110,9 @@ All other clients should work as well, since they all use Jellyfin’s API. If t
 
 - Anyone who doesn’t want to store terabytes of music.
 
-- Anyone who want to access over 110 million songs through their Subsonic-based client.
+- Anyone who want to access over 110 million songs through their Subsonic,Jellyfin or Plexamp based client.
 
-- Anyone who doesn’t need to download and manually add tracks.
-
-- Developers who want to create their own Subsonic-based client using HiFi as a tidal proxy.
+- Developers who want to create their own Jellyfin-based client using HiFi.
 
 <br>
 
