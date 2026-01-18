@@ -1,14 +1,15 @@
 {
   "name": "hifi",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "build": "go run github.com/syumai/workers/cmd/workers-assets-gen -mode=go && GOOS=js GOARCH=wasm go build -o ./build/app.wasm .",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
-    "start": "wrangler dev"
+    "start": "wrangler dev",
+    "prod": "pnpm run build && wrangler deploy"
   },
   "devDependencies": {
-    "wrangler": "^4.50.0"
+    "wrangler": "^4.59.2"
   }
 }
