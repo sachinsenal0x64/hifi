@@ -10,6 +10,6 @@
     "prod": "pnpm run build && wrangler deploy"
   },
   "devDependencies": {
-    "wrangler": "^4.59.2"
+    "wrangler": "^4.35.0"
   }
 }
