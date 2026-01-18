@@ -146,6 +146,16 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 <br/>
 
 > [!NOTE]
+>The managed Hi-Fi server is designed for individual users, with support for multiple members and user customization coming in the future.
+
+<br/>
+
+> [!NOTE]
+>For a complete self-hosted setup including WebUI, multi-member support, and full database integration follow the guide below. [installation-self-hosted-hifi](https://github.com/sachinsenal0x64/hifi?tab=readme-ov-file#installation-self-hosted-hifi)
+
+<br/>
+
+> [!NOTE]
 > First Install the latest Go version. https://go.dev/doc/install and https://git-scm.com/install </br>
 >
 > Please obtain the HiFi managed server values https://gist.github.com/sachinsenal0x64/0b7945a4a0df4c77ecf3bc7b7a7ee2f5.
@@ -170,14 +180,6 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 </br>
 
 ## Adding HiFi Credentials to a Subsonic Client After Server Startup
-
-> [!NOTE]
->The managed Hi-Fi server is designed for individual users, with support for multiple members and user customization coming in the future.
-
-
-> [!NOTE]
->For a complete self-hosted setup including WebUI, multi-member support, and full database integration follow the guide below. [installation-self-hosted-hifi](https://github.com/sachinsenal0x64/hifi?tab=readme-ov-file#installation-self-hosted-hifi)
-
 
 </br>
 
@@ -237,7 +239,6 @@ Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
 ## Security Policy
 
 Please refer to [SECURITY.md](./SECURITY.md).
-
 
 ## License
 
