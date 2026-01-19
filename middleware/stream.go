@@ -3,12 +3,14 @@ package middleware
 import (
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"hifi/config"
 	"hifi/types"
 	"io"
 	"net/http"
 	"net/url"
+	"syscall"
 )
 
 func stream(id string, w http.ResponseWriter, r *http.Request) {
@@ -60,7 +62,11 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 
 		_, err = io.Copy(w, res.Body)
 		if err != nil {
-			fmt.Printf("Error streaming to client: %v\n", err)
+			if errors.Is(err, syscall.EPIPE) || errors.Is(err, syscall.ECONNRESET) {
+				return
+			}
+			// We just log it for debugging.
+			fmt.Printf("Stream interrupted: %v\n", err)
 		}
 		return
 
