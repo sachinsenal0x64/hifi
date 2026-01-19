@@ -155,6 +155,8 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 <br/>
 
+---
+
 > [!NOTE]
 > First Install the latest Go version. https://go.dev/doc/install and https://git-scm.com/install </br>
 >
