@@ -39,7 +39,31 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 	tidalURL.RawQuery = q.Encode()
 
 	if config.MODE == "managed" {
-		http.Redirect(w, r, tidalURL.String(), config.StatusRedirectPermanent)
+
+		req, err := http.NewRequest(http.MethodGet, tidalURL.String(), nil)
+		if err != nil {
+			http.Error(w, "Proxy request creation failed", http.StatusInternalServerError)
+			return
+		}
+
+		req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36")
+
+		res, err := http.DefaultClient.Do(req)
+		if err != nil {
+			http.Error(w, "Proxy request failed", http.StatusInternalServerError)
+			return
+		}
+
+		defer res.Body.Close()
+
+		w.WriteHeader(res.StatusCode)
+
+		_, err = io.Copy(w, res.Body)
+		if err != nil {
+			fmt.Printf("Error streaming to client: %v\n", err)
+		}
+		return
+
 	} else {
 		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
 		req.Header.Set("Authorization", "Bearer "+TidalAuth())
