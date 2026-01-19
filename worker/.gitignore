@@ -209,6 +209,3 @@ web/ui/fly.toml
 web/api/fly.toml
 .github/workflows/fly-deploy.yml
 fly.toml
-worker/main.go
-
-

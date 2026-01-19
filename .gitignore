@@ -211,4 +211,3 @@ web/api/fly.toml
 .github/workflows/fly-deploy.yml
 fly.toml
 .phase.json
-worker/main.go
