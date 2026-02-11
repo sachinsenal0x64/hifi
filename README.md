@@ -90,7 +90,7 @@ All other clients should work as well, since they all use Jellyfin’s API. If t
 
 - HiFi project requires a valid Tidal subscription. We encourage users to maintain an active subscription.
 
-- Maximum audio quality available from the HiFi API.
+- Maximum audio quality (Lossless) available from the HiFi API.
 
 - Community projects may be inspired by or related to the HiFi Project but aren’t officially part of it. These projects are run independently, and the HiFi team isn’t responsible for their content or actions. Each project team should follow any relevant laws and handle its own checks and compliance.
 
