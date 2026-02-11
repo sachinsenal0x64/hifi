@@ -9,9 +9,9 @@ import (
 func MetaBanner() SubsonicWrapper {
 	var w SubsonicWrapper
 	w.Subsonic.Status = "ok"
-	w.Subsonic.Version = "1.15.0"
+	w.Subsonic.Version = "6.1.4"
 	w.Subsonic.Type = "hifi"
-	w.Subsonic.ServerVersion = "0.19.0"
+	w.Subsonic.ServerVersion = "1.16.1"
 	w.Subsonic.OpenSubsonic = true
 	return w
 }
