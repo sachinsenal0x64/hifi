@@ -10,9 +10,9 @@ import (
 func writeSubsonic(w http.ResponseWriter, status string, code int) {
 	var resp types.SubsonicWrapper
 	resp.Subsonic.Status = status
-	resp.Subsonic.Version = "2.0.0"
+	resp.Subsonic.Version = "6.1.4"
 	resp.Subsonic.Type = "hifi"
-	resp.Subsonic.ServerVersion = "2.0.0"
+	resp.Subsonic.ServerVersion = "1.16.1"
 	resp.Subsonic.OpenSubsonic = true
 
 	b, err := json.Marshal(resp)
