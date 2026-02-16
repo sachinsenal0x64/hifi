@@ -10,7 +10,9 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 	"syscall"
+	"time"
 )
 
 func stream(id string, w http.ResponseWriter, r *http.Request) {
@@ -40,23 +42,30 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 	q.Set("assetpresentation", "FULL")
 	tidalURL.RawQuery = q.Encode()
 
+	var proxyClient = &http.Client{
+		Transport: &http.Transport{
+			MaxIdleConns:        100,
+			MaxIdleConnsPerHost: 100,
+			IdleConnTimeout:     90 * time.Second,
+		},
+	}
+
 	if config.MODE == "managed" {
 		req, err := http.NewRequest(http.MethodGet, tidalURL.String(), nil)
 		if err != nil {
-			http.Error(w, "Proxy request creation failed", http.StatusInternalServerError)
+			http.Error(w, "Request failed", 500)
 			return
 		}
 
 		req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36")
 
-		if rangeHeader := r.Header.Get("Range"); rangeHeader != "" {
-			req.Header.Set("Range", rangeHeader)
-			fmt.Println(rangeHeader)
+		if rh := r.Header.Get("Range"); rh != "" {
+			req.Header.Set("Range", rh)
 		}
 
-		res, err := http.DefaultClient.Do(req)
+		res, err := proxyClient.Do(req)
 		if err != nil {
-			http.Error(w, "Proxy request failed", http.StatusInternalServerError)
+			http.Error(w, "Proxy failed", 500)
 			return
 		}
 		defer res.Body.Close()
@@ -67,33 +76,16 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		w.Header().Set(config.HeaderContentType, "audio/flac")
+		w.Header().Set("Content-Type", "audio/flac")
 		w.Header().Set("Accept-Ranges", "bytes")
 		w.WriteHeader(res.StatusCode)
 
-		buf := make([]byte, 64*1024)
-		for {
-			n, err := res.Body.Read(buf)
-			if n > 0 {
-				_, writeErr := w.Write(buf[:n])
-				if writeErr != nil {
-					if errors.Is(writeErr, syscall.EPIPE) || errors.Is(writeErr, syscall.ECONNRESET) {
-						return
-					}
-					fmt.Printf("Write error: %v\n", writeErr)
-					return
-				}
+		buf := make([]byte, 256*1024)
+		_, err = io.CopyBuffer(w, res.Body, buf)
 
-				if f, ok := w.(http.Flusher); ok {
-					f.Flush()
-				}
-			}
-
-			if err != nil {
-				if err != io.EOF {
-					fmt.Printf("Read error: %v\n", err)
-				}
-				break
+		if err != nil {
+			if !errors.Is(err, syscall.EPIPE) && !strings.Contains(err.Error(), "wsasend") {
+				fmt.Printf("Stream error: %v\n", err)
 			}
 		}
 		return
