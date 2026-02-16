@@ -41,7 +41,6 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 	tidalURL.RawQuery = q.Encode()
 
 	if config.MODE == "managed" {
-
 		req, err := http.NewRequest(http.MethodGet, tidalURL.String(), nil)
 		if err != nil {
 			http.Error(w, "Proxy request creation failed", http.StatusInternalServerError)
@@ -50,26 +49,54 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 
 		req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36")
 
+		if rangeHeader := r.Header.Get("Range"); rangeHeader != "" {
+			req.Header.Set("Range", rangeHeader)
+			fmt.Println(rangeHeader)
+		}
+
 		res, err := http.DefaultClient.Do(req)
 		if err != nil {
 			http.Error(w, "Proxy request failed", http.StatusInternalServerError)
 			return
 		}
-
 		defer res.Body.Close()
 
+		for k, vv := range res.Header {
+			for _, v := range vv {
+				w.Header().Add(k, v)
+			}
+		}
+
+		w.Header().Set(config.HeaderContentType, "audio/flac")
+		w.Header().Set("Accept-Ranges", "bytes")
 		w.WriteHeader(res.StatusCode)
 
-		_, err = io.Copy(w, res.Body)
-		if err != nil {
-			if errors.Is(err, syscall.EPIPE) || errors.Is(err, syscall.ECONNRESET) {
-				return
+		buf := make([]byte, 64*1024)
+		for {
+			n, err := res.Body.Read(buf)
+			if n > 0 {
+				_, writeErr := w.Write(buf[:n])
+				if writeErr != nil {
+					if errors.Is(writeErr, syscall.EPIPE) || errors.Is(writeErr, syscall.ECONNRESET) {
+						return
+					}
+					fmt.Printf("Write error: %v\n", writeErr)
+					return
+				}
+
+				if f, ok := w.(http.Flusher); ok {
+					f.Flush()
+				}
 			}
-			// We just log it for debugging.
-			fmt.Printf("Stream interrupted: %v\n", err)
+
+			if err != nil {
+				if err != io.EOF {
+					fmt.Printf("Read error: %v\n", err)
+				}
+				break
+			}
 		}
 		return
-
 	} else {
 		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
 		req.Header.Set("Authorization", "Bearer "+TidalAuth())
