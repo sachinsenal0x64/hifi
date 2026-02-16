@@ -76,7 +76,7 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		w.Header().Set("Content-Type", "audio/flac")
+		w.Header().Set(config.HeaderContentType, "audio/flac")
 		w.Header().Set("Accept-Ranges", "bytes")
 		w.WriteHeader(res.StatusCode)
 
