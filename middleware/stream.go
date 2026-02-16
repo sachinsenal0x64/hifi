@@ -8,6 +8,7 @@ import (
 	"hifi/config"
 	"hifi/types"
 	"io"
+	"log/slog"
 	"net/http"
 	"net/url"
 	"strings"
@@ -65,30 +66,29 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 
 		res, err := proxyClient.Do(req)
 		if err != nil {
-			http.Error(w, "Proxy failed", 500)
+			http.Error(w, "Proxy failed", http.StatusInternalServerError)
 			return
 		}
 		defer res.Body.Close()
 
-		for k, vv := range res.Header {
-			for _, v := range vv {
-				w.Header().Add(k, v)
+		for _, h := range []string{"Content-Type", "Content-Length", "Content-Range"} {
+			if v := res.Header.Get(h); v != "" {
+				w.Header().Set(h, v)
 			}
 		}
 
-		w.Header().Set(config.HeaderContentType, "audio/flac")
 		w.Header().Set("Accept-Ranges", "bytes")
 		w.WriteHeader(res.StatusCode)
 
-		buf := make([]byte, 256*1024)
-		_, err = io.CopyBuffer(w, res.Body, buf)
-
-		if err != nil {
+		buf := make([]byte, 64*1024)
+		if _, err := io.CopyBuffer(w, res.Body, buf); err != nil {
 			if !errors.Is(err, syscall.EPIPE) && !strings.Contains(err.Error(), "wsasend") {
-				fmt.Printf("Stream error: %v\n", err)
+				slog.Error("Failed to stream content", "error", err)
 			}
 		}
+
 		return
+
 	} else {
 		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
 		req.Header.Set("Authorization", "Bearer "+TidalAuth())
