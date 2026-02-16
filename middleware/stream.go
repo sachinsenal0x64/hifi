@@ -52,9 +52,10 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 	}
 
 	if config.MODE == "managed" {
-		req, err := http.NewRequest(http.MethodGet, tidalURL.String(), nil)
+
+		req, err := http.NewRequestWithContext(r.Context(), http.MethodGet, tidalURL.String(), nil)
 		if err != nil {
-			http.Error(w, "Request failed", 500)
+			http.Error(w, "Request creation failed", http.StatusInternalServerError)
 			return
 		}
 
