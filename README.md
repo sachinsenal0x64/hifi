@@ -181,7 +181,7 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 </br>
 
-## Adding hifi credentials to a subsonic client
+## Hifi credentials
 
 </br>
 
