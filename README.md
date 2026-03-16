@@ -226,9 +226,9 @@ Reason: The current installation is a little bit complex, so I will make this as
 ## Recommended Subsonic Clients
 
 - https://github.com/jeffvli/feishin (Desktop/Web)
+- https://github.com/sawyerf/Castafiore (Web/Mobile)
 - https://github.com/eddyizm/tempus (Mobile)
 - https://github.com/CappielloAntonio/tempo (Mobile)
-- https://github.com/sawyerf/Castafiore (Web/Mobile)
 - https://ultrasonic.github.io/download (Mobile)
 - https://substreamerapp.com (Mobile)
 
