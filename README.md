@@ -165,7 +165,7 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 > [!NOTE]
 > HiFi runs on port `8080` or `5000` or `5005` by default. If all is working, the logs below will appear. </br>
 >
-> `2025/12/26 00:22:52 INFO Hifi Running in MANAGED mode` </br> `2025/12/26 00:22:52 INFO Hifi API server running host=0.0.0.0 port=8080 url=http://0.0.0.0:8080`
+> `2025/12/26 00:22:52 INFO Hifi Running in MANAGED mode` </br> `2025/12/26 00:22:52 INFO Hifi API server running host=127.0.0.1 port=8080 url=http://127.0.0.1:8080`
 
 <br/>
 
