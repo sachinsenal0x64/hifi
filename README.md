@@ -181,7 +181,7 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 </br>
 
-## Adding HiFi Credentials to a Subsonic Client After Server Startup
+## Hifi credentials
 
 </br>
 
@@ -195,7 +195,7 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 </br>
 
-## Update Hifi
+## Update hifi
 
 ```sh
  cd hifi
