@@ -9,7 +9,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"time"
 )
 
 func stream(id string, w http.ResponseWriter, r *http.Request) {
@@ -39,14 +38,6 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 	q.Set("assetpresentation", "FULL")
 	tidalURL.RawQuery = q.Encode()
 
-	var proxyClient = &http.Client{
-		Transport: &http.Transport{
-			MaxIdleConns:        100,
-			MaxIdleConnsPerHost: 100,
-			IdleConnTimeout:     90 * time.Second,
-		},
-	}
-
 	if config.MODE == "managed" {
 
 		req, err := http.NewRequestWithContext(r.Context(), http.MethodGet, tidalURL.String(), nil)
@@ -61,7 +52,7 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 			req.Header.Set("Range", rh)
 		}
 
-		res, err := proxyClient.Do(req)
+		res, err := http.DefaultClient.Do(req)
 
 		http.Redirect(w, r, res.Request.URL.String(), http.StatusMovedPermanently)
 
