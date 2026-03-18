@@ -3,16 +3,12 @@ package middleware
 import (
 	"encoding/base64"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"hifi/config"
 	"hifi/types"
 	"io"
-	"log/slog"
 	"net/http"
 	"net/url"
-	"strings"
-	"syscall"
 	"time"
 )
 
@@ -66,29 +62,8 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 		}
 
 		res, err := proxyClient.Do(req)
-		if err != nil {
-			http.Error(w, "Proxy failed", http.StatusInternalServerError)
-			return
-		}
-		defer res.Body.Close()
 
-		for _, h := range []string{"Content-Type", "Content-Length", "Content-Range"} {
-			if v := res.Header.Get(h); v != "" {
-				w.Header().Set(h, v)
-			}
-		}
-
-		w.Header().Set("Accept-Ranges", "bytes")
-		w.WriteHeader(res.StatusCode)
-
-		buf := make([]byte, 64*1024)
-		if _, err := io.CopyBuffer(w, res.Body, buf); err != nil {
-			if !errors.Is(err, syscall.EPIPE) && !strings.Contains(err.Error(), "wsasend") {
-				slog.Error("Failed to stream content", "error", err)
-			}
-		}
-
-		return
+		http.Redirect(w, r, res.Request.URL.String(), http.StatusMovedPermanently)
 
 	} else {
 		req, _ := http.NewRequest(config.MethodGet, tidalURL.String(), nil)
