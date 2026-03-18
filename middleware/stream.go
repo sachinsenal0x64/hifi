@@ -48,10 +48,6 @@ func stream(id string, w http.ResponseWriter, r *http.Request) {
 
 		req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36")
 
-		if rh := r.Header.Get("Range"); rh != "" {
-			req.Header.Set("Range", rh)
-		}
-
 		res, err := http.DefaultClient.Do(req)
 
 		http.Redirect(w, r, res.Request.URL.String(), http.StatusMovedPermanently)
