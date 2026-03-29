@@ -2,7 +2,7 @@
 
 <h1 align="center"> Hifi </h1>
 
-<h4 align="center">🎵 Tidal Music integration for Subsonic/Jellyfin/Plexamp.<br><br>
+<h4 align="center">Tidal music integration for Subsonic/Jellyfin/Plexamp.<br><br>
 
 </h4>
 
