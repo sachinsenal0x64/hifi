@@ -2,9 +2,9 @@
 
 <h1 align="center"> Hifi </h1>
 
-<h4 align="center">Tidal music integration for Subsonic/Jellyfin/Plexamp.<br><br>
+<p align="center">Tidal music integration for Subsonic/Jellyfin/Plexamp.<br><br>
 
-</h4>
+</p>
 
 <img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/foamshot-2025-11-19-02-30-23-(Edit)-1.8l0imacwd1.webp" />
 
