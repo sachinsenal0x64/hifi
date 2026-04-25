@@ -6,23 +6,23 @@
 
 </p>
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/foamshot-2025-11-19-02-30-23-(Edit)-1.8l0imacwd1.webp" />
+<img alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/foamshot-2025-11-19-02-30-23-(Edit)-1.8l0imacwd1.webp" />
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/castafiore-1.9o0985zqqu.webp" />
+<img alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/castafiore-1.9o0985zqqu.webp" />
 
 HiFi running on - [Castafiore](https://github.com/sawyerf/Castafiore)
 
 <br>
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/Tempus.4clcngw11x.webp" />
+<img alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/Tempus.4clcngw11x.webp" />
 
 HiFi running on - [Tempus](https://github.com/eddyizm/tempus) Mobile app
 
 <br>
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/download-1.64eau537wz.webp" />
+<img alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/download-1.64eau537wz.webp" />
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/Untitled.9rjuho5l5w.webp" />
+<img alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/Untitled.9rjuho5l5w.webp" />
 
 HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
@@ -120,7 +120,7 @@ All other clients should work as well, since they all use Jellyfin’s API. If t
 >
 > ## HiFi proposal check
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/HiFi-proposal-check.26lwrtfomq.png" />
+<img  alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/HiFi-proposal-check.26lwrtfomq.png" />
 
 <br>
 
@@ -136,7 +136,7 @@ First, check which [routes](https://github.com/sachinsenal0x64/hifi/tree/main/ro
 
 # Quickstart
 
-<img width="1568" height="860" alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/hifi.b9c0j0foq.webp" />
+<img  alt="hifi tidal" src="https://sachinsenal0x64.github.io/picx-images-hosting/hifi.b9c0j0foq.webp" />
 
 ## Installation (Managed HiFi)
 
