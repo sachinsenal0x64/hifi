@@ -2,6 +2,13 @@
 
 <h1 align="center"> Hifi </h1>
 
+
+
+<img width="250" height="250" alt="hifi tidal" src="https://cdn.oddinpay.com/hifi.png" />
+
+<br>
+<br>
+
 <p align="center">Tidal music integration for Subsonic/Jellyfin/Plexamp.<br><br>
 
 </p>
