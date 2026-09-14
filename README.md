@@ -54,7 +54,7 @@ HiFi running on - [Feishin](https://feishin.vercel.app) Web UI
 
 <br>
 
-## Jellyfin Music Clients Support (WIP)
+## Jellyfin Support (WIP)
 
 > [!IMPORTANT]
 >
